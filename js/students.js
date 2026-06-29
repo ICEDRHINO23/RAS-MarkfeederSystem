@@ -335,7 +335,7 @@ if (photoFile) {
 
     const { data } =
         supabase.storage
-            .from("student-photos")
+            .from("STUDENT-PHOTOS")
             .getPublicUrl(fileName);
 
     photoUrl = data.publicUrl;
