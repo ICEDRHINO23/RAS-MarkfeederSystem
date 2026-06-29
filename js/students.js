@@ -177,12 +177,11 @@ async function loadClasses() {
 
 }
 
-}
+
 
 // ==========================
 // Load Academic Years
 // ==========================
-
 async function loadYears() {
 
     console.log("Loading years...");
@@ -194,15 +193,12 @@ async function loadYears() {
         .select("*");
 
     console.log(data);
-    console.log(error);
 
     if (error) return;
 
     yearSelect.innerHTML = `<option value="">Academic Year</option>`;
 
     data.forEach(y => {
-
-        console.log(y);
 
         yearSelect.innerHTML += `
             <option value="${y.id}">
