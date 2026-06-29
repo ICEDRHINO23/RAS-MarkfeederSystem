@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | RAS Markfeeder ERP</title>
+
+<link rel="stylesheet" href="../css/app.css">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo-area">
+
+            <img src="../assets/logos/logo.png">
+
+            <div class="logo-title">
+
+                <h2>RAS ERP</h2>
+
+                <span>School Examination System</span>
+
+            </div>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <ul>
+
+                <li>
+                    <a class="active" href="dashboard.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="students.html">
+                        <i class="fa-solid fa-user-graduate"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="teachers.html">
+                        <i class="fa-solid fa-chalkboard-user"></i>
+                        <span>Teachers</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="classes.html">
+                        <i class="fa-solid fa-school"></i>
+                        <span>Classes</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="subjects.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Subjects</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="exams.html">
+                        <i class="fa-solid fa-file-pen"></i>
+                        <span>Exams</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="marks.html">
+                        <i class="fa-solid fa-marker"></i>
+                        <span>Marks Entry</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reports.html">
+                        <i class="fa-solid fa-chart-column"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <a href="../login.html">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main">
+
+        <!-- Topbar -->
+
+        <header class="topbar">
+
+            <div class="page-title">
+
+                <h1>Dashboard</h1>
+
+                <p>Welcome to RAS Markfeeder ERP</p>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="global-search">
+
+                    <i class="fa-solid fa-search"></i>
+
+                    <input
+                    type="text"
+                    placeholder="Search...">
+
+                </div>
+
+                <button class="btn btn-primary">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Create Exam
+
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- Content -->
+
+        <section class="page-content">
+
+            <!-- Statistics -->
+
+            <div class="stats-grid">
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        Total Students
+
+                    </div>
+
+                    <div class="card-value"
+                    id="studentCount">
+
+                        0
+
+                    </div>
+
+                    <div class="card-footer">
+
+                        Active Students
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        Teachers
+
+                    </div>
+
+                    <div class="card-value"
+                    id="teacherCount">
+
+                        0
+
+                    </div>
+
+                    <div class="card-footer">
+
+                        Teaching Staff
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        Active Exams
+
+                    </div>
+
+                    <div class="card-value">
+
+                        0
+
+                    </div>
+
+                    <div class="card-footer">
+
+                        Running Exams
+
+                    </div>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        Reports
+
+                    </div>
+
+                    <div class="card-value">
+
+                        0
+
+                    </div>
+
+                    <div class="card-footer">
+
+                        Generated Reports
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Overview -->
+
+            <div class="section">
+
+                <h2>Academic Overview</h2>
+
+                <br>
+
+                <p>
+
+                    Welcome to the RAS Markfeeder ERP Dashboard.
+
+                    This dashboard will provide live statistics,
+                    charts, examination summaries, class-wise
+                    performance, recent activities, and quick
+                    access to every module.
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script type="module" src="../js/dashboard.js"></script>
+
+</body>
+
+</html>
