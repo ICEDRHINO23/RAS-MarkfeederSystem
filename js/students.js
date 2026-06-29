@@ -303,7 +303,44 @@ if (form) {
     form.addEventListener("submit", async (e) => {
 
         e.preventDefault();
+        const photoFile =
+    document.getElementById("photo").files[0];
 
+let photoUrl = "";
+
+if (photoFile) {
+
+    const extension =
+        photoFile.name.split(".").pop();
+
+    const fileName =
+        document.getElementById("admission_no").value +
+        "." +
+        extension;
+
+    const { error: uploadError } =
+        await supabase.storage
+            .from("student-photos")
+            .upload(fileName, photoFile, {
+                upsert: true
+            });
+
+    if (uploadError) {
+
+        alert(uploadError.message);
+
+        return;
+
+    }
+
+    const { data } =
+        supabase.storage
+            .from("student-photos")
+            .getPublicUrl(fileName);
+
+    photoUrl = data.publicUrl;
+
+}
         const student = {
 
             admission_no:
@@ -314,6 +351,8 @@ if (form) {
 
             student_name:
                 document.getElementById("student_name").value,
+
+                photo_url: photoUrl,
 
             gender:
                 document.getElementById("gender").value,
