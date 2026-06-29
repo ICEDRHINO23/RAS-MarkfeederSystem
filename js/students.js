@@ -99,24 +99,16 @@ function renderTable() {
         <tr>
 
             <td>
-                <img
-                    src="${student.photo_url || '../assets/images/default-user.png'}"
-                    class="student-photo"
-                    alt="Student">
+                <img src="${student.photo_url || '../assets/images/default-user.png'}"
+                     class="student-photo">
             </td>
 
             <td>${student.admission_no}</td>
-
             <td>${student.roll_no}</td>
-
             <td>${student.student_name}</td>
-
             <td>${student.gender}</td>
-
             <td>${student.class_grade} - ${student.section}</td>
-
             <td>${student.academic_year}</td>
-
             <td>${student.mobile ?? ""}</td>
 
             <td>
@@ -129,20 +121,14 @@ function renderTable() {
 
                 <button
                     class="action-btn edit-btn"
-                  onclick="editStudent('${student.id}')"
-                    title="Edit">
-
+                    data-id="${student.id}">
                     <i class="fa-solid fa-pen"></i>
-
                 </button>
 
                 <button
                     class="action-btn delete-btn"
-onclick="deleteStudent('${student.id}')"
-                    title="Delete">
-
+                    data-id="${student.id}">
                     <i class="fa-solid fa-trash"></i>
-
                 </button>
 
             </td>
@@ -153,6 +139,28 @@ onclick="deleteStudent('${student.id}')"
     });
 
 }
+tableBody.addEventListener("click", async (e) => {
+
+    const editBtn = e.target.closest(".edit-btn");
+    const deleteBtn = e.target.closest(".delete-btn");
+
+    if (editBtn) {
+
+        await editStudent(editBtn.dataset.id);
+
+    }
+
+    if (deleteBtn) {
+
+        await deleteStudent(deleteBtn.dataset.id);
+
+    }
+
+});
+
+    
+
+
 function loadCards() {
 
     totalStudents.textContent = students.length;
@@ -259,10 +267,17 @@ async function editStudent(id) {
 
     editingStudentId = id;
 
-    const student = students.find(s => s.id === id);
+    const { data: student, error } = await supabase
+        .from("students")
+        .select("*")
+        .eq("id", id)
+        .single();
 
-    if (!student) return;
-
+    if (error) {
+        console.error(error);
+        alert(error.message);
+        return;
+    }
 
     document.getElementById("admission_no").value = student.admission_no;
     document.getElementById("roll_no").value = student.roll_no;
@@ -278,7 +293,6 @@ async function editStudent(id) {
     document.getElementById("active").checked = student.active;
 
     modal.classList.add("show");
-
 }
 // ==========================
 // Save Student
@@ -357,8 +371,11 @@ if (editingStudentId) {
 
         }
 
- alert("Student Added Successfully");
-
+alert(
+    editingStudentId
+        ? "Student Updated Successfully"
+        : "Student Added Successfully"
+);
 form.reset();
 
 editingStudentId = null;
@@ -370,6 +387,4 @@ await loadStudents();
 });
 }
 
-// Make functions available to HTML onclick handlers
-window.editStudent = editStudent;
-window.deleteStudent = deleteStudent;
+
