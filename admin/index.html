@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RAS MarkfeederSystem | Dashboard</title>
+
+<link rel="stylesheet" href="../css/common.css">
+<link rel="stylesheet" href="../css/dashboard.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>RAS</h2>
+
+            <span>MarkfeederSystem</span>
+
+        </div>
+
+        <ul>
+
+            <li class="active">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </li>
+
+            <li>
+                <i class="fa-solid fa-user-graduate"></i>
+                Students
+            </li>
+
+            <li>
+                <i class="fa-solid fa-chalkboard-user"></i>
+                Teachers
+            </li>
+
+            <li>
+                <i class="fa-solid fa-school"></i>
+                Classes
+            </li>
+
+            <li>
+                <i class="fa-solid fa-book"></i>
+                Subjects
+            </li>
+
+            <li>
+                <i class="fa-solid fa-file-pen"></i>
+                Exams
+            </li>
+
+            <li>
+                <i class="fa-solid fa-square-poll-vertical"></i>
+                Marks
+            </li>
+
+            <li>
+                <i class="fa-solid fa-chart-column"></i>
+                Reports
+            </li>
+
+            <li>
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </li>
+
+            <li id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="content">
+
+        <header class="topbar">
+
+            <h1>Dashboard</h1>
+
+            <div class="profile">
+
+                <span id="adminName">
+                    Administrator
+                </span>
+
+            </div>
+
+        </header>
+
+        <!-- Cards -->
+
+        <section class="cards">
+
+            <div class="card">
+                <h3>Total Students</h3>
+                <h2 id="studentCount">0</h2>
+            </div>
+
+            <div class="card">
+                <h3>Total Teachers</h3>
+                <h2 id="teacherCount">0</h2>
+            </div>
+
+            <div class="card">
+                <h3>Total Classes</h3>
+                <h2 id="classCount">0</h2>
+            </div>
+
+            <div class="card">
+                <h3>Total Subjects</h3>
+                <h2 id="subjectCount">0</h2>
+            </div>
+
+        </section>
+
+        <!-- Charts -->
+
+        <section class="chart-area">
+
+            <canvas id="studentChart"></canvas>
+
+        </section>
+
+        <!-- Recent Activity -->
+
+        <section class="activity">
+
+            <h2>Recent Activity</h2>
+
+            <div id="activityList">
+
+                No activity available.
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script type="module" src="../js/dashboard.js"></script>
+
+</body>
+</html>
