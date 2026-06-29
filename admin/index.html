@@ -6,155 +6,214 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RAS MarkfeederSystem | Dashboard</title>
+<title>RAS MarkfeederSystem</title>
 
-<link rel="stylesheet" href="../css/common.css">
 <link rel="stylesheet" href="../css/dashboard.css">
 
+<!-- Font Awesome -->
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 </head>
 
 <body>
 
-<div class="app">
+<div class="wrapper">
 
     <!-- Sidebar -->
 
     <aside class="sidebar">
 
-        <div class="logo">
+        <div class="logo-area">
 
-            <h2>RAS</h2>
+            <img src="../assets/logos/logo.png">
 
-            <span>MarkfeederSystem</span>
+            <h2>RAS Markfeeder</h2>
+
+            <p>School Examination ERP</p>
 
         </div>
 
-        <ul>
+        <nav class="menu">
 
-            <li class="active">
+            <a href="#" class="active">
                 <i class="fa-solid fa-house"></i>
-                Dashboard
-            </li>
+                <span>Dashboard</span>
+            </a>
 
-            <li>
+            <a href="students.html">
                 <i class="fa-solid fa-user-graduate"></i>
-                Students
-            </li>
+                <span>Students</span>
+            </a>
 
-            <li>
+            <a href="teachers.html">
                 <i class="fa-solid fa-chalkboard-user"></i>
-                Teachers
-            </li>
+                <span>Teachers</span>
+            </a>
 
-            <li>
+            <a href="classes.html">
                 <i class="fa-solid fa-school"></i>
-                Classes
-            </li>
+                <span>Classes</span>
+            </a>
 
-            <li>
+            <a href="subjects.html">
                 <i class="fa-solid fa-book"></i>
-                Subjects
-            </li>
+                <span>Subjects</span>
+            </a>
 
-            <li>
-                <i class="fa-solid fa-file-pen"></i>
-                Exams
-            </li>
+            <a href="exams.html">
+                <i class="fa-solid fa-file-lines"></i>
+                <span>Exams</span>
+            </a>
 
-            <li>
-                <i class="fa-solid fa-square-poll-vertical"></i>
-                Marks
-            </li>
+            <a href="marks.html">
+                <i class="fa-solid fa-pen"></i>
+                <span>Marks Entry</span>
+            </a>
 
-            <li>
+            <a href="reports.html">
                 <i class="fa-solid fa-chart-column"></i>
-                Reports
-            </li>
+                <span>Reports</span>
+            </a>
 
-            <li>
+            <a href="settings.html">
                 <i class="fa-solid fa-gear"></i>
-                Settings
-            </li>
+                <span>Settings</span>
+            </a>
 
-            <li id="logoutBtn">
+            <a href="#" id="logoutBtn">
+
                 <i class="fa-solid fa-right-from-bracket"></i>
-                Logout
-            </li>
 
-        </ul>
+                <span>Logout</span>
+
+            </a>
+
+        </nav>
 
     </aside>
 
-    <!-- Main Content -->
+    <!-- Main -->
 
-    <main class="content">
+    <main class="main">
 
-        <header class="topbar">
+        <!-- Header -->
+
+        <header class="header">
 
             <h1>Dashboard</h1>
 
-            <div class="profile">
+            <div class="user-area">
 
-                <span id="adminName">
-                    Administrator
-                </span>
+                <div class="user-box">
+
+                    <h4 id="adminName">Administrator</h4>
+
+                    <span id="currentTime"></span>
+
+                </div>
 
             </div>
 
         </header>
 
-        <!-- Cards -->
+        <!-- Content -->
 
-        <section class="cards">
+        <section class="content">
 
-            <div class="card">
-                <h3>Total Students</h3>
-                <h2 id="studentCount">0</h2>
+            <!-- Statistics -->
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>Total Students</h3>
+                    <h1 id="studentCount">0</h1>
+                    <p>Registered Students</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Teachers</h3>
+                    <h1 id="teacherCount">0</h1>
+                    <p>Teaching Staff</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Classes</h3>
+                    <h1 id="classCount">0</h1>
+                    <p>Active Classes</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Subjects</h3>
+                    <h1 id="subjectCount">0</h1>
+                    <p>Available Subjects</p>
+                </div>
+
             </div>
 
-            <div class="card">
-                <h3>Total Teachers</h3>
-                <h2 id="teacherCount">0</h2>
-            </div>
+            <!-- Panels -->
 
-            <div class="card">
-                <h3>Total Classes</h3>
-                <h2 id="classCount">0</h2>
-            </div>
+            <div class="grid">
 
-            <div class="card">
-                <h3>Total Subjects</h3>
-                <h2 id="subjectCount">0</h2>
+                <div class="panel">
+
+                    <h2>Quick Actions</h2>
+
+                    <div class="quick-buttons">
+
+                        <button onclick="location.href='students.html'">
+                            Add Student
+                        </button>
+
+                        <button onclick="location.href='teachers.html'">
+                            Add Teacher
+                        </button>
+
+                        <button onclick="location.href='exams.html'">
+                            Create Exam
+                        </button>
+
+                        <button onclick="location.href='marks.html'">
+                            Enter Marks
+                        </button>
+
+                        <button onclick="location.href='reports.html'">
+                            Reports
+                        </button>
+
+                        <button onclick="location.href='settings.html'">
+                            Settings
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="panel">
+
+                    <h2>Recent Activity</h2>
+
+                    <ul class="activity">
+
+                        <li>System Started</li>
+
+                        <li>Waiting for Database Activity...</li>
+
+                        <li>Supabase Connected</li>
+
+                    </ul>
+
+                </div>
+
             </div>
 
         </section>
 
-        <!-- Charts -->
+        <div class="footer">
 
-        <section class="chart-area">
+            © 2026 RAS MarkfeederSystem
 
-            <canvas id="studentChart"></canvas>
-
-        </section>
-
-        <!-- Recent Activity -->
-
-        <section class="activity">
-
-            <h2>Recent Activity</h2>
-
-            <div id="activityList">
-
-                No activity available.
-
-            </div>
-
-        </section>
+        </div>
 
     </main>
 
@@ -163,4 +222,5 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 <script type="module" src="../js/dashboard.js"></script>
 
 </body>
+
 </html>
