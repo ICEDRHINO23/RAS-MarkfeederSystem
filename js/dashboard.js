@@ -1,92 +1,123 @@
 import { supabase } from "../database/supabase.js";
 
-/* =====================================
-   Authentication Check
-===================================== */
+// ======================================================
+// RAS MARKFEEDER ERP
+// Dashboard
+// ======================================================
 
-const {
-    data: { session }
-} = await supabase.auth.getSession();
+const studentCount = document.getElementById("studentCount");
+const teacherCount = document.getElementById("teacherCount");
+const examCount = document.getElementById("examCount");
+const reportCount = document.getElementById("reportCount");
 
-if (!session) {
-    window.location.href = "../login.html";
-}
+document.addEventListener("DOMContentLoaded", async () => {
 
-/* =====================================
-   Show Admin Name
-===================================== */
-
-document.getElementById("adminName").textContent =
-    session.user.email;
-
-/* =====================================
-   Live Clock
-===================================== */
-
-function updateClock() {
-
-    const now = new Date();
-
-    document.getElementById("currentTime").textContent =
-        now.toLocaleString();
-
-}
-
-updateClock();
-
-setInterval(updateClock,1000);
-
-/* =====================================
-   Dashboard Counts
-===================================== */
-
-async function loadCounts(){
-
-    const students =
-        await supabase
-        .from("students")
-        .select("*",{count:"exact",head:true});
-
-    const teachers =
-        await supabase
-        .from("teachers")
-        .select("*",{count:"exact",head:true});
-
-    const classes =
-        await supabase
-        .from("classes")
-        .select("*",{count:"exact",head:true});
-
-    const subjects =
-        await supabase
-        .from("subjects")
-        .select("*",{count:"exact",head:true});
-
-    document.getElementById("studentCount").textContent =
-        students.count ?? 0;
-
-    document.getElementById("teacherCount").textContent =
-        teachers.count ?? 0;
-
-    document.getElementById("classCount").textContent =
-        classes.count ?? 0;
-
-    document.getElementById("subjectCount").textContent =
-        subjects.count ?? 0;
-
-}
-
-loadCounts();
-
-/* =====================================
-   Logout
-===================================== */
-
-document.getElementById("logoutBtn")
-.addEventListener("click",async()=>{
-
-    await supabase.auth.signOut();
-
-    window.location.href="../login.html";
+    await Promise.all([
+        loadStudents(),
+        loadTeachers(),
+        loadExams(),
+        loadReports()
+    ]);
 
 });
+
+// ======================================================
+// Students
+// ======================================================
+
+async function loadStudents() {
+
+    const { count, error } = await supabase
+        .from("students")
+        .select("*", { count: "exact", head: true });
+
+    if (error) {
+        console.error("Students :", error.message);
+        studentCount.textContent = "0";
+        return;
+    }
+
+    studentCount.textContent = count;
+
+}
+
+// ======================================================
+// Teachers
+// ======================================================
+
+async function loadTeachers() {
+
+    const { count, error } = await supabase
+        .from("teachers")
+        .select("*", { count: "exact", head: true });
+
+    if (error) {
+        console.error("Teachers :", error.message);
+        teacherCount.textContent = "0";
+        return;
+    }
+
+    teacherCount.textContent = count;
+
+}
+
+// ======================================================
+// Exams
+// ======================================================
+
+async function loadExams() {
+
+    if (!examCount) return;
+
+    const { count, error } = await supabase
+        .from("exams")
+        .select("*", { count: "exact", head: true });
+
+    if (error) {
+        console.error("Exams :", error.message);
+        examCount.textContent = "0";
+        return;
+    }
+
+    examCount.textContent = count;
+
+}
+
+// ======================================================
+// Reports
+// ======================================================
+
+async function loadReports() {
+
+    if (!reportCount) return;
+
+    const { count, error } = await supabase
+        .from("results")
+        .select("*", { count: "exact", head: true });
+
+    if (error) {
+        console.error("Reports :", error.message);
+        reportCount.textContent = "0";
+        return;
+    }
+
+    reportCount.textContent = count;
+
+}
+
+// ======================================================
+// Dashboard Refresh
+// ======================================================
+
+export async function refreshDashboard() {
+
+    await Promise.all([
+        loadStudents(),
+        loadTeachers(),
+        loadExams(),
+        loadReports()
+    ]);
+
+}
+
+console.log("✅ Dashboard Loaded");
