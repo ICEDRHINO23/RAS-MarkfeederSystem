@@ -129,7 +129,7 @@ function renderTable() {
 
                 <button
                     class="action-btn edit-btn"
-                    onclick="editStudent(${student.id})"
+                  onclick="editStudent('${student.id}')"
                     title="Edit">
 
                     <i class="fa-solid fa-pen"></i>
@@ -138,7 +138,7 @@ function renderTable() {
 
                 <button
                     class="action-btn delete-btn"
-                    onclick="deleteStudent(${student.id})"
+onclick="deleteStudent('${student.id}')"
                     title="Delete">
 
                     <i class="fa-solid fa-trash"></i>
