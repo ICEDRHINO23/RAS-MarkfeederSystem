@@ -32,7 +32,7 @@
 
 .topbar button{
     background:#2563eb;
-    color:white;
+    color:#fff;
     border:none;
     padding:12px 22px;
     border-radius:10px;
@@ -77,7 +77,7 @@
 }
 
 /* ===============================
-   FILTER BAR
+   TOOLBAR
 =============================== */
 
 .toolbar{
@@ -93,13 +93,13 @@
     border:1px solid #dbe2ea;
     border-radius:10px;
     min-width:220px;
+    background:#fff;
     font-size:14px;
-    background:white;
 }
 
 .toolbar button{
     background:#10b981;
-    color:white;
+    color:#fff;
     border:none;
     padding:12px 18px;
     border-radius:10px;
@@ -116,7 +116,7 @@
 =============================== */
 
 .table-container{
-    background:white;
+    background:#fff;
     border-radius:16px;
     overflow:auto;
     box-shadow:0 5px 20px rgba(0,0,0,.08);
@@ -129,18 +129,17 @@ table{
 
 thead{
     background:#2563eb;
-    color:white;
+    color:#fff;
 }
 
 thead th{
-    padding:16px;
+    padding:15px;
     text-align:left;
-    font-size:14px;
 }
 
 tbody td{
-    padding:14px 16px;
-    border-bottom:1px solid #eef2f7;
+    padding:15px;
+    border-bottom:1px solid #eee;
 }
 
 tbody tr:hover{
@@ -148,33 +147,29 @@ tbody tr:hover{
 }
 
 .student-photo{
-    width:42px;
-    height:42px;
+    width:45px;
+    height:45px;
     border-radius:50%;
     object-fit:cover;
 }
 
 .status-active{
     color:#16a34a;
-    font-weight:700;
+    font-weight:bold;
 }
 
 .status-inactive{
     color:#dc2626;
-    font-weight:700;
+    font-weight:bold;
 }
 
-/* ===============================
-   ACTION BUTTONS
-=============================== */
-
 .action-btn{
-    padding:8px 12px;
     border:none;
+    padding:8px 14px;
     border-radius:8px;
     cursor:pointer;
-    margin-right:6px;
-    color:white;
+    color:#fff;
+    margin-right:5px;
 }
 
 .edit-btn{
@@ -186,10 +181,106 @@ tbody tr:hover{
 }
 
 /* ===============================
+   MODAL
+=============================== */
+
+.modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.55);
+    justify-content:center;
+    align-items:center;
+    z-index:999999;
+}
+
+.modal-content{
+    width:850px;
+    max-width:95%;
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.modal-header h2{
+    margin:0;
+}
+
+.modal-header span{
+    font-size:30px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #dbe2ea;
+    border-radius:10px;
+    font-size:15px;
+    box-sizing:border-box;
+}
+
+.form-grid textarea{
+    grid-column:span 2;
+    min-height:90px;
+    resize:vertical;
+}
+
+.modal-buttons{
+    margin-top:25px;
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+}
+
+.modal-buttons button{
+    border:none;
+    padding:12px 24px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.modal-buttons button:first-child{
+    background:#e5e7eb;
+}
+
+.modal-buttons button:last-child{
+    background:#2563eb;
+    color:#fff;
+}
+
+/* ===============================
    MOBILE
 =============================== */
 
 @media(max-width:768px){
+
+.topbar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+}
 
 .cards{
     grid-template-columns:1fr;
@@ -205,167 +296,17 @@ tbody tr:hover{
     width:100%;
 }
 
-.topbar{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:15px;
+.form-grid{
+    grid-template-columns:1fr;
 }
-   /* ==========================
-   MODAL
-========================== */
 
-.modal{
-
-    display:none;
-
-    position:fixed;
-
-    left:0;
-
-    top:0;
-
-    width:100%;
-
-    height:100%;
-
-    background:rgba(0,0,0,.55);
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:9999;
-
+.form-grid textarea{
+    grid-column:span 1;
 }
 
 .modal-content{
-
-    width:850px;
-
-    max-width:95%;
-
-    background:white;
-
-    border-radius:18px;
-
-    padding:30px;
-
-}
-
-.modal-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:25px;
-
-}
-
-.modal-header h2{
-
-    margin:0;
-
-}
-
-.modal-header span{
-
-    font-size:30px;
-
-    cursor:pointer;
-
-}
-
-.form-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:18px;
-
-}
-
-.form-grid input,
-.form-grid select,
-.form-grid textarea{
-
-    width:100%;
-
-    padding:12px;
-
-    border:1px solid #dbe2ea;
-
-    border-radius:10px;
-
-    font-size:15px;
-
-}
-
-.form-grid textarea{
-
-    min-height:90px;
-
-    resize:vertical;
-
-    grid-column:span 2;
-
-}
-
-.modal-buttons{
-
-    margin-top:25px;
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:12px;
-
-}
-
-.modal-buttons button{
-
-    border:none;
-
-    padding:12px 24px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-}
-
-.modal-buttons button:first-child{
-
-    background:#e5e7eb;
-
-}
-
-.modal-buttons button:last-child{
-
-    background:#2563eb;
-
-    color:white;
-
-}
-
-@media(max-width:768px){
-
-.form-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.form-grid textarea{
-
-grid-column:span 1;
-
-}
-
+    width:95%;
+    padding:20px;
 }
 
 }
