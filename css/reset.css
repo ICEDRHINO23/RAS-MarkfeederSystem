@@ -1,0 +1,402 @@
+/* ==========================================================
+   RAS MARKFEEDER ERP
+   RESET.CSS
+   Global CSS Reset
+========================================================== */
+
+/* ==============================
+   IMPORT FONT
+============================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ==============================
+   RESET
+============================== */
+
+*,
+*::before,
+*::after{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+/* ==============================
+   HTML
+============================== */
+
+html{
+
+    scroll-behavior:smooth;
+    -webkit-text-size-adjust:100%;
+
+}
+
+/* ==============================
+   BODY
+============================== */
+
+body{
+
+    font-family:var(--font-family);
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-size:var(--text-md);
+
+    line-height:1.5;
+
+    overflow-x:hidden;
+
+    min-height:100vh;
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
+}
+
+/* ==============================
+   TYPOGRAPHY
+============================== */
+
+h1,h2,h3,h4,h5,h6{
+
+    color:var(--text);
+
+    font-weight:var(--fw-bold);
+
+    line-height:1.25;
+
+}
+
+p{
+
+    color:var(--text-light);
+
+}
+
+small{
+
+    font-size:var(--text-sm);
+
+}
+
+/* ==============================
+   LINKS
+============================== */
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+    transition:var(--transition);
+
+}
+
+/* ==============================
+   LIST
+============================== */
+
+ul,
+ol{
+
+    list-style:none;
+
+}
+
+/* ==============================
+   IMAGES
+============================== */
+
+img,
+picture{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+/* ==============================
+   FORM ELEMENTS
+============================== */
+
+input,
+textarea,
+select,
+button{
+
+    font:inherit;
+
+    outline:none;
+
+}
+
+input,
+textarea,
+select{
+
+    border:1px solid var(--border);
+
+    background:#fff;
+
+    color:var(--text);
+
+}
+
+textarea{
+
+    resize:vertical;
+
+}
+
+/* ==============================
+   BUTTON
+============================== */
+
+button{
+
+    cursor:pointer;
+
+    border:none;
+
+    background:none;
+
+    transition:var(--transition);
+
+}
+
+/* ==============================
+   TABLE
+============================== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+th{
+
+    text-align:left;
+
+    font-weight:600;
+
+}
+
+/* ==============================
+   HR
+============================== */
+
+hr{
+
+    border:none;
+
+    border-top:1px solid var(--border);
+
+}
+
+/* ==============================
+   SELECTION
+============================== */
+
+::selection{
+
+    background:var(--primary);
+
+    color:#fff;
+
+}
+
+/* ==============================
+   SCROLLBAR
+============================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+    height:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:var(--bg-secondary);
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#cbd5e1;
+
+    border-radius:100px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#94a3b8;
+
+}
+
+/* ==============================
+   PLACEHOLDER
+============================== */
+
+::placeholder{
+
+    color:#94a3b8;
+
+}
+
+/* ==============================
+   FOCUS
+============================== */
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+
+}
+
+/* ==============================
+   DISABLED
+============================== */
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+/* ==============================
+   HIDDEN
+============================== */
+
+[hidden]{
+
+    display:none !important;
+
+}
+
+/* ==============================
+   UTILITIES
+============================== */
+
+.container{
+
+    width:min(var(--container-width),95%);
+
+    margin:auto;
+
+}
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.text-right{
+
+    text-align:right;
+
+}
+
+.text-left{
+
+    text-align:left;
+
+}
+
+.w-100{
+
+    width:100%;
+
+}
+
+.h-100{
+
+    height:100%;
+
+}
+
+.d-none{
+
+    display:none !important;
+
+}
+
+.d-flex{
+
+    display:flex;
+
+}
+
+.d-grid{
+
+    display:grid;
+
+}
+
+.align-center{
+
+    align-items:center;
+
+}
+
+.justify-between{
+
+    justify-content:space-between;
+
+}
+
+.justify-center{
+
+    justify-content:center;
+
+}
+
+.flex-column{
+
+    flex-direction:column;
+
+}
+
+.gap-sm{
+
+    gap:10px;
+
+}
+
+.gap-md{
+
+    gap:20px;
+
+}
+
+.gap-lg{
+
+    gap:30px;
+
+}
