@@ -1,8 +1,15 @@
 import { supabase } from "../database/supabase.js";
 
-// ==========================
-// Elements
-// ==========================
+// =============================
+// DOM ELEMENTS
+// =============================
+
+const tableBody = document.getElementById("studentTable");
+
+const totalStudents = document.getElementById("totalStudents");
+const boysCount = document.getElementById("boysCount");
+const girlsCount = document.getElementById("girlsCount");
+const activeCount = document.getElementById("activeCount");
 
 const modal = document.getElementById("studentModal");
 const addBtn = document.getElementById("addStudentBtn");
@@ -10,28 +17,110 @@ const closeBtn = document.getElementById("closeModal");
 const cancelBtn = document.getElementById("cancelStudent");
 const form = document.getElementById("studentForm");
 
-// ==========================
-// Open / Close Modal
-// ==========================
+let students = [];
 
-addBtn?.addEventListener("click", () => {
-    modal.style.display = "flex";
+// =============================
+// INITIALIZE
+// =============================
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+    await loadClasses();
+    await loadYears();
+    await loadStudents();
+
 });
 
-closeBtn?.addEventListener("click", () => {
-    modal.style.display = "none";
-});
+// =============================
+// LOAD STUDENTS
+// =============================
 
-cancelBtn?.addEventListener("click", () => {
-    modal.style.display = "none";
-});
+async function loadStudents() {
 
-window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.style.display = "none";
+    const { data, error } = await supabase
+        .from("vw_student_details")
+        .select("*")
+        .order("student_name");
+
+    if (error) {
+        console.error(error);
+        return;
     }
-});
 
+    students = data;
+
+    renderTable();
+    loadCards();
+
+}
+
+function renderTable() {
+
+    tableBody.innerHTML = "";
+
+    students.forEach(student => {
+
+        tableBody.innerHTML += `
+        <tr>
+
+            <td>
+                <img
+                    src="${student.photo_url || '../assets/images/default-user.png'}"
+                    class="student-photo">
+            </td>
+
+            <td>${student.admission_no}</td>
+
+            <td>${student.roll_no}</td>
+
+            <td>${student.student_name}</td>
+
+            <td>${student.gender}</td>
+
+            <td>${student.class_grade} - ${student.section}</td>
+
+            <td>${student.academic_year}</td>
+
+            <td>${student.mobile ?? ""}</td>
+
+            <td>
+                <span class="${student.active ? "status-active" : "status-inactive"}">
+                    ${student.active ? "Active" : "Inactive"}
+                </span>
+            </td>
+
+            <td>
+
+                <button class="action-btn edit-btn">
+                    Edit
+                </button>
+
+                <button class="action-btn delete-btn">
+                    Delete
+                </button>
+
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+}
+function loadCards() {
+
+    totalStudents.textContent = students.length;
+
+    boysCount.textContent =
+        students.filter(s => s.gender === "Male").length;
+
+    girlsCount.textContent =
+        students.filter(s => s.gender === "Female").length;
+
+    activeCount.textContent =
+        students.filter(s => s.active).length;
+
+}
 // ==========================
 // Load Classes
 // ==========================
@@ -173,15 +262,7 @@ if (form) {
 
         modal.style.display = "none";
 
-        location.reload();
-
+      await loadStudents();
     });
 
 }
-
-// ==========================
-// Initialize
-// ==========================
-
-loadClasses();
-loadYears();
