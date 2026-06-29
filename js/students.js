@@ -15,36 +15,40 @@ const modal = document.getElementById("studentModal");
 const addBtn = document.getElementById("addStudentBtn");
 const closeBtn = document.getElementById("closeModal");
 const cancelBtn = document.getElementById("cancelStudent");
+const form = document.getElementById("studentForm");
+
+let students = [];
 // =============================
 // MODAL EVENTS
 // =============================
 
 addBtn?.addEventListener("click", () => {
 
-    console.log("Add button clicked");
-
-    alert("Button clicked");
-
-    modal.style.display = "flex";
+    modal.classList.add("show");
 
 });
 
 closeBtn?.addEventListener("click", () => {
-    modal.style.display = "none";
+
+    modal.classList.remove("show");
+
 });
 
 cancelBtn?.addEventListener("click", () => {
-    modal.style.display = "none";
+
+    modal.classList.remove("show");
+
 });
 
 window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.style.display = "none";
-    }
-});
-const form = document.getElementById("studentForm");
 
-let students = [];
+    if (e.target === modal) {
+
+        modal.classList.remove("show");
+
+    }
+
+});
 
 // =============================
 // INITIALIZE
@@ -279,13 +283,14 @@ if (form) {
 
         }
 
-        alert("Student Added Successfully");
+ alert("Student Added Successfully");
 
-        form.reset();
+form.reset();
 
-        modal.style.display = "none";
+modal.classList.remove("show");
 
-      await loadStudents();
-    });
+await loadStudents();
+
+});
 
 }
