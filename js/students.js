@@ -1,176 +1,171 @@
 import { supabase } from "../database/supabase.js";
 
 // ==========================
-// DOM
+// Elements
 // ==========================
 
-const table = document.getElementById("studentTable");
-
-const totalStudents = document.getElementById("totalStudents");
-const boysCount = document.getElementById("boysCount");
-const girlsCount = document.getElementById("girlsCount");
-const activeCount = document.getElementById("activeCount");
-
-const classFilter = document.getElementById("filterClass");
-const yearFilter = document.getElementById("filterYear");
+const modal = document.getElementById("studentModal");
+const addBtn = document.getElementById("addStudentBtn");
+const closeBtn = document.getElementById("closeModal");
+const cancelBtn = document.getElementById("cancelStudent");
+const form = document.getElementById("studentForm");
 
 // ==========================
-// INITIALIZE
+// Open Modal
 // ==========================
 
-loadStudents();
-loadClasses();
-loadAcademicYears();
+addBtn.onclick = () => {
+    modal.style.display = "flex";
+};
 
 // ==========================
-// LOAD STUDENTS
+// Close Modal
 // ==========================
 
-async function loadStudents() {
+closeBtn.onclick = () => {
+    modal.style.display = "none";
+};
 
-    const { data, error } = await supabase
-        .from("vw_student_details")
-        .select("*")
-        .order("student_name");
+cancelBtn.onclick = () => {
+    modal.style.display = "none";
+};
 
-    if (error) {
-
-        console.error(error);
-        return;
-
+window.onclick = (e) => {
+    if (e.target === modal) {
+        modal.style.display = "none";
     }
-
-    renderStudents(data);
-
-}
+};
 
 // ==========================
-// RENDER TABLE
-// ==========================
-
-function renderStudents(students) {
-
-    table.innerHTML = "";
-
-    let boys = 0;
-    let girls = 0;
-    let active = 0;
-
-    students.forEach(student => {
-
-        if (student.gender === "Male") boys++;
-        if (student.gender === "Female") girls++;
-        if (student.active) active++;
-
-        table.innerHTML += `
-
-<tr>
-
-<td>
-
-<img
-src="${student.photo_url || '../assets/images/default-user.png'}"
-class="student-photo">
-
-</td>
-
-<td>${student.admission_no}</td>
-
-<td>${student.roll_no}</td>
-
-<td>${student.student_name}</td>
-
-<td>${student.gender}</td>
-
-<td>${student.class_grade} - ${student.section}</td>
-
-<td>${student.academic_year}</td>
-
-<td>${student.mobile ?? ""}</td>
-
-<td>
-
-<span class="${student.active ? "status-active":"status-inactive"}">
-
-${student.active ? "Active":"Inactive"}
-
-</span>
-
-</td>
-
-<td>
-
-<button class="action-btn edit-btn">
-Edit
-</button>
-
-<button class="action-btn delete-btn">
-Delete
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-    });
-
-    totalStudents.textContent = students.length;
-    boysCount.textContent = boys;
-    girlsCount.textContent = girls;
-    activeCount.textContent = active;
-
-}
-
-// ==========================
-// LOAD CLASSES
+// Load Classes
 // ==========================
 
 async function loadClasses() {
 
     const { data } = await supabase
-
         .from("classes")
-
         .select("*")
+        .eq("active", true)
+        .order("class_name");
 
-        .order("grade");
+    const classSelect = document.getElementById("class_id");
+
+    classSelect.innerHTML =
+        '<option value="">Select Class</option>';
 
     data?.forEach(c => {
 
-        classFilter.innerHTML +=
-
-`<option value="${c.id}">
-${c.grade} - ${c.section}
-</option>`;
+        classSelect.innerHTML += `
+            <option value="${c.id}">
+                ${c.class_name}
+            </option>
+        `;
 
     });
 
 }
 
 // ==========================
-// LOAD YEARS
+// Load Academic Years
 // ==========================
 
-async function loadAcademicYears() {
+async function loadYears() {
 
     const { data } = await supabase
-
         .from("academic_years")
-
         .select("*")
+        .order("year_name");
 
-        .order("academic_year");
+    const yearSelect =
+        document.getElementById("academic_year_id");
+
+    yearSelect.innerHTML =
+        '<option value="">Academic Year</option>';
 
     data?.forEach(y => {
 
-        yearFilter.innerHTML +=
-
-`<option value="${y.id}">
-${y.academic_year}
-</option>`;
+        yearSelect.innerHTML += `
+            <option value="${y.id}">
+                ${y.year_name}
+            </option>
+        `;
 
     });
 
 }
+
+// ==========================
+// Save Student
+// ==========================
+
+form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const student = {
+
+        admission_no:
+            document.getElementById("admission_no").value,
+
+        roll_no:
+            Number(document.getElementById("roll_no").value),
+
+        student_name:
+            document.getElementById("student_name").value,
+
+        gender:
+            document.getElementById("gender").value,
+
+        dob:
+            document.getElementById("dob").value,
+
+        father_name:
+            document.getElementById("father_name").value,
+
+        mother_name:
+            document.getElementById("mother_name").value,
+
+        mobile:
+            document.getElementById("mobile").value,
+
+        address:
+            document.getElementById("address").value,
+
+        class_id:
+            document.getElementById("class_id").value,
+
+        academic_year_id:
+            document.getElementById("academic_year_id").value,
+
+        active:
+            document.getElementById("active").checked
+
+    };
+
+    const { error } = await supabase
+        .from("students")
+        .insert(student);
+
+    if (error) {
+
+        alert(error.message);
+
+        return;
+
+    }
+
+    alert("Student Added Successfully");
+
+    form.reset();
+
+    modal.style.display = "none";
+
+    location.reload();
+
+});
+
+// ==========================
+
+loadClasses();
+
+loadYears();
