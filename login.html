@@ -1,71 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RAS MarkfeederSystem</title>
+    <title>RAS MarkfeederSystem</title>
 
-<link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/login.css">
 
 </head>
 
 <body>
 
-<div class="login-container">
+    <div class="login-container">
 
-    <div class="login-card">
+        <div class="login-card">
 
-        <img src="assets/logos/logo.png"
-             class="logo">
+            <img src="assets/logos/logo.png" class="logo" alt="Logo">
 
-        <h1>RAS MarkfeederSystem</h1>
+            <h1>RAS MarkfeederSystem</h1>
 
-        <p>School Examination Management System</p>
+            <p>School Examination Management System</p>
 
-        <form id="loginForm">
-
-            <input
-                type="email"
-                id="email"
-                placeholder="Email Address"
-                required>
-
-            <div class="password-box">
+            <form id="loginForm">
 
                 <input
-                    type="password"
-                    id="password"
-                    placeholder="Password"
+                    type="email"
+                    id="email"
+                    placeholder="Email Address"
                     required>
 
-                <span id="togglePassword">👁</span>
+                <div class="password-box">
 
-            </div>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Password"
+                        required>
 
-            <label class="remember">
+                    <span id="togglePassword">👁</span>
 
-                <input type="checkbox" id="remember">
+                </div>
 
-                Remember Me
+                <label class="remember">
 
-            </label>
+                    <input type="checkbox" id="remember">
 
-            <button type="submit">
+                    Remember Me
 
-                LOGIN
+                </label>
 
-            </button>
+                <button type="submit">
 
-        </form>
+                    LOGIN
 
-        <p id="error"></p>
+                </button>
+
+            </form>
+
+            <p id="error"></p>
+
+        </div>
 
     </div>
 
-</div>
+    <script type="module" src="js/login.js"></script>
 
-<script type="module" src="js/login.js"></script>
 </body>
+
 </html>
