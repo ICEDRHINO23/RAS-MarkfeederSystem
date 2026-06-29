@@ -1,316 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Students | RAS MarkfeederSystem</title>
-
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/students.css">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Students | RAS Markfeeder ERP</title>
+<link rel="stylesheet" href="../css/app.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
-
 <body>
-
-<div class="page-container">
-
-    <!-- =========================
-         SIDEBAR
-    ========================== -->
-
-    <aside class="sidebar">
-
-        <div class="logo-section">
-
-            <img src="../assets/logos/logo.png" class="logo">
-
-            <h2>RAS Markfeeder</h2>
-
-            <p>School Examination ERP</p>
-
-        </div>
-
-        <nav>
-
-            <a href="index.html">🏠 Dashboard</a>
-
-            <a class="active" href="students.html">🎓 Students</a>
-
-            <a href="teachers.html">👨‍🏫 Teachers</a>
-
-            <a href="classes.html">🏫 Classes</a>
-
-            <a href="subjects.html">📚 Subjects</a>
-
-            <a href="exams.html">📝 Exams</a>
-
-            <a href="marks.html">📝 Marks Entry</a>
-
-            <a href="reports.html">📊 Reports</a>
-
-            <a href="settings.html">⚙ Settings</a>
-
-            <a href="../login.html">🚪 Logout</a>
-
-        </nav>
-
-    </aside>
-
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
-
-    <main class="content">
-
-        <div class="topbar">
-
-            <div>
-
-                <h1>Student Management</h1>
-
-                <p>Manage all students</p>
-
-            </div>
-
-            <button id="addStudentBtn">
-
-                + Add Student
-
-            </button>
-
-        </div>
-
-        <!-- Statistics -->
-
-        <div class="cards">
-
-            <div class="card">
-
-                <h3>Total Students</h3>
-
-                <h1 id="totalStudents">0</h1>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Boys</h3>
-
-                <h1 id="boysCount">0</h1>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Girls</h3>
-
-                <h1 id="girlsCount">0</h1>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Active Students</h3>
-
-                <h1 id="activeCount">0</h1>
-
-            </div>
-
-        </div>
-
-        <!-- Toolbar -->
-
-        <div class="toolbar">
-
-            <input
-                type="text"
-                id="searchStudent"
-                placeholder="Search Student">
-
-            <select id="filterClass">
-
-                <option value="">All Classes</option>
-
-            </select>
-
-            <select id="filterYear">
-
-                <option value="">Academic Year</option>
-
-            </select>
-
-            <button id="exportExcel">
-
-                Export Excel
-
-            </button>
-
-        </div>
-
-        <!-- Table -->
-
-        <div class="table-container">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>Photo</th>
-                        <th>Admission No</th>
-                        <th>Roll No</th>
-                        <th>Name</th>
-                        <th>Gender</th>
-                        <th>Class</th>
-                        <th>Year</th>
-                        <th>Mobile</th>
-                        <th>Status</th>
-                        <th>Action</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="studentTable">
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </main>
-
+<div class="app">
+<aside class="sidebar">
+<div class="logo-area">
+<img src="../assets/logos/logo.png" alt="Logo">
+<div class="logo-title"><h2>RAS ERP</h2><span>School Examination ERP</span></div>
+</div>
+<nav class="sidebar-menu">
+<ul>
+<li><a href="dashboard.html"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
+<li><a class="active" href="students.html"><i class="fa-solid fa-user-graduate"></i><span>Students</span></a></li>
+<li><a href="teachers.html"><i class="fa-solid fa-chalkboard-user"></i><span>Teachers</span></a></li>
+<li><a href="classes.html"><i class="fa-solid fa-school"></i><span>Classes</span></a></li>
+<li><a href="subjects.html"><i class="fa-solid fa-book"></i><span>Subjects</span></a></li>
+<li><a href="exams.html"><i class="fa-solid fa-file-pen"></i><span>Exams</span></a></li>
+<li><a href="marks.html"><i class="fa-solid fa-marker"></i><span>Marks Entry</span></a></li>
+<li><a href="reports.html"><i class="fa-solid fa-chart-column"></i><span>Reports</span></a></li>
+<li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+</ul>
+</nav>
+<div class="sidebar-footer"><a href="../login.html"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a></div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+<div class="page-title"><h1>Student Management</h1><p>Manage students and academic records</p></div>
+<div class="topbar-right">
+<div class="global-search"><i class="fa-solid fa-search"></i><input id="searchStudent" type="text" placeholder="Search students..."></div>
+<button class="btn btn-primary" id="addStudentBtn"><i class="fa-solid fa-plus"></i> Add Student</button>
+</div>
+</header>
+
+<section class="page-content">
+
+<div class="stats-grid">
+<div class="card"><div class="card-title">Students</div><div class="card-value" id="totalStudents">0</div><div class="card-footer">Total Registered</div></div>
+<div class="card"><div class="card-title">Boys</div><div class="card-value" id="boysCount">0</div><div class="card-footer">Male Students</div></div>
+<div class="card"><div class="card-title">Girls</div><div class="card-value" id="girlsCount">0</div><div class="card-footer">Female Students</div></div>
+<div class="card"><div class="card-title">Active</div><div class="card-value" id="activeCount">0</div><div class="card-footer">Active Students</div></div>
 </div>
 
-<!-- =========================
-     ADD STUDENT MODAL
-========================== -->
+<div class="section">
+<div class="toolbar">
+<select id="filterClass"><option value="">All Classes</option></select>
+<select id="filterYear"><option value="">Academic Year</option></select>
+<button id="exportExcel" class="btn"><i class="fa-solid fa-file-excel"></i> Export Excel</button>
+</div>
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Photo</th><th>Admission</th><th>Roll</th><th>Name</th><th>Gender</th><th>Class</th><th>Year</th><th>Mobile</th><th>Status</th><th>Action</th>
+</tr>
+</thead>
+<tbody id="studentTable"></tbody>
+</table>
+</div>
+</div>
+
+</section>
+</main>
+</div>
 
 <div class="modal" id="studentModal">
+<div class="modal-content">
+<div class="modal-header"><h2>Add Student</h2><span id="closeModal">&times;</span></div>
 
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2>Add Student</h2>
-
-            <span id="closeModal">&times;</span>
-
-        </div>
-
-        <form id="studentForm">
-
-            <div class="form-grid">
-
-                <input
-                    id="admission_no"
-                    placeholder="Admission Number"
-                    required>
-
-                <input
-                    id="roll_no"
-                    type="number"
-                    placeholder="Roll Number"
-                    required>
-
-                <input
-                    id="student_name"
-                    placeholder="Student Name"
-                    required>
-
-                <select
-                    id="gender"
-                    required>
-
-                    <option value="">Select Gender</option>
-                    <option>Male</option>
-                    <option>Female</option>
-
-                </select>
-
-                <input
-                    id="dob"
-                    type="date">
-
-                <input
-                    id="mobile"
-                    placeholder="Mobile Number">
-
-                <input
-                    id="father_name"
-                    placeholder="Father Name">
-
-                <input
-                    id="mother_name"
-                    placeholder="Mother Name">
-
-                <select
-                    id="class_id"
-                    required>
-
-                    <option value="">Select Class</option>
-
-                </select>
-
-                <select
-                    id="academic_year_id"
-                    required>
-
-                    <option value="">Academic Year</option>
-
-                </select>
-
-                <textarea
-                    id="address"
-                    placeholder="Address"></textarea>
-
-            </div>
-
-            <br>
-
-            <label>
-
-                <input
-                    type="checkbox"
-                    id="active"
-                    checked>
-
-                Active Student
-
-            </label>
-
-            <div class="modal-buttons">
-
-                <button
-                    type="button"
-                    id="cancelStudent">
-
-                    Cancel
-
-                </button>
-
-                <button
-                    type="submit">
-
-                    Save Student
-
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
+<form id="studentForm">
+<div class="form-grid">
+<input id="admission_no" placeholder="Admission Number" required>
+<input id="roll_no" type="number" placeholder="Roll Number" required>
+<input id="student_name" placeholder="Student Name" required>
+<select id="gender" required><option value="">Select Gender</option><option>Male</option><option>Female</option></select>
+<input id="dob" type="date">
+<input id="mobile" placeholder="Mobile Number">
+<input id="father_name" placeholder="Father Name">
+<input id="mother_name" placeholder="Mother Name">
+<select id="class_id" required><option value="">Select Class</option></select>
+<select id="academic_year_id" required><option value="">Academic Year</option></select>
+<textarea id="address" placeholder="Address"></textarea>
+</div>
+<label><input type="checkbox" id="active" checked> Active Student</label>
+<div class="modal-buttons">
+<button type="button" id="cancelStudent">Cancel</button>
+<button type="submit">Save Student</button>
+</div>
+</form>
+</div>
 </div>
 
 <script type="module" src="../js/students.js"></script>
-
 </body>
-
 </html>
