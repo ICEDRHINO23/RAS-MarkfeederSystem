@@ -17,7 +17,10 @@
 
 <div class="page-container">
 
-    <!-- Sidebar -->
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
     <aside class="sidebar">
 
         <div class="logo-section">
@@ -44,13 +47,21 @@
 
             <a href="exams.html">📝 Exams</a>
 
+            <a href="marks.html">📝 Marks Entry</a>
+
+            <a href="reports.html">📊 Reports</a>
+
+            <a href="settings.html">⚙ Settings</a>
+
             <a href="../login.html">🚪 Logout</a>
 
         </nav>
 
     </aside>
 
-    <!-- Main -->
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
 
     <main class="content">
 
@@ -102,7 +113,7 @@
 
             <div class="card">
 
-                <h3>Active</h3>
+                <h3>Active Students</h3>
 
                 <h1 id="activeCount">0</h1>
 
@@ -110,14 +121,14 @@
 
         </div>
 
-        <!-- Filters -->
+        <!-- Toolbar -->
 
         <div class="toolbar">
 
             <input
                 type="text"
                 id="searchStudent"
-                placeholder="Search student...">
+                placeholder="Search Student">
 
             <select id="filterClass">
 
@@ -147,20 +158,20 @@
 
                 <thead>
 
-                <tr>
+                    <tr>
 
-                    <th>Photo</th>
-                    <th>Admission No</th>
-                    <th>Roll No</th>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>Class</th>
-                    <th>Year</th>
-                    <th>Mobile</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                        <th>Photo</th>
+                        <th>Admission No</th>
+                        <th>Roll No</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Class</th>
+                        <th>Year</th>
+                        <th>Mobile</th>
+                        <th>Status</th>
+                        <th>Action</th>
 
-                </tr>
+                    </tr>
 
                 </thead>
 
@@ -176,7 +187,130 @@
 
 </div>
 
+<!-- =========================
+     ADD STUDENT MODAL
+========================== -->
+
+<div class="modal" id="studentModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Add Student</h2>
+
+            <span id="closeModal">&times;</span>
+
+        </div>
+
+        <form id="studentForm">
+
+            <div class="form-grid">
+
+                <input
+                    id="admission_no"
+                    placeholder="Admission Number"
+                    required>
+
+                <input
+                    id="roll_no"
+                    type="number"
+                    placeholder="Roll Number"
+                    required>
+
+                <input
+                    id="student_name"
+                    placeholder="Student Name"
+                    required>
+
+                <select
+                    id="gender"
+                    required>
+
+                    <option value="">Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+
+                </select>
+
+                <input
+                    id="dob"
+                    type="date">
+
+                <input
+                    id="mobile"
+                    placeholder="Mobile Number">
+
+                <input
+                    id="father_name"
+                    placeholder="Father Name">
+
+                <input
+                    id="mother_name"
+                    placeholder="Mother Name">
+
+                <select
+                    id="class_id"
+                    required>
+
+                    <option value="">Select Class</option>
+
+                </select>
+
+                <select
+                    id="academic_year_id"
+                    required>
+
+                    <option value="">Academic Year</option>
+
+                </select>
+
+                <textarea
+                    id="address"
+                    placeholder="Address"></textarea>
+
+            </div>
+
+            <br>
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    id="active"
+                    checked>
+
+                Active Student
+
+            </label>
+
+            <div class="modal-buttons">
+
+                <button
+                    type="button"
+                    id="cancelStudent">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit">
+
+                    Save Student
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
 <script type="module" src="../js/students.js"></script>
 
 </body>
+
 </html>
