@@ -4,36 +4,45 @@ import { supabase } from "./supabase.js";
 // LOGIN
 // ===============================
 
-export async function login(username, password) {
+export async function login(email, password) {
 
-    const { data, error } = await supabase
-        .from("users")
-        .select("*")
-        .eq("username", username)
-        .single();
+    // Authenticate with Supabase Auth
+    const { data: authData, error: authError } =
+        await supabase.auth.signInWithPassword({
+            email,
+            password
+        });
 
-    if (error || !data) {
-        throw new Error("Invalid username");
-    }
+    if (authError) throw authError;
 
-    // Temporary password check
-    // Later we'll use proper password hashing.
-    if (data.password_hash !== password) {
-        throw new Error("Incorrect password");
-    }
+    // Get user profile from users table
+    const { data: profile, error: profileError } =
+        await supabase
+            .from("users")
+            .select("*")
+            .eq("auth_user_id", authData.user.id)
+            .maybeSingle();
 
-    localStorage.setItem("user", JSON.stringify(data));
+    if (profileError) throw profileError;
 
-    return data;
+    localStorage.setItem("user", JSON.stringify(profile));
+    localStorage.setItem("session", JSON.stringify(authData.session));
+
+    return profile;
 }
 
 // ===============================
 // LOGOUT
 // ===============================
 
-export function logout() {
+export async function logout() {
+
+    await supabase.auth.signOut();
+
     localStorage.removeItem("user");
-    window.location.href = "/login.html";
+    localStorage.removeItem("session");
+
+    window.location.href = "../login.html";
 }
 
 // ===============================
@@ -49,5 +58,5 @@ export function currentUser() {
 // ===============================
 
 export function isLoggedIn() {
-    return localStorage.getItem("user") !== null;
+    return localStorage.getItem("session") !== null;
 }
