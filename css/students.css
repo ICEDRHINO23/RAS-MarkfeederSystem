@@ -210,5 +210,162 @@ tbody tr:hover{
     align-items:flex-start;
     gap:15px;
 }
+   /* ==========================
+   MODAL
+========================== */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.55);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.modal-content{
+
+    width:850px;
+
+    max-width:95%;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px;
+
+}
+
+.modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.modal-header h2{
+
+    margin:0;
+
+}
+
+.modal-header span{
+
+    font-size:30px;
+
+    cursor:pointer;
+
+}
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+}
+
+.form-grid input,
+.form-grid select,
+.form-grid textarea{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #dbe2ea;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+}
+
+.form-grid textarea{
+
+    min-height:90px;
+
+    resize:vertical;
+
+    grid-column:span 2;
+
+}
+
+.modal-buttons{
+
+    margin-top:25px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+}
+
+.modal-buttons button{
+
+    border:none;
+
+    padding:12px 24px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+.modal-buttons button:first-child{
+
+    background:#e5e7eb;
+
+}
+
+.modal-buttons button:last-child{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+@media(max-width:768px){
+
+.form-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.form-grid textarea{
+
+grid-column:span 1;
+
+}
+
+}
 
 }
