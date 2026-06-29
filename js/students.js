@@ -20,7 +20,13 @@ const cancelBtn = document.getElementById("cancelStudent");
 // =============================
 
 addBtn?.addEventListener("click", () => {
+
+    console.log("Add button clicked");
+
+    alert("Button clicked");
+
     modal.style.display = "flex";
+
 });
 
 closeBtn?.addEventListener("click", () => {
