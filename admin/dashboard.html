@@ -3,18 +3,16 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dashboard | RAS Markfeeder ERP</title>
+    <title>Dashboard | RAS Markfeeder ERP</title>
 
-<link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/app.css">
 
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
@@ -22,18 +20,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <div class="app">
 
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
+    <!-- =======================
+         SIDEBAR
+    ======================== -->
+
+    <aside class="sidebar">
 
         <div class="logo-area">
 
-            <img src="../assets/logos/logo.png">
+            <img src="../assets/logos/logo.png" alt="Logo">
 
             <div class="logo-title">
 
                 <h2>RAS ERP</h2>
 
-                <span>School Examination System</span>
+                <span>School Examination ERP</span>
 
             </div>
 
@@ -99,6 +100,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                     </a>
                 </li>
 
+                <li>
+                    <a href="settings.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+
             </ul>
 
         </nav>
@@ -117,11 +125,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
     </aside>
 
-    <!-- Main -->
+    <!-- =======================
+         MAIN
+    ======================== -->
 
     <main class="main">
 
-        <!-- Topbar -->
+        <!-- =======================
+             TOPBAR
+        ======================== -->
 
         <header class="topbar">
 
@@ -140,8 +152,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                     <i class="fa-solid fa-search"></i>
 
                     <input
-                    type="text"
-                    placeholder="Search...">
+                        type="text"
+                        placeholder="Search Students, Teachers, Exams...">
 
                 </div>
 
@@ -157,107 +169,87 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
         </header>
 
-        <!-- Content -->
+        <!-- =======================
+             PAGE CONTENT
+        ======================== -->
 
         <section class="page-content">
 
-            <!-- Statistics -->
+            <!-- =======================
+                 STATISTICS
+            ======================== -->
 
             <div class="stats-grid">
 
-                <div class="card">
+                <div class="card hover-lift">
 
                     <div class="card-title">
-
                         Total Students
-
                     </div>
 
-                    <div class="card-value"
-                    id="studentCount">
-
+                    <div class="card-value" id="studentCount">
                         0
-
                     </div>
 
                     <div class="card-footer">
-
-                        Active Students
-
+                        Registered Students
                     </div>
 
                 </div>
 
-                <div class="card">
+                <div class="card hover-lift">
 
                     <div class="card-title">
-
                         Teachers
-
                     </div>
 
-                    <div class="card-value"
-                    id="teacherCount">
-
+                    <div class="card-value" id="teacherCount">
                         0
-
                     </div>
 
                     <div class="card-footer">
-
                         Teaching Staff
-
                     </div>
 
                 </div>
 
-                <div class="card">
+                <div class="card hover-lift">
 
                     <div class="card-title">
-
                         Active Exams
-
                     </div>
 
-                    <div class="card-value">
-
+                    <div class="card-value" id="examCount">
                         0
-
                     </div>
 
                     <div class="card-footer">
-
                         Running Exams
-
                     </div>
 
                 </div>
 
-                <div class="card">
+                <div class="card hover-lift">
 
                     <div class="card-title">
-
                         Reports
-
                     </div>
 
-                    <div class="card-value">
-
+                    <div class="card-value" id="reportCount">
                         0
-
                     </div>
 
                     <div class="card-footer">
-
                         Generated Reports
-
                     </div>
 
                 </div>
 
             </div>
 
-            <!-- Overview -->
+            <!-- =======================
+                 ACADEMIC OVERVIEW
+            ======================== -->
 
             <div class="section">
 
@@ -269,12 +261,48 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
                     Welcome to the RAS Markfeeder ERP Dashboard.
 
-                    This dashboard will provide live statistics,
-                    charts, examination summaries, class-wise
-                    performance, recent activities, and quick
-                    access to every module.
+                    This dashboard provides live statistics from
+                    Supabase, giving administrators quick access
+                    to students, teachers, examinations, reports,
+                    and upcoming academic activities.
 
                 </p>
+
+            </div>
+
+            <!-- =======================
+                 QUICK ACTIONS
+            ======================== -->
+
+            <div class="section">
+
+                <h2>Quick Actions</h2>
+
+                <br>
+
+                <div class="d-flex gap-4 flex-wrap">
+
+                    <a href="students.html" class="btn btn-primary">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Add Student
+                    </a>
+
+                    <a href="teachers.html" class="btn btn-success">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Add Teacher
+                    </a>
+
+                    <a href="exams.html" class="btn btn-outline">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                        Create Exam
+                    </a>
+
+                    <a href="reports.html" class="btn btn-outline">
+                        <i class="fa-solid fa-chart-line"></i>
+                        View Reports
+                    </a>
+
+                </div>
 
             </div>
 
