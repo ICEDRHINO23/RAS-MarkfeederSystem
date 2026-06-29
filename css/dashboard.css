@@ -1,0 +1,286 @@
+/* ==========================================
+   RAS MarkfeederSystem Dashboard
+   ========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#333;
+}
+
+/* =========================
+   Layout
+========================= */
+
+.wrapper{
+    display:flex;
+    min-height:100vh;
+}
+
+/* =========================
+   Sidebar
+========================= */
+
+.sidebar{
+    width:250px;
+    background:#0f172a;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    position:fixed;
+    height:100vh;
+}
+
+.logo-area{
+    padding:25px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.logo-area img{
+    width:70px;
+    margin-bottom:10px;
+}
+
+.logo-area h2{
+    font-size:20px;
+    font-weight:700;
+}
+
+.logo-area p{
+    font-size:12px;
+    color:#94a3b8;
+}
+
+/* =========================
+   Menu
+========================= */
+
+.menu{
+    flex:1;
+    margin-top:20px;
+}
+
+.menu a{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:15px 25px;
+    color:#cbd5e1;
+    text-decoration:none;
+    transition:.3s;
+    font-size:15px;
+}
+
+.menu a:hover{
+    background:#1d4ed8;
+    color:#fff;
+}
+
+.menu a.active{
+    background:#2563eb;
+    color:#fff;
+}
+
+.menu i{
+    width:20px;
+    text-align:center;
+}
+
+/* =========================
+   Main Area
+========================= */
+
+.main{
+    margin-left:250px;
+    flex:1;
+}
+
+/* =========================
+   Header
+========================= */
+
+.header{
+    background:#fff;
+    height:75px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 30px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.header h1{
+    font-size:24px;
+}
+
+.user-area{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.user-box{
+    text-align:right;
+}
+
+.user-box h4{
+    font-size:15px;
+}
+
+.user-box span{
+    font-size:12px;
+    color:#666;
+}
+
+/* =========================
+   Dashboard Content
+========================= */
+
+.content{
+    padding:30px;
+}
+
+/* =========================
+   Cards
+========================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    color:#666;
+    font-size:15px;
+    margin-bottom:12px;
+}
+
+.card h1{
+    font-size:34px;
+    color:#2563eb;
+}
+
+.card p{
+    margin-top:10px;
+    color:#888;
+}
+
+/* =========================
+   Panels
+========================= */
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+    margin-top:30px;
+}
+
+.panel{
+    background:#fff;
+    border-radius:12px;
+    padding:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.panel h2{
+    margin-bottom:20px;
+}
+
+/* =========================
+   Quick Buttons
+========================= */
+
+.quick-buttons{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.quick-buttons button{
+    padding:15px;
+    border:none;
+    background:#2563eb;
+    color:#fff;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
+}
+
+.quick-buttons button:hover{
+    background:#1d4ed8;
+}
+
+/* =========================
+   Activity
+========================= */
+
+.activity{
+    list-style:none;
+}
+
+.activity li{
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+}
+
+/* =========================
+   Footer
+========================= */
+
+.footer{
+    text-align:center;
+    padding:20px;
+    color:#777;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media(max-width:900px){
+
+.sidebar{
+    width:75px;
+}
+
+.sidebar h2,
+.sidebar p,
+.sidebar span{
+    display:none;
+}
+
+.main{
+    margin-left:75px;
+}
+
+.grid{
+    grid-template-columns:1fr;
+}
+
+.menu a{
+    justify-content:center;
+}
+
+}
