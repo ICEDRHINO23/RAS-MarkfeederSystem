@@ -1,0 +1,399 @@
+/* ==========================================================
+   RAS MARKFEEDER ERP
+   FORMS.CSS
+   Enterprise Form System
+========================================================== */
+
+/* ===============================
+   FORM
+=============================== */
+
+.form{
+
+    width:100%;
+
+}
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:24px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.form-group.full{
+
+    grid-column:1 / -1;
+
+}
+
+/* ===============================
+   LABEL
+=============================== */
+
+.form-label{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:var(--text);
+
+}
+
+.required{
+
+    color:var(--danger);
+
+    margin-left:3px;
+
+}
+
+/* ===============================
+   INPUT
+=============================== */
+
+.form-control{
+
+    width:100%;
+
+    height:48px;
+
+    padding:0 16px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    background:#fff;
+
+    color:var(--text);
+
+    font-size:15px;
+
+    transition:var(--transition);
+
+}
+
+.form-control:hover{
+
+    border-color:#cbd5e1;
+
+}
+
+.form-control:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+
+}
+
+/* ===============================
+   SELECT
+=============================== */
+
+.form-select{
+
+    width:100%;
+
+    height:48px;
+
+    padding:0 16px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    background:white;
+
+    cursor:pointer;
+
+}
+
+/* ===============================
+   TEXTAREA
+=============================== */
+
+.form-textarea{
+
+    width:100%;
+
+    min-height:120px;
+
+    padding:14px 16px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    resize:vertical;
+
+}
+
+/* ===============================
+   INPUT GROUP
+=============================== */
+
+.input-group{
+
+    position:relative;
+
+}
+
+.input-group i{
+
+    position:absolute;
+
+    left:15px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#94a3b8;
+
+}
+
+.input-group input{
+
+    padding-left:45px;
+
+}
+
+/* ===============================
+   FILE UPLOAD
+=============================== */
+
+.file-upload{
+
+    border:2px dashed var(--border);
+
+    border-radius:16px;
+
+    padding:35px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.file-upload:hover{
+
+    border-color:var(--primary);
+
+    background:#f8fbff;
+
+}
+
+.file-upload input{
+
+    display:none;
+
+}
+
+/* ===============================
+   IMAGE PREVIEW
+=============================== */
+
+.image-preview{
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    margin:auto;
+
+    border:3px solid var(--border);
+
+}
+
+.image-preview img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+/* ===============================
+   CHECKBOX
+=============================== */
+
+.checkbox{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.checkbox input{
+
+    width:18px;
+
+    height:18px;
+
+}
+
+/* ===============================
+   SWITCH
+=============================== */
+
+.switch{
+
+    position:relative;
+
+    width:50px;
+
+    height:26px;
+
+}
+
+.switch input{
+
+    display:none;
+
+}
+
+.slider{
+
+    position:absolute;
+
+    inset:0;
+
+    background:#cbd5e1;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.slider::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:20px;
+
+    height:20px;
+
+    left:3px;
+
+    top:3px;
+
+    background:white;
+
+    border-radius:50%;
+
+    transition:.3s;
+
+}
+
+.switch input:checked + .slider{
+
+    background:var(--success);
+
+}
+
+.switch input:checked + .slider::before{
+
+    transform:translateX(24px);
+
+}
+
+/* ===============================
+   ERROR
+=============================== */
+
+.error{
+
+    color:var(--danger);
+
+    font-size:13px;
+
+}
+
+.success{
+
+    color:var(--success);
+
+    font-size:13px;
+
+}
+
+/* ===============================
+   FORM ACTIONS
+=============================== */
+
+.form-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    margin-top:35px;
+
+}
+
+/* ===============================
+   MOBILE
+=============================== */
+
+@media(max-width:768px){
+
+.form-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.form-group.full{
+
+    grid-column:auto;
+
+}
+
+.form-actions{
+
+    flex-direction:column;
+
+}
+
+.form-actions .btn{
+
+    width:100%;
+
+}
+
+}
