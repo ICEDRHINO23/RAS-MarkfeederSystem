@@ -148,24 +148,24 @@ function loadCards() {
 
 async function loadClasses() {
 
-    const classSelect = document.getElementById("class_id");
+    console.log("Loading classes...");
 
-    if (!classSelect) return;
+    const classSelect = document.getElementById("class_id");
 
     const { data, error } = await supabase
         .from("classes")
-        .select("*")
-        .order("grade", { ascending: true });
+        .select("*");
 
-    if (error) {
-        console.error(error);
-        return;
-    }
+    console.log(data);
+    console.log(error);
 
-    classSelect.innerHTML =
-        '<option value="">Select Class</option>';
+    if (error) return;
+
+    classSelect.innerHTML = `<option value="">Select Class</option>`;
 
     data.forEach(c => {
+
+        console.log(c);
 
         classSelect.innerHTML += `
             <option value="${c.id}">
@@ -177,31 +177,32 @@ async function loadClasses() {
 
 }
 
+}
+
 // ==========================
 // Load Academic Years
 // ==========================
 
 async function loadYears() {
 
-    const yearSelect =
-        document.getElementById("academic_year_id");
+    console.log("Loading years...");
 
-    if (!yearSelect) return;
+    const yearSelect = document.getElementById("academic_year_id");
 
     const { data, error } = await supabase
         .from("academic_years")
-        .select("*")
-        .order("academic_year", { ascending: true });
+        .select("*");
 
-    if (error) {
-        console.error(error);
-        return;
-    }
+    console.log(data);
+    console.log(error);
 
-    yearSelect.innerHTML =
-        '<option value="">Academic Year</option>';
+    if (error) return;
+
+    yearSelect.innerHTML = `<option value="">Academic Year</option>`;
 
     data.forEach(y => {
+
+        console.log(y);
 
         yearSelect.innerHTML += `
             <option value="${y.id}">
@@ -212,7 +213,6 @@ async function loadYears() {
     });
 
 }
-
 // ==========================
 // Save Student
 // ==========================
