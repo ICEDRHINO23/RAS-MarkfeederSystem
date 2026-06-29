@@ -18,11 +18,16 @@ const cancelBtn = document.getElementById("cancelStudent");
 const form = document.getElementById("studentForm");
 
 let students = [];
+let editingStudentId = null;
 // =============================
 // MODAL EVENTS
 // =============================
 
 addBtn?.addEventListener("click", () => {
+
+    editingStudentId = null;
+
+    form.reset();
 
     modal.classList.add("show");
 
@@ -84,7 +89,6 @@ async function loadStudents() {
     loadCards();
 
 }
-
 function renderTable() {
 
     tableBody.innerHTML = "";
@@ -97,7 +101,8 @@ function renderTable() {
             <td>
                 <img
                     src="${student.photo_url || '../assets/images/default-user.png'}"
-                    class="student-photo">
+                    class="student-photo"
+                    alt="Student">
             </td>
 
             <td>${student.admission_no}</td>
@@ -122,12 +127,22 @@ function renderTable() {
 
             <td>
 
-                <button class="action-btn edit-btn">
-                    Edit
+                <button
+                    class="action-btn edit-btn"
+                    onclick="editStudent(${student.id})"
+                    title="Edit">
+
+                    <i class="fa-solid fa-pen"></i>
+
                 </button>
 
-                <button class="action-btn delete-btn">
-                    Delete
+                <button
+                    class="action-btn delete-btn"
+                    onclick="deleteStudent(${student.id})"
+                    title="Delete">
+
+                    <i class="fa-solid fa-trash"></i>
+
                 </button>
 
             </td>
@@ -219,6 +234,52 @@ async function loadYears() {
     });
 
 }
+async function deleteStudent(id) {
+
+    if (!confirm("Are you sure you want to delete this student?")) {
+        return;
+    }
+
+    const { error } = await supabase
+        .from("students")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+        alert(error.message);
+        return;
+    }
+
+    alert("Student deleted successfully.");
+
+    await loadStudents();
+
+}
+async function editStudent(id) {
+
+    editingStudentId = id;
+
+    const student = students.find(s => s.id === id);
+
+    if (!student) return;
+
+
+    document.getElementById("admission_no").value = student.admission_no;
+    document.getElementById("roll_no").value = student.roll_no;
+    document.getElementById("student_name").value = student.student_name;
+    document.getElementById("gender").value = student.gender;
+    document.getElementById("dob").value = student.dob || "";
+    document.getElementById("father_name").value = student.father_name || "";
+    document.getElementById("mother_name").value = student.mother_name || "";
+    document.getElementById("mobile").value = student.mobile || "";
+    document.getElementById("address").value = student.address || "";
+    document.getElementById("class_id").value = student.class_id;
+    document.getElementById("academic_year_id").value = student.academic_year_id;
+    document.getElementById("active").checked = student.active;
+
+    modal.classList.add("show");
+
+}
 // ==========================
 // Save Student
 // ==========================
@@ -269,9 +330,22 @@ if (form) {
 
         };
 
-        const { error } = await supabase
-            .from("students")
-            .insert([student]);
+      let error;
+
+if (editingStudentId) {
+
+    ({ error } = await supabase
+        .from("students")
+        .update(student)
+        .eq("id", editingStudentId));
+
+} else {
+
+    ({ error } = await supabase
+        .from("students")
+        .insert([student]));
+
+}
 
         if (error) {
 
@@ -287,10 +361,15 @@ if (form) {
 
 form.reset();
 
+editingStudentId = null;
+
 modal.classList.remove("show");
 
 await loadStudents();
 
 });
-
 }
+
+// Make functions available to HTML onclick handlers
+window.editStudent = editStudent;
+window.deleteStudent = deleteStudent;
