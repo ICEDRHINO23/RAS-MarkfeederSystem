@@ -1,28 +1,63 @@
-import { login } from "../database/auth.js";
+import { supabase } from "../database/supabase.js";
 
 const form = document.getElementById("loginForm");
-const errorDiv = document.getElementById("error");
+const error = document.getElementById("error");
+const togglePassword = document.getElementById("togglePassword");
+const password = document.getElementById("password");
 
+// Show / Hide Password
+togglePassword.addEventListener("click", () => {
+    password.type =
+        password.type === "password"
+            ? "text"
+            : "password";
+});
+
+// Login
 form.addEventListener("submit", async (e) => {
+
     e.preventDefault();
 
-    errorDiv.textContent = "";
+    error.textContent = "";
 
     const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+    const pass = password.value;
 
-    try {
+    const { data, error: loginError } =
+        await supabase.auth.signInWithPassword({
 
-        await login(email, password);
+            email,
+            password: pass
 
-        window.location.href = "admin/index.html";
+        });
 
-    } catch (err) {
+    if (loginError) {
 
-        console.error(err);
-
-        errorDiv.textContent = err.message;
+        error.textContent = loginError.message;
+        return;
 
     }
+
+    const { data: userData, error: dbError } =
+        await supabase
+            .from("users")
+            .select("*")
+            .eq("auth_user_id", data.user.id)
+            .single();
+
+    if (dbError) {
+
+        error.textContent = "User profile not found.";
+        await supabase.auth.signOut();
+        return;
+
+    }
+
+    localStorage.setItem(
+        "user",
+        JSON.stringify(userData)
+    );
+
+    window.location.href = "admin/index.html";
 
 });
