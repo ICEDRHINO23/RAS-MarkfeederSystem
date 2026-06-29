@@ -11,30 +11,26 @@ const cancelBtn = document.getElementById("cancelStudent");
 const form = document.getElementById("studentForm");
 
 // ==========================
-// Open Modal
+// Open / Close Modal
 // ==========================
 
-addBtn.onclick = () => {
+addBtn?.addEventListener("click", () => {
     modal.style.display = "flex";
-};
+});
 
-// ==========================
-// Close Modal
-// ==========================
-
-closeBtn.onclick = () => {
+closeBtn?.addEventListener("click", () => {
     modal.style.display = "none";
-};
+});
 
-cancelBtn.onclick = () => {
+cancelBtn?.addEventListener("click", () => {
     modal.style.display = "none";
-};
+});
 
-window.onclick = (e) => {
+window.addEventListener("click", (e) => {
     if (e.target === modal) {
         modal.style.display = "none";
     }
-};
+});
 
 // ==========================
 // Load Classes
@@ -42,22 +38,28 @@ window.onclick = (e) => {
 
 async function loadClasses() {
 
-    const { data } = await supabase
+    const classSelect = document.getElementById("class_id");
+
+    if (!classSelect) return;
+
+    const { data, error } = await supabase
         .from("classes")
         .select("*")
-        .eq("active", true)
-        .order("class_name");
+        .order("grade", { ascending: true });
 
-    const classSelect = document.getElementById("class_id");
+    if (error) {
+        console.error(error);
+        return;
+    }
 
     classSelect.innerHTML =
         '<option value="">Select Class</option>';
 
-    data?.forEach(c => {
+    data.forEach(c => {
 
         classSelect.innerHTML += `
             <option value="${c.id}">
-                ${c.class_name}
+                Grade ${c.grade} - ${c.section}
             </option>
         `;
 
@@ -71,22 +73,29 @@ async function loadClasses() {
 
 async function loadYears() {
 
-    const { data } = await supabase
-        .from("academic_years")
-        .select("*")
-        .order("year_name");
-
     const yearSelect =
         document.getElementById("academic_year_id");
+
+    if (!yearSelect) return;
+
+    const { data, error } = await supabase
+        .from("academic_years")
+        .select("*")
+        .order("academic_year", { ascending: true });
+
+    if (error) {
+        console.error(error);
+        return;
+    }
 
     yearSelect.innerHTML =
         '<option value="">Academic Year</option>';
 
-    data?.forEach(y => {
+    data.forEach(y => {
 
         yearSelect.innerHTML += `
             <option value="${y.id}">
-                ${y.year_name}
+                ${y.academic_year}
             </option>
         `;
 
@@ -98,74 +107,81 @@ async function loadYears() {
 // Save Student
 // ==========================
 
-form.addEventListener("submit", async (e) => {
+if (form) {
 
-    e.preventDefault();
+    form.addEventListener("submit", async (e) => {
 
-    const student = {
+        e.preventDefault();
 
-        admission_no:
-            document.getElementById("admission_no").value,
+        const student = {
 
-        roll_no:
-            Number(document.getElementById("roll_no").value),
+            admission_no:
+                document.getElementById("admission_no").value,
 
-        student_name:
-            document.getElementById("student_name").value,
+            roll_no:
+                parseInt(document.getElementById("roll_no").value),
 
-        gender:
-            document.getElementById("gender").value,
+            student_name:
+                document.getElementById("student_name").value,
 
-        dob:
-            document.getElementById("dob").value,
+            gender:
+                document.getElementById("gender").value,
 
-        father_name:
-            document.getElementById("father_name").value,
+            dob:
+                document.getElementById("dob").value,
 
-        mother_name:
-            document.getElementById("mother_name").value,
+            father_name:
+                document.getElementById("father_name").value,
 
-        mobile:
-            document.getElementById("mobile").value,
+            mother_name:
+                document.getElementById("mother_name").value,
 
-        address:
-            document.getElementById("address").value,
+            mobile:
+                document.getElementById("mobile").value,
 
-        class_id:
-            document.getElementById("class_id").value,
+            address:
+                document.getElementById("address").value,
 
-        academic_year_id:
-            document.getElementById("academic_year_id").value,
+            class_id:
+                parseInt(document.getElementById("class_id").value),
 
-        active:
-            document.getElementById("active").checked
+            academic_year_id:
+                parseInt(document.getElementById("academic_year_id").value),
 
-    };
+            active:
+                document.getElementById("active").checked
 
-    const { error } = await supabase
-        .from("students")
-        .insert(student);
+        };
 
-    if (error) {
+        const { error } = await supabase
+            .from("students")
+            .insert([student]);
 
-        alert(error.message);
+        if (error) {
 
-        return;
+            console.error(error);
 
-    }
+            alert(error.message);
 
-    alert("Student Added Successfully");
+            return;
 
-    form.reset();
+        }
 
-    modal.style.display = "none";
+        alert("Student Added Successfully");
 
-    location.reload();
+        form.reset();
 
-});
+        modal.style.display = "none";
 
+        location.reload();
+
+    });
+
+}
+
+// ==========================
+// Initialize
 // ==========================
 
 loadClasses();
-
 loadYears();
