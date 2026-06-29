@@ -1,27 +1,92 @@
-import { requireAuth } from "./session.js";
-import { getDashboardStats } from "../database/dashboard.js";
+import { supabase } from "../database/supabase.js";
 
-(async () => {
+/* =====================================
+   Authentication Check
+===================================== */
 
-    const user = await requireAuth("Admin");
+const {
+    data: { session }
+} = await supabase.auth.getSession();
 
-    if (!user) return;
+if (!session) {
+    window.location.href = "../login.html";
+}
 
-    document.getElementById("adminName").textContent =
-        user.full_name;
+/* =====================================
+   Show Admin Name
+===================================== */
 
-    const stats = await getDashboardStats();
+document.getElementById("adminName").textContent =
+    session.user.email;
+
+/* =====================================
+   Live Clock
+===================================== */
+
+function updateClock() {
+
+    const now = new Date();
+
+    document.getElementById("currentTime").textContent =
+        now.toLocaleString();
+
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+/* =====================================
+   Dashboard Counts
+===================================== */
+
+async function loadCounts(){
+
+    const students =
+        await supabase
+        .from("students")
+        .select("*",{count:"exact",head:true});
+
+    const teachers =
+        await supabase
+        .from("teachers")
+        .select("*",{count:"exact",head:true});
+
+    const classes =
+        await supabase
+        .from("classes")
+        .select("*",{count:"exact",head:true});
+
+    const subjects =
+        await supabase
+        .from("subjects")
+        .select("*",{count:"exact",head:true});
 
     document.getElementById("studentCount").textContent =
-        stats.students;
+        students.count ?? 0;
 
     document.getElementById("teacherCount").textContent =
-        stats.teachers;
+        teachers.count ?? 0;
 
     document.getElementById("classCount").textContent =
-        stats.classes;
+        classes.count ?? 0;
 
     document.getElementById("subjectCount").textContent =
-        stats.subjects;
+        subjects.count ?? 0;
 
-})();
+}
+
+loadCounts();
+
+/* =====================================
+   Logout
+===================================== */
+
+document.getElementById("logoutBtn")
+.addEventListener("click",async()=>{
+
+    await supabase.auth.signOut();
+
+    window.location.href="../login.html";
+
+});
