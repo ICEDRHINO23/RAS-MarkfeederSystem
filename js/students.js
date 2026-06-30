@@ -65,8 +65,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadYears();
     await loadStudents();
 
-});
+    // Filter events
+    document.getElementById("filterClass")
+        .addEventListener("change", filterStudents);
 
+    document.getElementById("filterYear")
+        .addEventListener("change", filterStudents);
+
+});
 // =============================
 // LOAD STUDENTS
 // =============================
@@ -89,11 +95,14 @@ async function loadStudents() {
     loadCards();
 
 }
-function renderTable() {
+// =============================
+// RENDER TABLE
+// =============================
+function renderTable(data = students) {
 
     tableBody.innerHTML = "";
 
-    students.forEach(student => {
+  data.forEach(student => {
 
         tableBody.innerHTML += `
         <tr>
@@ -157,8 +166,33 @@ tableBody.addEventListener("click", async (e) => {
     }
 
 });
+// =============================
+// FILTER STUDENTS
+// =============================
 
-    
+function filterStudents() {
+
+    const classId = document.getElementById("filterClass").value;
+    const yearId = document.getElementById("filterYear").value;
+
+    const filtered = students.filter(student => {
+
+        const classMatch =
+            !classId || String(student.class_id) === classId;
+
+        const yearMatch =
+            !yearId || String(student.academic_year_id) === yearId;
+
+        return classMatch && yearMatch;
+
+    });
+
+    renderTable(filtered);
+
+}
+ // =============================
+// LOAD CARDS
+// =============================   
 
 
 function loadCards() {
