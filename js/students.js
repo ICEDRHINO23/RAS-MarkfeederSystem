@@ -318,12 +318,11 @@ if (photoFile) {
         "." +
         extension;
 
-    const { error: uploadError } =
-        await supabase.storage
-            .from("student-photos")
-            .upload(fileName, photoFile, {
-                upsert: true
-            });
+   const { error: uploadError } = await supabase.storage
+    .from("student-photos")
+    .upload(fileName, file, {
+        upsert: true
+    });
 
     if (uploadError) {
 
@@ -333,13 +332,12 @@ if (photoFile) {
 
     }
 
-    const { data } =
-        supabase.storage
-            .from("STUDENT-PHOTOS")
-            .getPublicUrl(fileName);
+  const { data } =
+    supabase.storage
+        .from("student-photos")
+        .getPublicUrl(fileName);
 
-    photoUrl = data.publicUrl;
-
+photoUrl = data.publicUrl;
 }
         const student = {
 
