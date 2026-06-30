@@ -368,9 +368,9 @@ if (photoFile) {
         "." +
         extension;
 
-   const { error: uploadError } = await supabase.storage
+const { error: uploadError } = await supabase.storage
     .from("student-photos")
-    .upload(fileName, file, {
+    .upload(fileName, photoFile, {
         upsert: true
     });
 
