@@ -184,32 +184,38 @@ async function loadClasses() {
     console.log("Loading classes...");
 
     const classSelect = document.getElementById("class_id");
+    const filterClass = document.getElementById("filterClass");
 
     const { data, error } = await supabase
         .from("classes")
-        .select("*");
+        .select("*")
+        .order("grade");
 
-    console.log(data);
-    console.log(error);
+    if (error) {
+        console.error(error);
+        return;
+    }
 
-    if (error) return;
-
+    // Modal Dropdown
     classSelect.innerHTML = `<option value="">Select Class</option>`;
+
+    // Filter Dropdown
+    filterClass.innerHTML = `<option value="">All Classes</option>`;
 
     data.forEach(c => {
 
-        console.log(c);
-
-        classSelect.innerHTML += `
+        const option = `
             <option value="${c.id}">
                 Grade ${c.grade} - ${c.section}
             </option>
         `;
 
+        classSelect.innerHTML += option;
+        filterClass.innerHTML += option;
+
     });
 
 }
-
 
 
 // ==========================
@@ -217,27 +223,37 @@ async function loadClasses() {
 // ==========================
 async function loadYears() {
 
-    console.log("Loading years...");
+    console.log("Loading Academic Years...");
 
     const yearSelect = document.getElementById("academic_year_id");
+    const filterYear = document.getElementById("filterYear");
 
     const { data, error } = await supabase
         .from("academic_years")
-        .select("*");
+        .select("*")
+        .order("id");
 
-    console.log(data);
+    if (error) {
+        console.error(error);
+        return;
+    }
 
-    if (error) return;
-
+    // Modal Dropdown
     yearSelect.innerHTML = `<option value="">Academic Year</option>`;
+
+    // Filter Dropdown
+    filterYear.innerHTML = `<option value="">Academic Year</option>`;
 
     data.forEach(y => {
 
-        yearSelect.innerHTML += `
+        const option = `
             <option value="${y.id}">
                 ${y.academic_year}
             </option>
         `;
+
+        yearSelect.innerHTML += option;
+        filterYear.innerHTML += option;
 
     });
 
