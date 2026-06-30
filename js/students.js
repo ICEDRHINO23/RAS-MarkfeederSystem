@@ -108,8 +108,11 @@ function renderTable(data = students) {
         <tr>
 
             <td>
-                <img src="${student.photo_url || '../assets/images/default-user.png'}"
-                     class="student-photo">
+              <img
+    src="${student.photo_url || '../assets/images/default-user.png'}"
+    class="student-photo"
+    alt="Student"
+    onerror="this.src='../assets/images/default-user.png'">
             </td>
 
             <td>${student.admission_no}</td>
