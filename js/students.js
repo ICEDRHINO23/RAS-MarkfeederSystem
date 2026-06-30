@@ -1,5 +1,6 @@
 import { supabase } from "../database/supabase.js";
-
+import { exportStudentsToExcel }
+from "./utils/excel.js";
 // =============================
 // DOM ELEMENTS
 // =============================
@@ -16,7 +17,20 @@ const addBtn = document.getElementById("addStudentBtn");
 const closeBtn = document.getElementById("closeModal");
 const cancelBtn = document.getElementById("cancelStudent");
 const form = document.getElementById("studentForm");
+const exportBtn =
+    document.getElementById("exportExcel");
 
+exportBtn.addEventListener("click", () => {
+
+    exportStudentsToExcel(
+
+        students,
+
+        "Students.xlsx"
+
+    );
+
+});
 let students = [];
 let editingStudentId = null;
 // =============================
