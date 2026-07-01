@@ -193,3 +193,120 @@
         ====================================== -->
 
         <section class="page-content">
+<!-- ===========================
+        DASHBOARD CARDS
+============================ -->
+
+<div class="cards-grid">
+
+    <div class="card">
+
+        <div class="card-icon blue">
+            <i class="fa-solid fa-users"></i>
+        </div>
+
+        <div class="card-info">
+
+            <h2 id="totalTeachers">0</h2>
+
+            <p>Total Teachers</p>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-icon green">
+            <i class="fa-solid fa-person"></i>
+        </div>
+
+        <div class="card-info">
+
+            <h2 id="maleTeachers">0</h2>
+
+            <p>Male Teachers</p>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-icon pink">
+            <i class="fa-solid fa-person-dress"></i>
+        </div>
+
+        <div class="card-info">
+
+            <h2 id="femaleTeachers">0</h2>
+
+            <p>Female Teachers</p>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-icon orange">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+
+        <div class="card-info">
+
+            <h2 id="activeTeachers">0</h2>
+
+            <p>Active Teachers</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+            <!-- ===========================
+        FILTER BAR
+============================ -->
+
+<div class="toolbar">
+
+    <div class="toolbar-left">
+
+        <select id="filterDepartment">
+
+            <option value="">All Departments</option>
+
+        </select>
+
+        <select id="filterDesignation">
+
+            <option value="">All Designations</option>
+
+        </select>
+
+        <select id="filterStatus">
+
+            <option value="">All Status</option>
+            <option value="true">Active</option>
+            <option value="false">Inactive</option>
+
+        </select>
+
+    </div>
+
+    <div class="toolbar-right">
+
+        <button
+            class="btn btn-success"
+            id="exportTeachers">
+
+            <i class="fa-solid fa-file-excel"></i>
+
+            Export Excel
+
+        </button>
+
+    </div>
+
+</div>
