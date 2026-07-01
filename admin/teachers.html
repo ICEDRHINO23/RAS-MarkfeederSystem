@@ -3,13 +3,17 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>Teachers | RAS Markfeeder ERP</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="../css/app.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Teachers | RAS Markfeeder ERP</title>
+
+    <link rel="stylesheet" href="../css/app.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
@@ -17,15 +21,16 @@
 
 <div class="app">
 
-    <!-- =========================
-         SIDEBAR
-    ========================== -->
+    <!-- =========================================
+                 SIDEBAR
+    ========================================== -->
 
     <aside class="sidebar">
 
         <div class="logo-area">
 
-            <img src="../assets/logos/logo.png">
+            <img src="../assets/logos/logo.png"
+                 alt="RAS ERP">
 
             <div class="logo-title">
 
@@ -41,23 +46,72 @@
 
             <ul>
 
-                <li><a href="dashboard.html"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
 
-                <li><a href="students.html"><i class="fa-solid fa-user-graduate"></i><span>Students</span></a></li>
+                <li>
+                    <a href="students.html">
+                        <i class="fa-solid fa-user-graduate"></i>
+                        <span>Students</span>
+                    </a>
+                </li>
 
-                <li><a class="active" href="teachers.html"><i class="fa-solid fa-chalkboard-user"></i><span>Teachers</span></a></li>
+                <li>
+                    <a class="active"
+                       href="teachers.html">
 
-                <li><a href="classes.html"><i class="fa-solid fa-school"></i><span>Classes</span></a></li>
+                        <i class="fa-solid fa-chalkboard-user"></i>
 
-                <li><a href="subjects.html"><i class="fa-solid fa-book"></i><span>Subjects</span></a></li>
+                        <span>Teachers</span>
 
-                <li><a href="exams.html"><i class="fa-solid fa-file-pen"></i><span>Exams</span></a></li>
+                    </a>
+                </li>
 
-                <li><a href="marks.html"><i class="fa-solid fa-marker"></i><span>Marks Entry</span></a></li>
+                <li>
+                    <a href="classes.html">
+                        <i class="fa-solid fa-school"></i>
+                        <span>Classes</span>
+                    </a>
+                </li>
 
-                <li><a href="reports.html"><i class="fa-solid fa-chart-column"></i><span>Reports</span></a></li>
+                <li>
+                    <a href="subjects.html">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Subjects</span>
+                    </a>
+                </li>
 
-                <li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+                <li>
+                    <a href="exams.html">
+                        <i class="fa-solid fa-file-pen"></i>
+                        <span>Exams</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="marks.html">
+                        <i class="fa-solid fa-marker"></i>
+                        <span>Marks Entry</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="reports.html">
+                        <i class="fa-solid fa-chart-column"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="settings.html">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
 
             </ul>
 
@@ -77,19 +131,33 @@
 
     </aside>
 
-    <!-- =========================
-         MAIN
-    ========================== -->
+    <!-- =========================================
+                    MAIN CONTENT
+    ========================================== -->
 
     <main class="main">
+
+        <!-- =====================================
+                    TOP BAR
+        ====================================== -->
 
         <header class="topbar">
 
             <div class="page-title">
 
-                <h1>Teacher Management</h1>
+                <h1>
 
-                <p>Manage teachers and staff</p>
+                    <i class="fa-solid fa-chalkboard-user"></i>
+
+                    Teacher Management
+
+                </h1>
+
+                <p>
+
+                    Manage teachers, staff details and login accounts
+
+                </p>
 
             </div>
 
@@ -100,9 +168,9 @@
                     <i class="fa-solid fa-search"></i>
 
                     <input
-                        id="searchTeacher"
                         type="text"
-                        placeholder="Search Teacher...">
+                        id="searchTeacher"
+                        placeholder="Search by Name, Employee ID or Mobile">
 
                 </div>
 
@@ -120,250 +188,8 @@
 
         </header>
 
+        <!-- =====================================
+                    PAGE CONTENT
+        ====================================== -->
+
         <section class="page-content">
-
-            <!-- Dashboard Cards -->
-
-            <div class="stats-grid">
-
-                <div class="card">
-
-                    <div class="card-title">Teachers</div>
-
-                    <div class="card-value" id="totalTeachers">0</div>
-
-                    <div class="card-footer">Total Teachers</div>
-
-                </div>
-
-                <div class="card">
-
-                    <div class="card-title">Male</div>
-
-                    <div class="card-value" id="maleTeachers">0</div>
-
-                    <div class="card-footer">Male Teachers</div>
-
-                </div>
-
-                <div class="card">
-
-                    <div class="card-title">Female</div>
-
-                    <div class="card-value" id="femaleTeachers">0</div>
-
-                    <div class="card-footer">Female Teachers</div>
-
-                </div>
-
-                <div class="card">
-
-                    <div class="card-title">Active</div>
-
-                    <div class="card-value" id="activeTeachers">0</div>
-
-                    <div class="card-footer">Active Teachers</div>
-
-                </div>
-
-            </div>
-
-            <!-- Toolbar -->
-
-            <div class="section">
-
-                <div class="toolbar">
-
-                    <select id="filterDepartment">
-
-                        <option value="">All Departments</option>
-
-                    </select>
-
-                    <select id="filterDesignation">
-
-                        <option value="">All Designations</option>
-
-                    </select>
-
-                    <button
-                        id="exportTeacherExcel"
-                        class="btn">
-
-                        <i class="fa-solid fa-file-excel"></i>
-
-                        Export Excel
-
-                    </button>
-
-                </div>
-
-                <!-- Table -->
-
-                <div class="table-container">
-
-                    <table>
-
-                        <thead>
-
-                            <tr>
-
-                                <th>Photo</th>
-
-                                <th>Employee ID</th>
-
-                                <th>Name</th>
-
-                                <th>Department</th>
-
-                                <th>Designation</th>
-
-                                <th>Mobile</th>
-
-                                <th>Status</th>
-
-                                <th>Action</th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody id="teacherTable">
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-</div>
-
-<!-- =========================
-     ADD / EDIT TEACHER
-========================= -->
-
-<div class="modal" id="teacherModal">
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2>Teacher Details</h2>
-
-            <span id="closeTeacherModal">&times;</span>
-
-        </div>
-
-        <form id="teacherForm">
-
-            <div class="form-grid">
-
-                <input
-                    type="file"
-                    id="teacherPhoto"
-                    accept="image/*">
-
-                <input
-                    id="employee_id"
-                    placeholder="Employee ID"
-                    required>
-
-                <input
-                    id="teacher_name"
-                    placeholder="Teacher Name"
-                    required>
-
-                <select
-                    id="gender">
-
-                    <option value="">Gender</option>
-
-                    <option>Male</option>
-
-                    <option>Female</option>
-
-                </select>
-
-                <input
-                    id="dob"
-                    type="date">
-
-                <input
-                    id="qualification"
-                    placeholder="Qualification">
-
-                <input
-                    id="designation"
-                    placeholder="Designation">
-
-                <input
-                    id="department"
-                    placeholder="Department">
-
-                <input
-                    id="mobile"
-                    placeholder="Mobile">
-
-                <input
-                    id="email"
-                    type="email"
-                    placeholder="Email">
-
-                <input
-                    id="joining_date"
-                    type="date">
-
-                <textarea
-                    id="address"
-                    placeholder="Address"></textarea>
-
-            </div>
-
-            <br>
-
-            <label>
-
-                <input
-                    type="checkbox"
-                    id="active"
-                    checked>
-
-                Active Teacher
-
-            </label>
-
-            <div class="modal-buttons">
-
-                <button
-                    type="button"
-                    id="cancelTeacher">
-
-                    Cancel
-
-                </button>
-
-                <button
-                    type="submit">
-
-                    Save Teacher
-
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>
-
-<script type="module" src="../js/teachers.js"></script>
-
-</body>
-</html>
