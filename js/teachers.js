@@ -75,9 +75,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 });
 
-/* Teacher Form */
 
-teacherForm.addEventListener("submit", saveTeacher);
 /* ==========================================================
    EVENTS
 ========================================================== */
@@ -86,6 +84,7 @@ function initializeEvents() {
 
     console.log("Initializing Events...");
 
+    // Add Teacher Button
     if (addTeacherBtn) {
 
         addTeacherBtn.addEventListener("click", () => {
@@ -96,38 +95,41 @@ function initializeEvents() {
 
             editingTeacher = null;
 
-            document.getElementById("modalTitle").textContent = "Add Teacher";
+            const title = document.getElementById("modalTitle");
+            if (title) title.textContent = "Add Teacher";
 
             teacherModal.classList.add("show");
 
         });
 
-    } else {
-
-        console.error("addTeacherBtn not found");
-
     }
 
+    // Close Button
     if (closeModal) {
 
         closeModal.addEventListener("click", closeTeacherModal);
 
     }
 
+    // Cancel Button
     if (cancelTeacher) {
 
         cancelTeacher.addEventListener("click", closeTeacherModal);
-         window.addEventListener("click", (e) => {
-
-    if (e.target === teacherModal) {
-
-        closeTeacherModal();
 
     }
 
-});
-    
+    // Click Outside Modal
+    window.addEventListener("click", (e) => {
 
+        if (e.target === teacherModal) {
+
+            closeTeacherModal();
+
+        }
+
+    });
+
+    // Form Submit
     if (teacherForm) {
 
         teacherForm.addEventListener("submit", saveTeacher);
@@ -135,8 +137,6 @@ function initializeEvents() {
     }
 
 }
-
-
 /* ==========================================================
    CLOSE MODAL
 ========================================================== */
