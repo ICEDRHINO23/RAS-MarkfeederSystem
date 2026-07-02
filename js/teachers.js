@@ -103,21 +103,22 @@ async function loadTeachers() {
     loadCards();
 
 }
-// =====================================
+// =============================
 // DASHBOARD CARDS
-// =====================================
+// =============================
 
 function loadCards() {
 
-    totalTeachers.textContent = teachers.length;
+    document.getElementById("totalTeachers").textContent =
+        teachers.length;
 
-    maleTeachers.textContent =
+    document.getElementById("maleTeachers").textContent =
         teachers.filter(t => t.gender === "Male").length;
 
-    femaleTeachers.textContent =
+    document.getElementById("femaleTeachers").textContent =
         teachers.filter(t => t.gender === "Female").length;
 
-    activeTeachers.textContent =
+    document.getElementById("activeTeachers").textContent =
         teachers.filter(t => t.active).length;
 
 }
@@ -523,3 +524,8 @@ document
     .getElementById("filterStatus")
     ?.addEventListener("change", applyFilters);
 
+document.addEventListener("DOMContentLoaded", async () => {
+
+    await loadTeachers();
+
+});
