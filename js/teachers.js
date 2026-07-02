@@ -84,40 +84,47 @@ teacherForm.addEventListener("submit", saveTeacher);
 
 function initializeEvents() {
 
-    // Open Modal
+    console.log("Initializing Events...");
 
-    addTeacherBtn.addEventListener("click", () => {
+    if (addTeacherBtn) {
 
-        teacherForm.reset();
+        addTeacherBtn.addEventListener("click", () => {
 
-        editingTeacher = null;
+            console.log("Add Teacher Clicked");
 
-        document.getElementById("modalTitle").textContent =
-            "Add Teacher";
+            teacherForm.reset();
 
-        teacherModal.style.display = "flex";
+            editingTeacher = null;
 
-    });
+            document.getElementById("modalTitle").textContent = "Add Teacher";
 
-    // Close Button
+            teacherModal.style.display = "flex";
 
-    closeModal.addEventListener("click", closeTeacherModal);
+        });
 
-    // Cancel Button
+    } else {
 
-    cancelTeacher.addEventListener("click", closeTeacherModal);
+        console.error("addTeacherBtn not found");
 
-    // Click Outside
+    }
 
-    window.addEventListener("click", (e) => {
+    if (closeModal) {
 
-        if (e.target === teacherModal) {
+        closeModal.addEventListener("click", closeTeacherModal);
 
-            closeTeacherModal();
+    }
 
-        }
+    if (cancelTeacher) {
 
-    });
+        cancelTeacher.addEventListener("click", closeTeacherModal);
+
+    }
+
+    if (teacherForm) {
+
+        teacherForm.addEventListener("submit", saveTeacher);
+
+    }
 
 }
 
