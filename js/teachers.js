@@ -98,7 +98,7 @@ function initializeEvents() {
 
             document.getElementById("modalTitle").textContent = "Add Teacher";
 
-            teacherModal.style.display = "flex";
+            teacherModal.classList.add("show");
 
         });
 
@@ -117,8 +117,16 @@ function initializeEvents() {
     if (cancelTeacher) {
 
         cancelTeacher.addEventListener("click", closeTeacherModal);
+         window.addEventListener("click", (e) => {
+
+    if (e.target === teacherModal) {
+
+        closeTeacherModal();
 
     }
+
+});
+    
 
     if (teacherForm) {
 
@@ -135,7 +143,7 @@ function initializeEvents() {
 
 function closeTeacherModal() {
 
-    teacherModal.style.display = "none";
+    teacherModal.classList.remove("show");
 
 }
 /* ==========================================================
