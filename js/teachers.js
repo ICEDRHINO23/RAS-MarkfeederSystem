@@ -75,7 +75,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 });
 
+/* Teacher Form */
 
+teacherForm.addEventListener("submit", saveTeacher);
 /* ==========================================================
    EVENTS
 ========================================================== */
@@ -188,6 +190,7 @@ async function loadTeachers() {
     loadFilters();
 
 }
+
 /* ==========================================================
    UPDATE DASHBOARD
 ========================================================== */
@@ -324,5 +327,72 @@ function loadFilters() {
             `<option value="${designation}">${designation}</option>`;
 
     });
+
+}
+/* ==========================================================
+   SAVE TEACHER
+========================================================== */
+
+async function saveTeacher(e){
+
+    e.preventDefault();
+
+    const teacher={
+
+        employee_id:
+            document.getElementById("employee_id").value.trim(),
+
+        teacher_name:
+            document.getElementById("teacher_name").value.trim(),
+
+        gender:
+            document.getElementById("gender").value,
+
+        mobile:
+            document.getElementById("mobile").value.trim(),
+
+        email:
+            document.getElementById("email").value.trim(),
+
+        department:
+            document.getElementById("department").value,
+
+        designation:
+            document.getElementById("designation").value,
+
+        qualification:
+            document.getElementById("qualification").value.trim(),
+
+        joining_date:
+            document.getElementById("joining_date").value,
+
+        active:
+            document.getElementById("active").checked
+
+    };
+
+    const { error } = await supabase
+
+        .from("teachers")
+
+        .insert([teacher]);
+
+    if(error){
+
+        alert(error.message);
+
+        console.error(error);
+
+        return;
+
+    }
+
+    alert("Teacher Added Successfully");
+
+    teacherForm.reset();
+
+    closeTeacherModal();
+
+    await loadTeachers();
 
 }
