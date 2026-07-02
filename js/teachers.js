@@ -293,3 +293,36 @@ function renderTeachers(data) {
     });
 
 }
+/* ==========================================================
+   LOAD FILTERS
+========================================================== */
+
+function loadFilters() {
+
+    filterDepartment.innerHTML =
+        `<option value="">All Departments</option>`;
+
+    filterDesignation.innerHTML =
+        `<option value="">All Designations</option>`;
+
+    const departments =
+        [...new Set(teachers.map(t => t.department).filter(Boolean))];
+
+    departments.forEach(dept => {
+
+        filterDepartment.innerHTML +=
+            `<option value="${dept}">${dept}</option>`;
+
+    });
+
+    const designations =
+        [...new Set(teachers.map(t => t.designation).filter(Boolean))];
+
+    designations.forEach(designation => {
+
+        filterDesignation.innerHTML +=
+            `<option value="${designation}">${designation}</option>`;
+
+    });
+
+}
