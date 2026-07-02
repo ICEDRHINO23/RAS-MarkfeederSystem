@@ -188,3 +188,21 @@ async function loadTeachers() {
     loadFilters();
 
 }
+/* ==========================================================
+   UPDATE DASHBOARD
+========================================================== */
+
+function updateDashboard() {
+
+    totalTeachers.textContent = teachers.length;
+
+    maleTeachers.textContent =
+        teachers.filter(t => t.gender === "Male").length;
+
+    femaleTeachers.textContent =
+        teachers.filter(t => t.gender === "Female").length;
+
+    activeTeachers.textContent =
+        teachers.filter(t => t.active).length;
+
+}
