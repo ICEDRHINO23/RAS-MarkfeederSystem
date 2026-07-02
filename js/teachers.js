@@ -206,3 +206,90 @@ function updateDashboard() {
         teachers.filter(t => t.active).length;
 
 }
+/* ==========================================================
+   RENDER TEACHERS TABLE
+========================================================== */
+
+function renderTeachers(data) {
+
+    if (data.length === 0) {
+
+        teacherTable.innerHTML = `
+            <tr>
+                <td colspan="10" style="text-align:center;padding:30px;">
+                    No Teachers Found
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    teacherTable.innerHTML = "";
+
+    data.forEach((teacher) => {
+
+        teacherTable.innerHTML += `
+
+        <tr>
+
+            <td>
+
+                <img
+                    src="${teacher.photo_url || '../assets/images/default-user.png'}"
+                    class="teacher-photo"
+                    alt="Teacher">
+
+            </td>
+
+            <td>${teacher.employee_id}</td>
+
+            <td>${teacher.teacher_name}</td>
+
+            <td>${teacher.gender}</td>
+
+            <td>${teacher.department || "-"}</td>
+
+            <td>${teacher.designation}</td>
+
+            <td>${teacher.mobile}</td>
+
+            <td>${teacher.joining_date}</td>
+
+            <td>
+
+                <span class="${teacher.active ? 'badge-success' : 'badge-danger'}">
+
+                    ${teacher.active ? "Active" : "Inactive"}
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <button
+                    class="btn btn-sm btn-primary"
+                    onclick="editTeacher('${teacher.id}')">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                </button>
+
+                <button
+                    class="btn btn-sm btn-danger"
+                    onclick="deleteTeacher('${teacher.id}')">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
