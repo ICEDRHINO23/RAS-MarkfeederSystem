@@ -382,6 +382,54 @@ function searchTeachers() {
     renderTeachers(filtered);
 
 }
+
+/* ==========================================================
+   EDIT TEACHER
+========================================================== */
+
+async function editTeacher(id) {
+
+    const teacher = teachers.find(t => t.id == id);
+
+    if (!teacher) return;
+
+    editingTeacher = id;
+
+    document.getElementById("modalTitle").textContent = "Edit Teacher";
+
+    document.getElementById("employee_id").value =
+        teacher.employee_id || "";
+
+    document.getElementById("teacher_name").value =
+        teacher.teacher_name || "";
+
+    document.getElementById("gender").value =
+        teacher.gender || "";
+
+    document.getElementById("mobile").value =
+        teacher.mobile || "";
+
+    document.getElementById("email").value =
+        teacher.email || "";
+
+    document.getElementById("department").value =
+        teacher.department || "";
+
+    document.getElementById("designation").value =
+        teacher.designation || "";
+
+    document.getElementById("qualification").value =
+        teacher.qualification || "";
+
+    document.getElementById("joining_date").value =
+        teacher.joining_date || "";
+
+    document.getElementById("active").checked =
+        teacher.active;
+
+    teacherModal.classList.add("show");
+
+}
 /* ==========================================================
    SAVE TEACHER
 ========================================================== */
@@ -451,7 +499,7 @@ if (editingTeacher) {
     }
 
     alert("Teacher Added Successfully");
-
+   editingTeacher = null;
     teacherForm.reset();
 
     closeTeacherModal();
@@ -459,3 +507,4 @@ if (editingTeacher) {
     await loadTeachers();
 
 }
+window.editTeacher = editTeacher;
