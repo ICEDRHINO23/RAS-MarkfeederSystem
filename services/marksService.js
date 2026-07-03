@@ -221,3 +221,79 @@ export async function isExamLocked(examId) {
     return data.lock_marks;
 
 }
+/* ==========================================================
+   CHECK COMPLETION
+========================================================== */
+
+export async function canSubmitMarks(
+    examId,
+    classId,
+    subjectId
+) {
+
+    const { count: totalStudents, error: studentError } =
+        await supabase
+            .from("students")
+            .select("*", { count: "exact", head: true })
+            .eq("class_id", classId)
+            .eq("active", true);
+
+    if (studentError) throw studentError;
+
+    const { count: savedMarks, error: marksError } =
+        await supabase
+            .from("marks")
+            .select("*", { count: "exact", head: true })
+            .eq("exam_id", examId)
+            .eq("subject_id", subjectId);
+
+    if (marksError) throw marksError;
+
+    return totalStudents === savedMarks;
+
+}
+
+/* ==========================================================
+   SUBMIT MARKS
+========================================================== */
+
+export async function submitMarks(
+    examId,
+    classId,
+    subjectId
+) {
+
+    const ready =
+        await canSubmitMarks(
+            examId,
+            classId,
+            subjectId
+        );
+
+    if (!ready) {
+
+        throw new Error(
+            "Marks entry is incomplete."
+        );
+
+    }
+
+    const { error } = await supabase
+
+        .from("marks")
+
+        .update({
+
+            status: "Submitted"
+
+        })
+
+        .eq("exam_id", examId)
+
+        .eq("subject_id", subjectId);
+
+    if (error) throw error;
+
+    return true;
+
+}
