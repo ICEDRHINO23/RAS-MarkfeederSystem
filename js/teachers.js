@@ -424,12 +424,22 @@ async function saveTeacher(e){
 
     };
 
-    const { error } = await supabase
+  let error;
 
+if (editingTeacher) {
+
+    ({ error } = await supabase
         .from("teachers")
+        .update(teacher)
+        .eq("id", editingTeacher));
 
-        .insert([teacher]);
+} else {
 
+    ({ error } = await supabase
+        .from("teachers")
+        .insert([teacher]));
+
+}
     if(error){
 
         alert(error.message);
