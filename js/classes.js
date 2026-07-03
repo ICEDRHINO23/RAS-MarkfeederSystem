@@ -49,7 +49,25 @@ const filterStatus =
 
 const exportClasses =
     document.getElementById("exportClasses");
+/* ==========================================================
+   INITIALIZE
+========================================================== */
 
+document.addEventListener("DOMContentLoaded", async () => {
+
+    initializeEvents();
+
+    classForm.addEventListener("submit", saveClass);
+
+    if (searchClass) {
+        searchClass.addEventListener("input", searchClasses);
+    }
+
+    await loadTeachersDropdown();
+
+    await loadClasses();
+
+});
 /* ==========================================================
    DASHBOARD
 ========================================================== */
@@ -66,31 +84,6 @@ const totalStudents =
 const activeClasses =
     document.getElementById("activeClasses");
 
-/* ==========================================================
-   INITIALIZE
-========================================================== */
-addClassBtn.addEventListener("click", () => {
-
-    classForm.reset();
-
-    editingClass = null;
-
-    document.getElementById("modalTitle").textContent = "Add Class";
-
-    classModal.classList.add("show");
-
-});
-/* Search */
-
-if (searchClass) {
-
-    searchClass.addEventListener(
-        "input",
-        searchClasses
-    );
-
-}
-});
 
 /* ==========================================================
    EVENTS
@@ -242,25 +235,15 @@ function renderClasses(data) {
 
             <tr>
 
-                <td>${cls.class_name}</td>
-
-                <td>${cls.section}</td>
-
-                <td>${cls.class_name}</td>
-
-                <td>${cls.teachers?.teacher_name || "-"}</td>
-
-                <td>${cls.strength || 0}</td>
-
-                <td>
-
-                    <span class="${cls.active ? "badge-success" : "badge-danger"}">
-
-                        ${cls.active ? "Active" : "Inactive"}
-
-                    </span>
-
-                </td>
+              <td>${cls.class_name}</td>
+<td>${cls.section}</td>
+<td>${cls.teachers?.teacher_name || "-"}</td>
+<td>${cls.strength || 0}</td>
+<td>
+    <span class="${cls.active ? "badge-success" : "badge-danger"}">
+        ${cls.active ? "Active" : "Inactive"}
+    </span>
+</td>
 
                 <td>
 
