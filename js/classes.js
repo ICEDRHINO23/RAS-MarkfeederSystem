@@ -300,3 +300,42 @@ function renderClasses(data) {
     });
 
 }
+/* ==========================================================
+   LOAD FILTERS
+========================================================== */
+
+function loadFilters() {
+
+    filterClass.innerHTML =
+        `<option value="">All Classes</option>`;
+
+    filterSection.innerHTML =
+        `<option value="">All Sections</option>`;
+
+    const classList = [
+        ...new Set(
+            classes.map(c => c.class_name).filter(Boolean)
+        )
+    ];
+
+    classList.forEach(cls => {
+
+        filterClass.innerHTML +=
+            `<option value="${cls}">${cls}</option>`;
+
+    });
+
+    const sectionList = [
+        ...new Set(
+            classes.map(c => c.section).filter(Boolean)
+        )
+    ];
+
+    sectionList.forEach(sec => {
+
+        filterSection.innerHTML +=
+            `<option value="${sec}">${sec}</option>`;
+
+    });
+
+}
