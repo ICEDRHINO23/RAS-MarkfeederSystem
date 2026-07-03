@@ -95,20 +95,20 @@ if (searchClass) {
 function initializeEvents() {
 
     // Add Class
-    addClassBtn.addEventListener("click", () => {
+  addClassBtn.addEventListener("click", async () => {
 
-        classForm.reset();
+    classForm.reset();
 
-        editingClass = null;
+    editingClass = null;
 
-        document.getElementById("modalTitle").textContent =
-            "Add Class";
-       
-         await loadTeachersDropdown();   
-       
-        classModal.classList.add("show");
+    document.getElementById("modalTitle").textContent =
+        "Add Class";
 
-    });
+    await loadTeachersDropdown();
+
+    classModal.classList.add("show");
+
+});
 
     // Close
     closeModal.addEventListener("click", closeClassModal);
@@ -144,54 +144,42 @@ function closeClassModal() {
 async function loadClasses() {
 
     classTable.innerHTML = `
-
         <tr>
-
-            <td colspan="7">
-
+            <td colspan="7" style="text-align:center;padding:20px;">
                 Loading Classes...
-
             </td>
-
         </tr>
-
     `;
-const { data, error } = await supabase
 
-    .from("classes")
-
-    .select(`
-        *,
-        teachers (
-            teacher_name
-        )
-    `)
-
-    .order("class_name");
+    const { data, error } = await supabase
+        .from("classes")
+        .select(`
+            *,
+            teachers:class_teacher (
+                teacher_name
+            )
+        `)
+        .order("class_name", { ascending: true })
+        .order("section", { ascending: true });
 
     if (error) {
 
-        console.error(error);
+        console.error("Load Classes Error:", error);
 
         classTable.innerHTML = `
-
             <tr>
-
-                <td colspan="7">
-
+                <td colspan="7" style="text-align:center;color:red;padding:20px;">
                     Failed to load classes
-
                 </td>
-
             </tr>
-
         `;
 
         return;
-
     }
 
     classes = data || [];
+
+    console.log("Classes Loaded:", classes);
 
     updateDashboard();
 
@@ -200,7 +188,6 @@ const { data, error } = await supabase
     loadFilters();
 
 }
-
 /* ==========================================================
    UPDATE DASHBOARD
 ========================================================== */
@@ -500,8 +487,28 @@ async function editClass(id) {
 ========================================================== */
 
 async function deleteClass(id) {
+
+    if (!confirm("Are you sure you want to delete this class?")) {
+        return;
+    }
+
+    const { error } = await supabase
+        .from("classes")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+        console.error(error);
+        alert(error.message);
+        return;
+    }
+
+    await loadClasses();
+
+}
+
 /* ==========================================================
-   LOAD TEACHERS
+   LOAD TEACHERS DROPDOWN
 ========================================================== */
 
 async function loadTeachersDropdown() {
@@ -512,51 +519,32 @@ async function loadTeachersDropdown() {
     teacherSelect.innerHTML =
         `<option value="">Select Class Teacher</option>`;
 
-    const { data } = await supabase
-
+    const { data, error } = await supabase
         .from("teachers")
-
-        .select("id,teacher_name")
-
+        .select("id, teacher_name")
         .order("teacher_name");
 
-    data?.forEach(t => {
+    if (error) {
+        console.error(error);
+        return;
+    }
 
-        teacherSelect.innerHTML +=
+    data.forEach(teacher => {
 
-            `<option value="${t.id}">
-
-                ${t.teacher_name}
-
-            </option>`;
+        teacherSelect.innerHTML += `
+            <option value="${teacher.id}">
+                ${teacher.teacher_name}
+            </option>
+        `;
 
     });
 
 }
-   window.editClass = editClass;
 
-window.deleteClass = deleteClass;
+/* ==========================================================
+   GLOBAL FUNCTIONS
+========================================================== */
 
-        return;
-
-    const { error } = await supabase
-
-        .from("classes")
-
-        .delete()
-
-        .eq("id", id);
-
-    if (error) {
-
-        alert(error.message);
-
-        return;
-
-    }
-
-    await loadClasses();
-
-}
 window.editClass = editClass;
 window.deleteClass = deleteClass;
+
