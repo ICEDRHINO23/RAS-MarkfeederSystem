@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Marks Entry | RAS Markfeeder ERP</title>
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/marks-entry.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+
+    <aside id="sidebar"></aside>
+
+    <main class="main-content">
+
+        <!-- ===========================
+             PAGE HEADER
+        ============================ -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>Marks Entry</h1>
+
+                <p>Teacher Examination Portal</p>
+
+            </div>
+
+        </div>
+
+        <!-- ===========================
+             DASHBOARD
+        ============================ -->
+
+        <div class="dashboard-grid">
+
+            <div class="card">
+
+                <h3>Assigned Classes</h3>
+
+                <h1 id="assignedClasses">0</h1>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Subjects</h3>
+
+                <h1 id="assignedSubjects">0</h1>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Students</h3>
+
+                <h1 id="studentCount">0</h1>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Completion</h3>
+
+                <h1 id="completionPercent">0%</h1>
+
+            </div>
+
+        </div>
+
+        <!-- ===========================
+             FILTER PANEL
+        ============================ -->
+
+        <div class="filter-card">
+
+            <div class="filter-grid">
+
+                <select id="examSelect">
+
+                    <option value="">
+                        Select Exam
+                    </option>
+
+                </select>
+
+                <select id="classSelect">
+
+                    <option value="">
+                        Select Class
+                    </option>
+
+                </select>
+
+                <select id="subjectSelect">
+
+                    <option value="">
+                        Select Subject
+                    </option>
+
+                </select>
+
+                <button
+                    id="loadStudentsBtn"
+                    class="btn-primary">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    Load Students
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- ===========================
+             MARKS TABLE
+        ============================ -->
+
+        <div class="table-card">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th width="90">
+                            Roll No
+                        </th>
+
+                        <th>
+                            Student Name
+                        </th>
+
+                        <th width="140">
+                            Marks
+                        </th>
+
+                        <th width="120">
+                            Grade
+                        </th>
+
+                        <th width="150">
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="marksTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- ===========================
+             FOOTER BUTTONS
+        ============================ -->
+
+        <div class="footer-actions">
+
+            <button
+                id="saveDraftBtn"
+                class="btn-secondary">
+
+                Save Draft
+
+            </button>
+
+            <button
+                id="submitMarksBtn"
+                class="btn-primary">
+
+                Submit Marks
+
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+<script type="module"
+        src="../js/marks-entry.js"></script>
+
+</body>
+
+</html>
