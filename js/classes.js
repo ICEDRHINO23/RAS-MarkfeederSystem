@@ -513,16 +513,17 @@ async function deleteClass(id) {
 
 async function loadTeachersDropdown() {
 
-    const teacherSelect =
-        document.getElementById("class_teacher");
+    const teacherSelect = document.getElementById("class_teacher");
 
-    teacherSelect.innerHTML =
-        `<option value="">Select Class Teacher</option>`;
+    // Clear existing options
+    teacherSelect.innerHTML = `
+        <option value="">Select Class Teacher</option>
+    `;
 
     const { data, error } = await supabase
         .from("teachers")
         .select("id, teacher_name")
-        .order("teacher_name");
+        .order("teacher_name", { ascending: true });
 
     if (error) {
         console.error(error);
@@ -531,16 +532,16 @@ async function loadTeachersDropdown() {
 
     data.forEach(teacher => {
 
-        teacherSelect.innerHTML += `
-            <option value="${teacher.id}">
-                ${teacher.teacher_name}
-            </option>
-        `;
+        const option = document.createElement("option");
+
+        option.value = teacher.id;
+        option.textContent = teacher.teacher_name;
+
+        teacherSelect.appendChild(option);
 
     });
 
 }
-
 /* ==========================================================
    GLOBAL FUNCTIONS
 ========================================================== */
