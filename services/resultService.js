@@ -12,11 +12,11 @@ import { supabase } from "../database/supabase.js";
 export async function processResults(examId, classId) {
 
     const { data: students, error } = await supabase
-        .from("students")
-        .select("*")
-        .eq("class_id", classId)
-        .eq("active", true)
-        .order("roll_no");
+    .from("students")
+    .select("*")
+    .eq("class_id", classId)
+    .eq("active", true)
+    .order("roll_no");
 
     if (error) throw error;
 
@@ -131,7 +131,7 @@ async function calculateGrade(percentage) {
    CALCULATE SCHOOL RANK
 ========================================================== */
 
-async function calculateRanks(examId) {
+async function calculateRanks(examId, classId)
 
     const { data } = await supabase
 
