@@ -69,13 +69,17 @@ const activeClasses =
 /* ==========================================================
    INITIALIZE
 ========================================================== */
+addClassBtn.addEventListener("click", () => {
 
-document.addEventListener("DOMContentLoaded", async () => {
+    classForm.reset();
 
-    initializeEvents();
-      classForm.addEventListener("submit", saveClass);
-   await loadTeachersDropdown();
-    await loadClasses();
+    editingClass = null;
+
+    document.getElementById("modalTitle").textContent = "Add Class";
+
+    classModal.classList.add("show");
+
+});
 /* Search */
 
 if (searchClass) {
@@ -95,7 +99,7 @@ if (searchClass) {
 function initializeEvents() {
 
     // Add Class
-  addClassBtn.addEventListener("click", async () => {
+addClassBtn.addEventListener("click", () => {
 
     classForm.reset();
 
@@ -103,8 +107,6 @@ function initializeEvents() {
 
     document.getElementById("modalTitle").textContent =
         "Add Class";
-
-    await loadTeachersDropdown();
 
     classModal.classList.add("show");
 
