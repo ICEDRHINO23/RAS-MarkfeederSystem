@@ -73,7 +73,7 @@ const activeClasses =
 document.addEventListener("DOMContentLoaded", async () => {
 
     initializeEvents();
-
+      classForm.addEventListener("submit", saveClass);
     await loadClasses();
 
 });
@@ -333,5 +333,183 @@ function loadFilters() {
             `<option value="${sec}">${sec}</option>`;
 
     });
+
+}
+/* ==========================================================
+   SAVE / UPDATE CLASS
+========================================================== */
+
+async function saveClass(e) {
+
+    e.preventDefault();
+
+    const cls = {
+
+        class_name:
+            document.getElementById("class_name").value.trim(),
+
+        section:
+            document.getElementById("section").value.trim(),
+
+        class_teacher:
+            document.getElementById("class_teacher").value || null,
+
+        strength:
+            Number(document.getElementById("strength").value) || 0,
+
+        active:
+            document.getElementById("active").checked
+
+    };
+
+    const isEdit = !!editingClass;
+
+    let error;
+
+    if (isEdit) {
+
+        ({ error } = await supabase
+
+            .from("classes")
+
+            .update(cls)
+
+            .eq("id", editingClass));
+
+    } else {
+
+        ({ error } = await supabase
+
+            .from("classes")
+
+            .insert([cls]));
+
+    }
+
+    if (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+        return;
+
+    }
+
+    alert(
+
+        isEdit
+
+            ? "Class Updated Successfully"
+
+            : "Class Added Successfully"
+
+    );
+
+    editingClass = null;
+
+    classForm.reset();
+
+    closeClassModal();
+
+    await loadClasses();
+
+}
+/* ==========================================================
+   EDIT CLASS
+========================================================== */
+
+async function editClass(id) {
+
+    console.log("Editing Class:", id);
+
+    const cls = classes.find(c => c.id === id);
+
+    if (!cls) return;
+
+    editingClass = id;
+
+    document.getElementById("modalTitle").textContent =
+        "Edit Class";
+
+    document.getElementById("class_name").value =
+        cls.class_name;
+
+    document.getElementById("section").value =
+        cls.section;
+
+    document.getElementById("strength").value =
+        cls.strength;
+
+    document.getElementById("active").checked =
+        cls.active;
+
+    document.getElementById("class_teacher").value =
+        cls.class_teacher || "";
+
+    classModal.classList.add("show");
+
+}
+/* ==========================================================
+   DELETE CLASS
+========================================================== */
+
+async function deleteClass(id) {
+/* ==========================================================
+   LOAD TEACHERS
+========================================================== */
+
+async function loadTeachersDropdown() {
+
+    const teacherSelect =
+        document.getElementById("class_teacher");
+
+    teacherSelect.innerHTML =
+        `<option value="">Select Class Teacher</option>`;
+
+    const { data } = await supabase
+
+        .from("teachers")
+
+        .select("id,teacher_name")
+
+        .order("teacher_name");
+
+    data?.forEach(t => {
+
+        teacherSelect.innerHTML +=
+
+            `<option value="${t.id}">
+
+                ${t.teacher_name}
+
+            </option>`;
+
+    });
+
+}
+   window.editClass = editClass;
+
+window.deleteClass = deleteClass;
+
+        return;
+
+    const { error } = await supabase
+
+        .from("classes")
+
+        .delete()
+
+        .eq("id", id);
+
+    if (error) {
+
+        alert(error.message);
+
+        return;
+
+    }
+
+    await loadClasses();
 
 }
