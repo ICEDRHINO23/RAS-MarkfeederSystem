@@ -103,7 +103,9 @@ function initializeEvents() {
 
         document.getElementById("modalTitle").textContent =
             "Add Class";
-
+       
+         await loadTeachersDropdown();   
+       
         classModal.classList.add("show");
 
     });
@@ -470,7 +472,8 @@ async function editClass(id) {
     if (!cls) return;
 
     editingClass = id;
-
+      await loadTeachersDropdown();
+   
     document.getElementById("modalTitle").textContent =
         "Edit Class";
 
@@ -555,3 +558,5 @@ window.deleteClass = deleteClass;
     await loadClasses();
 
 }
+window.editClass = editClass;
+window.deleteClass = deleteClass;
