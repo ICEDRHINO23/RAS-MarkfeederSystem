@@ -550,12 +550,42 @@ Loading Students...
 
     }
 
-    students = data || [];
+students = data || [];
 
-    studentCount.textContent =
-        students.length;
+studentCount.textContent =
+    students.length;
 
-    renderMarksGrid();
+const existingMarks =
+    await loadExistingMarks();
+
+renderMarksGrid(existingMarks);
+
+}
+/* ==========================================================
+   LOAD EXISTING MARKS
+========================================================== */
+
+async function loadExistingMarks() {
+
+    const { data, error } = await supabase
+
+        .from("marks")
+
+        .select("*")
+
+        .eq("exam_id", Number(examSelect.value))
+
+        .eq("subject_id", subjectSelect.value);
+
+    if (error) {
+
+        console.error(error);
+
+        return [];
+
+    }
+
+    return data || [];
 
 }
 /* ==========================================================
