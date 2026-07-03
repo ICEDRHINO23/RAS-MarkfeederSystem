@@ -439,6 +439,79 @@ async function saveTeacher(e) {
 
     e.preventDefault();
 
+    let photoUrl = null;
+
+    const photoFile =
+        document.getElementById("photo").files[0];
+
+    /* ===========================================
+       UPLOAD IMAGE
+    =========================================== */
+
+    if (photoFile) {
+
+      const fileExt = photoFile.name.split(".").pop();
+
+   const fileName =
+`${crypto.randomUUID()}.${fileExt}`;
+
+      const { data: uploadData, error: uploadError } =
+await supabase.storage
+.from("teacher-photos")
+.upload(fileName, photoFile, {
+
+    cacheControl: "3600",
+
+    upsert: true
+
+});
+
+        if (uploadError) {
+
+            alert(uploadError.message);
+
+            console.error(uploadError);
+
+            return;
+
+        }
+
+     const {
+
+    data: publicUrlData
+
+} = supabase.storage
+
+.from("teacher-photos")
+
+.getPublicUrl(fileName);
+
+photoUrl = publicUrlData.publicUrl;
+
+console.log("Uploaded Image:", photoUrl);
+    }
+
+    /* ===========================================
+       KEEP OLD PHOTO WHILE EDITING
+    =========================================== */
+
+    if (editingTeacher && !photoUrl) {
+
+        const oldTeacher =
+            teachers.find(t => t.id === editingTeacher);
+
+        if (oldTeacher) {
+
+            photoUrl = oldTeacher.photo_url;
+
+        }
+
+    }
+
+    /* ===========================================
+       CREATE OBJECT
+    =========================================== */
+
     const teacher = {
 
         employee_id:
@@ -469,16 +542,20 @@ async function saveTeacher(e) {
             document.getElementById("joining_date").value,
 
         active:
-            document.getElementById("active").checked
+            document.getElementById("active").checked,
+
+        photo_url:
+            photoUrl
 
     };
 
-    const isEdit = !!editingTeacher;
-      console.log("Is Edit:", isEdit);
-      console.log("Editing Teacher:", editingTeacher);
     let error;
 
-    if (isEdit) {
+    /* ===========================================
+       UPDATE
+    =========================================== */
+
+    if (editingTeacher) {
 
         ({ error } = await supabase
 
@@ -488,7 +565,13 @@ async function saveTeacher(e) {
 
             .eq("id", editingTeacher));
 
-    } else {
+    }
+
+    /* ===========================================
+       INSERT
+    =========================================== */
+
+    else {
 
         ({ error } = await supabase
 
@@ -510,7 +593,7 @@ async function saveTeacher(e) {
 
     alert(
 
-        isEdit
+        editingTeacher
 
             ? "Teacher Updated Successfully"
 
@@ -519,7 +602,7 @@ async function saveTeacher(e) {
     );
 
     editingTeacher = null;
-      
+
     teacherForm.reset();
 
     closeTeacherModal();
