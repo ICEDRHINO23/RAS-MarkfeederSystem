@@ -76,7 +76,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       classForm.addEventListener("submit", saveClass);
    await loadTeachersDropdown();
     await loadClasses();
+/* Search */
 
+if (searchClass) {
+
+    searchClass.addEventListener(
+        "input",
+        searchClasses
+    );
+
+}
 });
 
 /* ==========================================================
@@ -334,6 +343,38 @@ function loadFilters() {
             `<option value="${sec}">${sec}</option>`;
 
     });
+
+}
+/* ==========================================================
+   SEARCH CLASSES
+========================================================== */
+
+function searchClasses() {
+
+    const keyword = searchClass.value
+        .toLowerCase()
+        .trim();
+
+    const filtered = classes.filter(c =>
+
+        (c.class_name || "")
+            .toLowerCase()
+            .includes(keyword)
+
+        ||
+
+        (c.section || "")
+            .toLowerCase()
+            .includes(keyword)
+
+        ||
+
+        String(c.strength || "")
+            .includes(keyword)
+
+    );
+
+    renderClasses(filtered);
 
 }
 /* ==========================================================
