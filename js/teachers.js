@@ -431,7 +431,7 @@ async function editTeacher(id) {
     teacherModal.classList.add("show");
 
 }
-   console.log("Teacher Object:", teacher);
+   
 /* ==========================================================
    SAVE / UPDATE TEACHER
 ========================================================== */
@@ -447,8 +447,7 @@ async function saveTeacher(e) {
          console.log("Photo Input:", document.getElementById("photo"));
 
          console.log("Selected File:", photoFile);
-         photoUrl = publicUrlData.publicUrl;
-         console.log("Public URL:", photoUrl);
+         
    /* ===========================================
        UPLOAD IMAGE
     =========================================== */
@@ -481,18 +480,14 @@ async function saveTeacher(e) {
 
         }
 
-     const {
-
-    data: publicUrlData
-
-} = supabase.storage
-
-.from("teacher-photos")
-
-.getPublicUrl(fileName);
+const { data: publicUrlData } = supabase.storage
+    .from("teacher-photos")
+    .getPublicUrl(fileName);
 
 photoUrl = publicUrlData.publicUrl;
+
 console.log("Public URL:", photoUrl);
+
 console.log("Uploaded Image:", photoUrl);
     }
 
