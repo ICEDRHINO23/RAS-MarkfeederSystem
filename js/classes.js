@@ -125,3 +125,178 @@ function closeClassModal() {
     classModal.classList.remove("show");
 
 }
+/* ==========================================================
+   LOAD CLASSES
+========================================================== */
+
+async function loadClasses() {
+
+    classTable.innerHTML = `
+
+        <tr>
+
+            <td colspan="7">
+
+                Loading Classes...
+
+            </td>
+
+        </tr>
+
+    `;
+
+    const { data, error } = await supabase
+
+        .from("classes")
+
+        .select(`
+            *,
+            teachers (
+                teacher_name
+            ),
+            academic_years (
+                year_name
+            )
+        `)
+
+        .order("class_name");
+
+    if (error) {
+
+        console.error(error);
+
+        classTable.innerHTML = `
+
+            <tr>
+
+                <td colspan="7">
+
+                    Failed to load classes
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+    classes = data || [];
+
+    updateDashboard();
+
+    renderClasses(classes);
+
+    loadFilters();
+
+}
+
+/* ==========================================================
+   UPDATE DASHBOARD
+========================================================== */
+
+function updateDashboard() {
+
+    totalClasses.textContent = classes.length;
+
+    totalSections.textContent =
+        [...new Set(classes.map(c => c.section))].length;
+
+    totalStudents.textContent =
+        classes.reduce((sum, c) => sum + (c.strength || 0), 0);
+
+    activeClasses.textContent =
+        classes.filter(c => c.active).length;
+
+}
+/* ==========================================================
+   RENDER CLASSES TABLE
+========================================================== */
+
+function renderClasses(data) {
+
+    if (data.length === 0) {
+
+        classTable.innerHTML = `
+
+            <tr>
+
+                <td colspan="7" style="text-align:center;padding:30px;">
+
+                    No Classes Found
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+    classTable.innerHTML = "";
+
+    data.forEach(cls => {
+
+        classTable.innerHTML += `
+
+            <tr>
+
+                <td>${cls.class_name}</td>
+
+                <td>${cls.section}</td>
+
+                <td>${cls.academic_years?.year_name || "-"}</td>
+
+                <td>${cls.teachers?.teacher_name || "-"}</td>
+
+                <td>${cls.strength || 0}</td>
+
+                <td>
+
+                    <span class="${cls.active ? "badge-success" : "badge-danger"}">
+
+                        ${cls.active ? "Active" : "Inactive"}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <div class="action-buttons">
+
+                        <button
+
+                            class="edit-btn"
+
+                            onclick="editClass('${cls.id}')">
+
+                            <i class="fa-solid fa-pen"></i>
+
+                        </button>
+
+                        <button
+
+                            class="delete-btn"
+
+                            onclick="deleteClass('${cls.id}')">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
