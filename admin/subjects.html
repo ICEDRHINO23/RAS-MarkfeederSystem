@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>Subjects | RAS Markfeeder ERP</title>
+
+<link rel="stylesheet"
+href="../css/dashboard.css">
+
+<link rel="stylesheet"
+href="../css/subjects.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <img src="../assets/logo.png">
+
+            <div>
+
+                <h2>RAS ERP</h2>
+
+                <span>School Examination ERP</span>
+
+            </div>
+
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+            <a href="students.html">
+                <i class="fa-solid fa-user-graduate"></i>
+                Students
+            </a>
+
+            <a href="teachers.html">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                Teachers
+            </a>
+
+            <a href="classes.html">
+                <i class="fa-solid fa-school"></i>
+                Classes
+            </a>
+
+            <a class="active"
+               href="subjects.html">
+
+                <i class="fa-solid fa-book"></i>
+
+                Subjects
+
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-file-pen"></i>
+                Exams
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-square-poll-vertical"></i>
+                Marks Entry
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-chart-line"></i>
+                Reports
+            </a>
+
+            <a href="#">
+                <i class="fa-solid fa-gear"></i>
+                Settings
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>Subject Management</h1>
+
+                <p>
+
+                    Manage school subjects and examination settings
+
+                </p>
+
+            </div>
+
+            <div class="header-actions">
+
+                <input
+
+                    id="searchSubject"
+
+                    placeholder="Search Subject...">
+
+                <button
+
+                    id="addSubjectBtn"
+
+                    class="btn-primary">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Subject
+
+                </button>
+
+            </div>
+
+        </div>
+        <!-- ===========================
+DASHBOARD
+=========================== -->
+
+<div class="dashboard-grid">
+
+    <div class="card">
+
+        <h3>Total Subjects</h3>
+
+        <h1 id="totalSubjects">0</h1>
+
+        <span>Registered Subjects</span>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Scholastic</h3>
+
+        <h1 id="scholasticSubjects">0</h1>
+
+        <span>Academic Subjects</span>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Co-Scholastic</h3>
+
+        <h1 id="coScholasticSubjects">0</h1>
+
+        <span>Activity Subjects</span>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Active Subjects</h3>
+
+        <h1 id="activeSubjects">0</h1>
+
+        <span>Currently Active</span>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+TABLE CARD
+=========================== -->
+
+<div class="table-card">
+
+    <div class="table-toolbar">
+
+        <div>
+
+            <select id="filterType">
+
+                <option value="">
+
+                    All Types
+
+                </option>
+
+                <option value="Scholastic">
+
+                    Scholastic
+
+                </option>
+
+                <option value="Co-Scholastic">
+
+                    Co-Scholastic
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <button id="exportSubjects">
+
+            <i class="fa-solid fa-file-excel"></i>
+
+            Export Excel
+
+        </button>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Code</th>
+
+                <th>Subject Name</th>
+
+                <th>Type</th>
+
+                <th>Maximum Marks</th>
+
+                <th>Pass Marks</th>
+
+                <th>Status</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="subjectTable">
+
+        </tbody>
+
+    </table>
+
+</div>
+<!-- ==========================================================
+     SUBJECT MODAL
+========================================================== -->
+
+<div class="modal" id="subjectModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+
+                Add Subject
+
+            </h2>
+
+            <button id="closeModal">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <form id="subjectForm">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+
+                        Subject Code
+
+                    </label>
+
+                    <input
+
+                        type="text"
+
+                        id="subject_code"
+
+                        placeholder="Example : ENG"
+
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Subject Name
+
+                    </label>
+
+                    <input
+
+                        type="text"
+
+                        id="subject_name"
+
+                        placeholder="Example : English"
+
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Subject Type
+
+                    </label>
+
+                    <select id="subject_type">
+
+                        <option value="Scholastic">
+
+                            Scholastic
+
+                        </option>
+
+                        <option value="Co-Scholastic">
+
+                            Co-Scholastic
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Maximum Marks
+
+                    </label>
+
+                    <input
+
+                        type="number"
+
+                        id="max_marks"
+
+                        value="100"
+
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Pass Marks
+
+                    </label>
+
+                    <input
+
+                        type="number"
+
+                        id="pass_marks"
+
+                        value="35"
+
+                        required>
+
+                </div>
+
+                <div class="form-group checkbox-group">
+
+                    <label>
+
+                        <input
+
+                            type="checkbox"
+
+                            id="active"
+
+                            checked>
+
+                        Active Subject
+
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+
+                    type="button"
+
+                    class="btn-secondary"
+
+                    id="cancelSubject">
+
+                    Cancel
+
+                </button>
+
+                <button
+
+                    type="submit"
+
+                    class="btn-primary">
+
+                    Save Subject
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+    </main>
+
+</div>
+
+<!-- ==========================================================
+     SHEETJS
+========================================================== -->
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+<!-- ==========================================================
+     SUBJECTS MODULE
+========================================================== -->
+
+<script type="module" src="../js/subjects.js"></script>
+
+</body>
+
+</html>
