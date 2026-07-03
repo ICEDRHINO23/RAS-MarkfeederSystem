@@ -595,3 +595,107 @@ classForm.addEventListener("submit", saveClass);
 window.editClass = editClass;
 
 window.deleteClass = deleteClass;
+/* ==========================================================
+   PART 4
+   EXPORT TO EXCEL
+========================================================== */
+
+function exportToExcel() {
+
+    if (classes.length === 0) {
+
+        alert("No class data available.");
+
+        return;
+
+    }
+
+    const rows = classes.map(cls => ({
+
+        "Class": cls.class_name,
+
+        "Section": cls.section,
+
+        "Class Teacher": cls.teachers?.teacher_name || "",
+
+        "Strength": cls.strength,
+
+        "Status": cls.active ? "Active" : "Inactive"
+
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(rows);
+
+    const workbook = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(
+        workbook,
+        worksheet,
+        "Classes"
+    );
+
+    XLSX.writeFile(
+        workbook,
+        "Classes.xlsx"
+    );
+
+}
+
+/* ==========================================================
+   EXPORT BUTTON
+========================================================== */
+
+if (exportClasses) {
+
+    exportClasses.addEventListener(
+        "click",
+        exportToExcel
+    );
+
+}
+
+/* ==========================================================
+   RESET FORM
+========================================================== */
+
+function resetForm() {
+
+    editingClass = null;
+
+    classForm.reset();
+
+    document.getElementById("active").checked = true;
+
+}
+
+/* ==========================================================
+   REFRESH TABLE
+========================================================== */
+
+async function refreshTable() {
+
+    await loadClasses();
+
+}
+
+/* ==========================================================
+   KEYBOARD SHORTCUTS
+========================================================== */
+
+document.addEventListener("keydown", (e) => {
+
+    if (e.key === "Escape") {
+
+        closeClassModal();
+
+    }
+
+});
+
+/* ==========================================================
+   DEBUG
+========================================================== */
+
+console.log(
+    "RAS ERP :: Classes Module Loaded Successfully"
+);
