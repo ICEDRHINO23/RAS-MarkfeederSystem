@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     initializeEvents();
       classForm.addEventListener("submit", saveClass);
+   await loadTeachersDropdown();
     await loadClasses();
 
 });
