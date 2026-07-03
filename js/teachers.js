@@ -352,6 +352,7 @@ function loadFilters() {
 /* ==========================================================
    SEARCH TEACHERS
 ========================================================== */
+
 function searchTeachers() {
 
     console.log("Searching:", searchTeacher.value);
@@ -360,40 +361,19 @@ function searchTeachers() {
         .toLowerCase()
         .trim();
 
-    
-}
-
     const filtered = teachers.filter(t => {
 
         return (
 
-            (t.teacher_name || "")
-                .toLowerCase()
-                .includes(keyword)
+            (t.teacher_name || "").toLowerCase().includes(keyword) ||
 
-            ||
+            (t.employee_id || "").toLowerCase().includes(keyword) ||
 
-            (t.employee_id || "")
-                .toLowerCase()
-                .includes(keyword)
+            (t.mobile || "").toLowerCase().includes(keyword) ||
 
-            ||
+            (t.department || "").toLowerCase().includes(keyword) ||
 
-            (t.mobile || "")
-                .toLowerCase()
-                .includes(keyword)
-
-            ||
-
-            (t.department || "")
-                .toLowerCase()
-                .includes(keyword)
-
-            ||
-
-            (t.designation || "")
-                .toLowerCase()
-                .includes(keyword)
+            (t.designation || "").toLowerCase().includes(keyword)
 
         );
 
