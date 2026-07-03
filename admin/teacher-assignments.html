@@ -1,1 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Teacher Assignments | RAS Markfeeder ERP</title>
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/teacher-assignments.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside id="sidebar"></aside>
+
+    <main class="main-content">
+
+        <!-- Header -->
+        <div class="page-header">
+
+            <div>
+
+                <h1>Teacher Assignments</h1>
+
+                <p>Manage Teacher-Class-Subject Mapping</p>
+
+            </div>
+
+            <div class="header-actions">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search Assignment...">
+
+                <button
+                    class="btn-primary"
+                    id="addAssignmentBtn">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Assignment
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Dashboard Cards -->
+
+        <div class="dashboard-grid">
+
+            <div class="card">
+
+                <h3>Total Assignments</h3>
+
+                <h1 id="totalAssignments">0</h1>
+
+                <span>Teacher Mappings</span>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Teachers</h3>
+
+                <h1 id="teacherCount">0</h1>
+
+                <span>Assigned Teachers</span>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Classes</h3>
+
+                <h1 id="classCount">0</h1>
+
+                <span>Assigned Classes</span>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Class Teachers</h3>
+
+                <h1 id="classTeacherCount">0</h1>
+
+                <span>Homeroom Teachers</span>
+
+            </div>
+
+        </div>
+
+        <!-- Table -->
+
+        <div class="table-card">
+
+            <div class="table-toolbar">
+
+                <select id="teacherFilter">
+
+                    <option value="">All Teachers</option>
+
+                </select>
+
+                <select id="classFilter">
+
+                    <option value="">All Classes</option>
+
+                </select>
+
+                <select id="subjectFilter">
+
+                    <option value="">All Subjects</option>
+
+                </select>
+
+                <button id="exportBtn">
+
+                    <i class="fa-solid fa-file-excel"></i>
+
+                    Export Excel
+
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                <tr>
+
+                    <th>Teacher</th>
+
+                    <th>Class</th>
+
+                    <th>Section</th>
+
+                    <th>Subject</th>
+
+                    <th>Academic Year</th>
+
+                    <th>Class Teacher</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody id="assignmentTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- Modal -->
+
+<div class="modal" id="assignmentModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+
+                Add Teacher Assignment
+
+            </h2>
+
+            <span id="closeModal">&times;</span>
+
+        </div>
+
+        <form id="assignmentForm">
+
+            <div class="form-grid">
+
+                <select id="teacher_id" required></select>
+
+                <select id="class_id" required></select>
+
+                <select id="subject_id" required></select>
+
+                <input
+                    type="text"
+                    id="academic_year"
+                    value="2026-2027">
+
+            </div>
+
+            <div class="checkbox-group">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="is_class_teacher">
+
+                    Class Teacher
+
+                </label>
+
+            </div>
+
+            <div class="checkbox-group">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="active"
+                        checked>
+
+                    Active Assignment
+
+                </label>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    id="cancelAssignment">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn-primary">
+
+                    Save Assignment
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script type="module" src="../js/teacher-assignments.js"></script>
+
+</body>
+
+</html>
