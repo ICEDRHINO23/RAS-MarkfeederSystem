@@ -9,16 +9,13 @@ import { supabase } from "../database/supabase.js";
    PROCESS RESULTS
 ========================================================== */
 
-export async function processResults(examId) {
+export async function processResults(examId, classId) {
 
     const { data: students, error } = await supabase
-
         .from("students")
-
         .select("*")
-
+        .eq("class_id", classId)
         .eq("active", true)
-
         .order("roll_no");
 
     if (error) throw error;
@@ -29,10 +26,9 @@ export async function processResults(examId) {
 
     }
 
-    await calculateRanks(examId);
+    await calculateRanks(examId, classId);
 
 }
-
 /* ==========================================================
    PROCESS SINGLE STUDENT
 ========================================================== */
