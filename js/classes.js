@@ -144,22 +144,18 @@ async function loadClasses() {
         </tr>
 
     `;
+const { data, error } = await supabase
 
-    const { data, error } = await supabase
+    .from("classes")
 
-        .from("classes")
+    .select(`
+        *,
+        teachers (
+            teacher_name
+        )
+    `)
 
-        .select(`
-            *,
-            teachers (
-                teacher_name
-            ),
-            academic_years (
-                year_name
-            )
-        `)
-
-        .order("class_name");
+    .order("class_name");
 
     if (error) {
 
@@ -249,7 +245,7 @@ function renderClasses(data) {
 
                 <td>${cls.section}</td>
 
-                <td>${cls.academic_years?.year_name || "-"}</td>
+                <td>${cls.class_name}</td>
 
                 <td>${cls.teachers?.teacher_name || "-"}</td>
 
