@@ -5,8 +5,7 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Marks Entry | RAS Markfeeder ERP</title>
 
@@ -15,7 +14,7 @@
     <link rel="stylesheet" href="../css/marks-entry.css">
 
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
@@ -24,30 +23,41 @@
 <div class="dashboard">
 
     <!-- Sidebar -->
-
     <aside id="sidebar"></aside>
 
     <main class="main-content">
 
-        <!-- ===========================
+        <!-- =========================================
              PAGE HEADER
-        ============================ -->
+        ========================================== -->
 
         <div class="page-header">
 
             <div>
 
-                <h1>Marks Entry</h1>
+                <h1>
+                    Marks Entry
+                </h1>
 
-                <p>Teacher Examination Portal</p>
+                <p>
+                    Teacher Examination Portal
+                </p>
+
+            </div>
+
+            <div class="connection-status">
+
+                <span class="online-dot"></span>
+
+                Auto Save Ready
 
             </div>
 
         </div>
 
-        <!-- ===========================
+        <!-- =========================================
              DASHBOARD
-        ============================ -->
+        ========================================== -->
 
         <div class="dashboard-grid">
 
@@ -57,21 +67,27 @@
 
                 <h1 id="assignedClasses">0</h1>
 
+                <span>Available Classes</span>
+
             </div>
 
             <div class="card">
 
-                <h3>Subjects</h3>
+                <h3>Assigned Subjects</h3>
 
                 <h1 id="assignedSubjects">0</h1>
 
+                <span>Available Subjects</span>
+
             </div>
 
             <div class="card">
 
-                <h3>Students</h3>
+                <h3>Total Students</h3>
 
                 <h1 id="studentCount">0</h1>
+
+                <span>Loaded Students</span>
 
             </div>
 
@@ -81,47 +97,119 @@
 
                 <h1 id="completionPercent">0%</h1>
 
+                <span>Marks Entered</span>
+
             </div>
 
         </div>
 
-        <!-- ===========================
-             FILTER PANEL
-        ============================ -->
+        <!-- =========================================
+             EXAM SELECTION PANEL
+        ========================================== -->
 
-        <div class="filter-card">
+        <div class="selection-card">
 
-            <div class="filter-grid">
+            <h2>
 
-                <select id="examSelect">
+                Examination Details
 
-                    <option value="">
-                        Select Exam
-                    </option>
+            </h2>
 
-                </select>
+            <div class="selection-grid">
 
-                <select id="classSelect">
+                <div class="form-group">
 
-                    <option value="">
-                        Select Class
-                    </option>
+                    <label>
 
-                </select>
+                        Academic Year
 
-                <select id="subjectSelect">
+                    </label>
 
-                    <option value="">
-                        Select Subject
-                    </option>
+                    <select id="academicYear">
 
-                </select>
+                        <option value="">
+                            Select Academic Year
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Examination
+
+                    </label>
+
+                    <select id="examSelect">
+
+                        <option value="">
+                            Select Examination
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Class
+
+                    </label>
+
+                    <select id="classSelect">
+
+                        <option value="">
+                            Select Class
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        Subject
+
+                    </label>
+
+                    <select id="subjectSelect">
+
+                        <option value="">
+                            Select Subject
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="teacher-panel">
+
+                <div>
+
+                    <strong>Teacher</strong>
+
+                    <span id="teacherName">
+
+                        Loading...
+
+                    </span>
+
+                </div>
 
                 <button
                     id="loadStudentsBtn"
                     class="btn-primary">
 
-                    <i class="fa-solid fa-download"></i>
+                    <i class="fa-solid fa-users"></i>
 
                     Load Students
 
@@ -130,37 +218,192 @@
             </div>
 
         </div>
+                <!-- =========================================
+             EXAM INFORMATION
+        ========================================== -->
 
-        <!-- ===========================
+        <div class="exam-info-card">
+
+            <div class="info-box">
+
+                <h4>Maximum Marks</h4>
+
+                <h2 id="maxMarks">
+
+                    --
+
+                </h2>
+
+            </div>
+
+            <div class="info-box">
+
+                <h4>Pass Marks</h4>
+
+                <h2 id="passMarks">
+
+                    --
+
+                </h2>
+
+            </div>
+
+            <div class="info-box">
+
+                <h4>Entry Type</h4>
+
+                <h2 id="entryType">
+
+                    --
+
+                </h2>
+
+            </div>
+
+            <div class="info-box">
+
+                <h4>Exam Status</h4>
+
+                <h2 id="examStatus">
+
+                    OPEN
+
+                </h2>
+
+            </div>
+
+        </div>
+
+        <!-- =========================================
+             PROGRESS
+        ========================================== -->
+
+        <div class="progress-card">
+
+            <div class="progress-header">
+
+                <h3>
+
+                    Marks Entry Progress
+
+                </h3>
+
+                <span id="progressText">
+
+                    0 / 0 Students
+
+                </span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div
+                    id="progressFill"
+                    class="progress-fill">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- =========================================
+             QUICK FILTERS
+        ========================================== -->
+
+        <div class="quick-actions">
+
+            <button class="filter-btn active">
+
+                All Students
+
+            </button>
+
+            <button class="filter-btn">
+
+                Pending
+
+            </button>
+
+            <button class="filter-btn">
+
+                Saved
+
+            </button>
+
+            <button class="filter-btn">
+
+                Errors
+
+            </button>
+
+            <button class="filter-btn">
+
+                Absent
+
+            </button>
+
+        </div>
+
+        <!-- =========================================
              MARKS TABLE
-        ============================ -->
+        ========================================== -->
 
         <div class="table-card">
 
-            <table>
+            <table class="marks-table">
 
                 <thead>
 
                     <tr>
 
-                        <th width="90">
-                            Roll No
+                        <th width="70">
+
+                            Roll
+
+                        </th>
+
+                        <th width="110">
+
+                            Adm No
+
                         </th>
 
                         <th>
+
                             Student Name
+
                         </th>
 
-                        <th width="140">
-                            Marks
+                        <th width="90">
+
+                            Max
+
                         </th>
 
                         <th width="120">
-                            Grade
+
+                            Marks
+
                         </th>
 
-                        <th width="150">
-                            Status
+                        <th width="90">
+
+                            Grade
+
+                        </th>
+
+                        <th width="220">
+
+                            Remarks
+
+                        </th>
+
+                        <th width="120">
+
+                            Saved
+
                         </th>
 
                     </tr>
@@ -169,21 +412,35 @@
 
                 <tbody id="marksTable">
 
+                    <tr>
+
+                        <td colspan="8"
+                            class="empty-state">
+
+                            Select an Exam, Class and Subject,
+                            then click <strong>Load Students</strong>.
+
+                        </td>
+
+                    </tr>
+
                 </tbody>
 
             </table>
 
         </div>
 
-        <!-- ===========================
-             FOOTER BUTTONS
-        ============================ -->
+        <!-- =========================================
+             FOOTER ACTIONS
+        ========================================== -->
 
         <div class="footer-actions">
 
             <button
                 id="saveDraftBtn"
                 class="btn-secondary">
+
+                <i class="fa-solid fa-floppy-disk"></i>
 
                 Save Draft
 
@@ -193,7 +450,9 @@
                 id="submitMarksBtn"
                 class="btn-primary">
 
-                Submit Marks
+                <i class="fa-solid fa-paper-plane"></i>
+
+                Final Submit
 
             </button>
 
