@@ -431,6 +431,7 @@ async function editTeacher(id) {
     teacherModal.classList.add("show");
 
 }
+   console.log("Teacher Object:", teacher);
 /* ==========================================================
    SAVE / UPDATE TEACHER
 ========================================================== */
@@ -443,8 +444,12 @@ async function saveTeacher(e) {
 
     const photoFile =
         document.getElementById("photo").files[0];
+         console.log("Photo Input:", document.getElementById("photo"));
 
-    /* ===========================================
+         console.log("Selected File:", photoFile);
+         photoUrl = publicUrlData.publicUrl;
+         console.log("Public URL:", photoUrl);
+   /* ===========================================
        UPLOAD IMAGE
     =========================================== */
 
@@ -456,9 +461,9 @@ async function saveTeacher(e) {
 `${crypto.randomUUID()}.${fileExt}`;
 
       const { data: uploadData, error: uploadError } =
-await supabase.storage
-.from("teacher-photos")
-.upload(fileName, photoFile, {
+      await supabase.storage
+      .from("teacher-photos")
+      .upload(fileName, photoFile, {
 
     cacheControl: "3600",
 
@@ -487,7 +492,7 @@ await supabase.storage
 .getPublicUrl(fileName);
 
 photoUrl = publicUrlData.publicUrl;
-
+console.log("Public URL:", photoUrl);
 console.log("Uploaded Image:", photoUrl);
     }
 
