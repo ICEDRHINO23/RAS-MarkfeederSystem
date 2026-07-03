@@ -527,3 +527,24 @@ async function saveTeacher(e) {
     await loadTeachers();
 
 }
+async function deleteTeacher(id) {
+
+    if (!confirm("Delete this teacher?")) return;
+
+    const { error } = await supabase
+        .from("teachers")
+        .delete()
+        .eq("id", id);
+
+    if (error) {
+
+        alert(error.message);
+        return;
+
+    }
+
+    await loadTeachers();
+
+}
+window.editTeacher = editTeacher;
+window.deleteTeacher = deleteTeacher;
