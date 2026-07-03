@@ -592,80 +592,110 @@ async function loadExistingMarks() {
    RENDER GRID
 ========================================================== */
 
-function renderMarksGrid() {
+function renderMarksGrid(existingMarks = []) {
 
     marksTable.innerHTML = "";
 
     students.forEach(student => {
 
+        /* Existing Saved Record */
+
+        const saved = existingMarks.find(
+            mark => mark.student_id === student.id
+        );
+
+        const savedMark =
+            saved?.marks_obtained ?? "";
+
+        const savedGrade =
+            saved?.grade ?? "--";
+
+        const savedRemark =
+            saved?.remarks ?? "";
+
+        const savedStatus =
+            saved ? "✅" : "⏳";
+
+        const rowClass =
+            saved ? "row-saved" : "";
+
         marksTable.innerHTML += `
 
 <tr
+class="${rowClass}"
 data-student="${student.id}">
 
-<td>
+    <td>
 
-${student.roll_no}
+        ${student.roll_no}
 
-</td>
+    </td>
 
-<td>
+    <td>
 
-${student.admission_no}
+        ${student.admission_no}
 
-</td>
+    </td>
 
-<td>
+    <td>
 
-${student.student_name}
+        ${student.student_name}
 
-</td>
+    </td>
 
-<td>
+    <td>
 
-${markingScheme.max_marks}
+        ${markingScheme.max_marks}
 
-</td>
+    </td>
 
-<td>
+    <td>
 
-<input
+        <input
 
-type="number"
+            type="number"
 
-class="mark-input"
+            class="mark-input"
 
-max="${markingScheme.max_marks}"
+            data-id="${student.id}"
 
-data-id="${student.id}"
+            min="0"
 
->
+            max="${markingScheme.max_marks}"
 
-</td>
+            value="${savedMark}"
 
-<td class="grade-cell">
+        >
 
---
+    </td>
 
-</td>
+    <td class="grade-cell">
 
-<td>
+        ${savedGrade}
 
-<input
+    </td>
 
-type="text"
+    <td>
 
-class="remark-input"
+        <input
 
->
+            type="text"
 
-</td>
+            class="remark-input"
 
-<td class="save-status">
+            value="${savedRemark}"
 
-⏳
+            placeholder="Remarks"
 
-</td>
+        >
+
+    </td>
+
+    <td class="save-status">
+
+        ${savedStatus}
+
+    </td>
 
 </tr>
 
@@ -674,6 +704,8 @@ class="remark-input"
     });
 
     attachInputEvents();
+
+    updateProgress();
 
 }
 /* ==========================================================
