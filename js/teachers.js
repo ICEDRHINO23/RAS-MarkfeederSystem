@@ -394,7 +394,8 @@ async function editTeacher(id) {
     if (!teacher) return;
 
     editingTeacher = id;
-
+      console.log("Editing Teacher ID:", editingTeacher);
+   
     document.getElementById("modalTitle").textContent = "Edit Teacher";
 
     document.getElementById("employee_id").value =
@@ -431,14 +432,14 @@ async function editTeacher(id) {
 
 }
 /* ==========================================================
-   SAVE TEACHER
+   SAVE / UPDATE TEACHER
 ========================================================== */
 
-async function saveTeacher(e){
+async function saveTeacher(e) {
 
     e.preventDefault();
 
-    const teacher={
+    const teacher = {
 
         employee_id:
             document.getElementById("employee_id").value.trim(),
@@ -472,34 +473,53 @@ async function saveTeacher(e){
 
     };
 
-  let error;
+    const isEdit = !!editingTeacher;
+      console.log("Is Edit:", isEdit);
+      console.log("Editing Teacher:", editingTeacher);
+    let error;
 
-if (editingTeacher) {
+    if (isEdit) {
 
-    ({ error } = await supabase
-        .from("teachers")
-        .update(teacher)
-        .eq("id", editingTeacher));
+        ({ error } = await supabase
 
-} else {
+            .from("teachers")
 
-    ({ error } = await supabase
-        .from("teachers")
-        .insert([teacher]));
+            .update(teacher)
 
-}
-    if(error){
+            .eq("id", editingTeacher));
 
-        alert(error.message);
+    } else {
+
+        ({ error } = await supabase
+
+            .from("teachers")
+
+            .insert([teacher]));
+
+    }
+
+    if (error) {
 
         console.error(error);
+
+        alert(error.message);
 
         return;
 
     }
 
-    alert("Teacher Added Successfully");
-   editingTeacher = null;
+    alert(
+
+        isEdit
+
+            ? "Teacher Updated Successfully"
+
+            : "Teacher Added Successfully"
+
+    );
+
+    editingTeacher = null;
+      
     teacherForm.reset();
 
     closeTeacherModal();
@@ -507,4 +527,3 @@ if (editingTeacher) {
     await loadTeachers();
 
 }
-window.editTeacher = editTeacher;
