@@ -1,0 +1,457 @@
+/* ==========================================================
+   TEACHER ASSIGNMENTS
+========================================================== */
+
+/* Dashboard */
+
+.dashboard-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:24px;
+
+    margin-bottom:25px;
+
+}
+
+.card{
+
+    background:var(--card);
+
+    border-radius:16px;
+
+    padding:24px;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:var(--transition);
+
+}
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.card h3{
+
+    font-size:15px;
+
+    color:var(--text-light);
+
+    margin-bottom:12px;
+
+}
+
+.card h1{
+
+    font-size:34px;
+
+    color:var(--primary);
+
+}
+
+.card span{
+
+    color:var(--text-light);
+
+    font-size:14px;
+
+}
+
+/* Header */
+
+.page-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:25px;
+
+}
+
+.header-actions{
+
+    display:flex;
+
+    gap:12px;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+}
+
+.header-actions input{
+
+    width:300px;
+
+    height:46px;
+
+    padding:0 15px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    outline:none;
+
+}
+
+.header-actions input:focus{
+
+    border-color:var(--primary);
+
+}
+
+/* Buttons */
+
+.btn-primary{
+
+    background:var(--primary);
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:10px;
+
+    padding:12px 22px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-dark);
+
+}
+
+/* Table Card */
+
+.table-card{
+
+    background:var(--card);
+
+    border-radius:16px;
+
+    padding:20px;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+/* Toolbar */
+
+.table-toolbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:20px;
+
+}
+
+.table-toolbar select{
+
+    height:44px;
+
+    padding:0 15px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border);
+
+    min-width:180px;
+
+}
+
+.table-toolbar button{
+
+    height:44px;
+
+    padding:0 18px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#16a34a;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+/* Table */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+thead{
+
+    background:#f8fafc;
+
+}
+
+thead th{
+
+    padding:15px;
+
+    text-align:left;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+tbody td{
+
+    padding:15px;
+
+    border-bottom:1px solid #edf2f7;
+
+}
+
+tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+
+/* Badges */
+
+.badge-success{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.badge-danger{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+/* Action Buttons */
+
+.action-buttons{
+
+    display:flex;
+
+    gap:8px;
+
+}
+
+.action-buttons button{
+
+    width:36px;
+
+    height:36px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+.edit-btn{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+.delete-btn{
+
+    background:#dc2626;
+
+    color:white;
+
+}
+
+/* Modal */
+
+.modal-content{
+
+    width:760px;
+
+    max-width:95%;
+
+}
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+    margin-bottom:20px;
+
+}
+
+.form-grid input,
+
+.form-grid select{
+
+    width:100%;
+
+    height:46px;
+
+    padding:0 14px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+}
+
+.checkbox-group{
+
+    margin:15px 0;
+
+}
+
+.checkbox-group label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-weight:500;
+
+}
+
+.modal-footer{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+    margin-top:25px;
+
+}
+
+.modal-footer button{
+
+    padding:12px 20px;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+#cancelAssignment{
+
+    background:#e5e7eb;
+
+}
+
+#cancelAssignment:hover{
+
+    background:#d1d5db;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .page-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .header-actions{
+
+        width:100%;
+
+        flex-direction:column;
+
+    }
+
+    .header-actions input{
+
+        width:100%;
+
+    }
+
+    .table-toolbar{
+
+        flex-direction:column;
+
+    }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
