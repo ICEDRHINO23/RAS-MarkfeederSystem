@@ -1,107 +1,206 @@
-/* ==========================================
+/* ==========================================================
+   RAS MARKFEEDER ERP
    SIDEBAR
+========================================================== */
+
+.sidebar{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:var(--sidebar-width);
+
+    height:100vh;
+
+    background:#1e3a8a;
+
+    color:#fff;
+
+    display:flex;
+
+    flex-direction:column;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+
+    z-index:1000;
+
+}
+
+/* ==========================================
+   LOGO
 ========================================== */
 
-.dashboard {
-    display: flex;
-    min-height: 100vh;
-    background: #f5f7fb;
-}
+.logo-area{
 
-.sidebar {
-    width: 270px;
-    background: #1e3a8a;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-}
+    padding:25px;
 
-.sidebar-header {
-    padding: 25px;
-    text-align: center;
-    border-bottom: 1px solid rgba(255,255,255,.1);
-}
+    text-align:center;
 
-.sidebar-header img {
-    width: 90px;
-    margin-bottom: 15px;
-}
-
-.sidebar-header h2 {
-    margin: 0;
-    font-size: 22px;
-}
-
-.sidebar-header p {
-    margin-top: 8px;
-    opacity: .8;
-    font-size: 14px;
-}
-
-.sidebar-nav {
-    flex: 1;
-    padding: 20px 0;
-}
-
-.sidebar-nav a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 24px;
-    color: white;
-    text-decoration: none;
-    transition: .25s;
-}
-
-.sidebar-nav a:hover {
-
-    background: rgba(255,255,255,.12);
+    border-bottom:1px solid rgba(255,255,255,.12);
 
 }
 
-.sidebar-nav a.active {
+.logo-area img{
 
-    background: #2563eb;
+    width:110px;
 
-}
+    height:auto;
 
-.sidebar-nav i {
+    margin:auto;
 
-    width: 22px;
-
-    text-align: center;
+    margin-bottom:15px;
 
 }
 
-.logout {
+.logo-title h2{
 
-    margin: 20px;
+    font-size:28px;
 
-    padding: 12px;
+    font-weight:700;
 
-    background: #dc2626;
+    color:#fff;
 
-    color: white;
-
-    border-radius: 8px;
-
-    text-align: center;
-
-    text-decoration: none;
+    margin-bottom:4px;
 
 }
 
-.main-content {
+.logo-title span{
 
-    flex: 1;
+    font-size:13px;
 
-    margin-left: 270px;
+    color:rgba(255,255,255,.75);
 
-    padding: 30px;
+}
+
+/* ==========================================
+   MENU
+========================================== */
+
+.sidebar-menu{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:20px 0;
+
+}
+
+.sidebar-menu ul{
+
+    list-style:none;
+
+}
+
+.sidebar-menu li{
+
+    margin:4px 0;
+
+}
+
+.sidebar-menu a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:14px 28px;
+
+    color:#dbeafe;
+
+    font-size:15px;
+
+    transition:.25s;
+
+}
+
+.sidebar-menu a i{
+
+    width:20px;
+
+    text-align:center;
+
+    font-size:16px;
+
+}
+
+.sidebar-menu a:hover{
+
+    background:rgba(255,255,255,.10);
+
+    color:#fff;
+
+}
+
+.sidebar-menu a.active{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    border-left:5px solid #facc15;
+
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.sidebar-footer{
+
+    padding:20px;
+
+    border-top:1px solid rgba(255,255,255,.12);
+
+}
+
+.sidebar-footer a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    color:#fff;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    transition:.25s;
+
+}
+
+.sidebar-footer a:hover{
+
+    background:rgba(255,255,255,.10);
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:992px){
+
+    .sidebar{
+
+        transform:translateX(-100%);
+
+        transition:.3s;
+
+    }
+
+    .sidebar.show{
+
+        transform:translateX(0);
+
+    }
 
 }
