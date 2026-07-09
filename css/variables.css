@@ -1,1 +1,57 @@
+/* ==========================================================
+   RAS MARKFEEDER ERP
+   VARIABLES
+========================================================== */
 
+:root{
+
+    /* Colors */
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --secondary:#0f172a;
+
+    --success:#16a34a;
+    --warning:#f59e0b;
+    --danger:#dc2626;
+    --info:#0ea5e9;
+
+    --white:#ffffff;
+
+    --bg:#f4f7fb;
+    --surface:#ffffff;
+
+    --text:#1f2937;
+    --text-light:#64748b;
+
+    --border:#e5e7eb;
+
+    /* Sidebar */
+
+    --sidebar-width:280px;
+
+    /* Radius */
+
+    --radius-sm:8px;
+    --radius:12px;
+    --radius-lg:18px;
+
+    /* Shadows */
+
+    --shadow-sm:0 2px 6px rgba(0,0,0,.06);
+
+    --shadow:0 10px 25px rgba(0,0,0,.08);
+
+    /* Spacing */
+
+    --space-1:6px;
+    --space-2:10px;
+    --space-3:16px;
+    --space-4:24px;
+    --space-5:32px;
+
+    /* Animation */
+
+    --transition:.25s ease;
+
+}
