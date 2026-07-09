@@ -1,6 +1,5 @@
 import { supabase } from "../database/supabase.js";
-import { exportStudentsToExcel }
-from "./utils/excel.js";
+import { exportExcel } from "../utils/excel.js";
 // =============================
 // DOM ELEMENTS
 // =============================
@@ -22,11 +21,11 @@ const exportBtn =
 
 exportBtn.addEventListener("click", () => {
 
-    exportStudentsToExcel(
+    exportExcel(
 
         students,
 
-        "Students.xlsx"
+        "Students"
 
     );
 
