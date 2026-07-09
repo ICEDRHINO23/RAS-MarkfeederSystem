@@ -1,0 +1,242 @@
+/* ==========================================================
+   RAS MARKFEEDER ERP
+   BUTTONS
+========================================================== */
+
+/* ==========================================
+   BASE BUTTON
+========================================== */
+
+.btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+
+    text-decoration:none;
+
+    white-space:nowrap;
+
+    user-select:none;
+
+}
+
+.btn i{
+
+    font-size:15px;
+
+}
+
+/* ==========================================
+   PRIMARY
+========================================== */
+
+.btn-primary{
+
+    background:var(--primary);
+
+    color:#fff;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-dark);
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--shadow);
+
+}
+
+/* ==========================================
+   SUCCESS
+========================================== */
+
+.btn-success{
+
+    background:var(--success);
+
+    color:#fff;
+
+}
+
+.btn-success:hover{
+
+    filter:brightness(.95);
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================
+   DANGER
+========================================== */
+
+.btn-danger{
+
+    background:var(--danger);
+
+    color:#fff;
+
+}
+
+.btn-danger:hover{
+
+    filter:brightness(.95);
+
+}
+
+/* ==========================================
+   WARNING
+========================================== */
+
+.btn-warning{
+
+    background:var(--warning);
+
+    color:#fff;
+
+}
+
+.btn-warning:hover{
+
+    filter:brightness(.95);
+
+}
+
+/* ==========================================
+   OUTLINE
+========================================== */
+
+.btn-outline{
+
+    background:#fff;
+
+    border:1px solid var(--border);
+
+    color:var(--text);
+
+}
+
+.btn-outline:hover{
+
+    background:#f8fafc;
+
+    border-color:var(--primary);
+
+    color:var(--primary);
+
+}
+
+/* ==========================================
+   SECONDARY
+========================================== */
+
+.btn-secondary{
+
+    background:#e2e8f0;
+
+    color:#334155;
+
+}
+
+.btn-secondary:hover{
+
+    background:#cbd5e1;
+
+}
+
+/* ==========================================
+   SMALL
+========================================== */
+
+.btn-sm{
+
+    padding:8px 14px;
+
+    font-size:13px;
+
+}
+
+/* ==========================================
+   LARGE
+========================================== */
+
+.btn-lg{
+
+    padding:15px 28px;
+
+    font-size:16px;
+
+}
+
+/* ==========================================
+   FULL WIDTH
+========================================== */
+
+.btn-block{
+
+    width:100%;
+
+}
+
+/* ==========================================
+   DISABLED
+========================================== */
+
+.btn:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+
+}
+
+/* ==========================================
+   ICON BUTTON
+========================================== */
+
+.btn-icon{
+
+    width:42px;
+
+    height:42px;
+
+    padding:0;
+
+    border-radius:10px;
+
+}
+
+/* ==========================================
+   FLOAT EFFECT
+========================================== */
+
+.btn:hover{
+
+    transition:all .25s ease;
+
+}
