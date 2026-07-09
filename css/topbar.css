@@ -1,0 +1,140 @@
+/* ==========================================================
+   RAS MARKFEEDER ERP
+   TOP BAR
+========================================================== */
+
+.topbar{
+
+    height:80px;
+
+    background:#ffffff;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 30px;
+
+    border-bottom:1px solid var(--border);
+
+    box-shadow:var(--shadow-sm);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+}
+
+.page-title h1{
+
+    font-size:28px;
+
+    color:var(--text);
+
+    margin-bottom:4px;
+
+}
+
+.page-title p{
+
+    color:var(--text-light);
+
+    font-size:14px;
+
+}
+
+.topbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+/* ==========================
+   SEARCH BOX
+========================== */
+
+.global-search{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:#f8fafc;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    padding:10px 15px;
+
+    min-width:320px;
+
+}
+
+.global-search i{
+
+    color:var(--text-light);
+
+}
+
+.global-search input{
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    width:100%;
+
+    font-size:14px;
+
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+    .topbar{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        height:auto;
+
+        gap:15px;
+
+        padding:20px;
+
+    }
+
+    .topbar-right{
+
+        width:100%;
+
+        flex-direction:column;
+
+    }
+
+    .global-search{
+
+        width:100%;
+
+        min-width:unset;
+
+    }
+
+}
