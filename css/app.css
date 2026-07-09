@@ -1,4 +1,159 @@
 /* ==========================================================
+   RAS MARKFEEDER ERP
+   MASTER APPLICATION STYLESHEET
+========================================================== */
+
+/* ==========================================================
+   GOOGLE FONT
+========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================================
+   CSS MODULES
+========================================================== */
+
+@import url("./variables.css");
+@import url("./layout.css");
+@import url("./sidebar.css");
+@import url("./topbar.css");
+@import url("./cards.css");
+@import url("./tables.css");
+@import url("./forms.css");
+@import url("./buttons.css");
+@import url("./modals.css");
+@import url("./utilities.css");
+@import url("./animations.css");
+
+/* ==========================================================
+   GLOBAL RESET
+========================================================== */
+
+*,
+*::before,
+*::after{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    font-size:16px;
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:"Inter",sans-serif;
+
+    background:#f4f7fb;
+
+    color:#1f2937;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    line-height:1.5;
+
+}
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+a{
+
+    text-decoration:none;
+
+    color:inherit;
+
+}
+
+button{
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+}
+
+input,
+select,
+textarea{
+
+    font-family:inherit;
+
+    outline:none;
+
+}
+
+table{
+
+    border-collapse:collapse;
+
+    width:100%;
+
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+    height:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#cbd5e1;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f8fafc;
+
+}
+
+/* ==========================================================
+   APP LOADER
+========================================================== */
+
+.app-loading{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    height:100vh;
+
+    font-size:18px;
+
+    color:#64748b;
+
+}
+
+/* ==========================================================
    TOAST
 ========================================================== */
 
@@ -59,14 +214,37 @@
     background:#2563eb;
 
 }
-/* ======================================
+
+/* ==========================================================
    INPUT ERROR
-====================================== */
+========================================================== */
 
 .input-error{
 
     border:2px solid #dc2626 !important;
 
     background:#fef2f2;
+
+}
+
+/* ==========================================================
+   HIDDEN
+========================================================== */
+
+.hidden{
+
+    display:none !important;
+
+}
+
+/* ==========================================================
+   DISABLED
+========================================================== */
+
+.disabled{
+
+    pointer-events:none;
+
+    opacity:.6;
 
 }
