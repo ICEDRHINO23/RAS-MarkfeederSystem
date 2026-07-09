@@ -949,7 +949,7 @@ async function autoSaveMark(e) {
 
     const marks = row.querySelector(".mark-input").value;
 
-    if (marks === "") return;
+
 
     const remarks = row.querySelector(".remark-input").value;
 
@@ -957,6 +957,13 @@ async function autoSaveMark(e) {
 
     const statusCell = row.querySelector(".save-status");
 
+          if (marks === "" || grade === "--") {
+
+    statusCell.textContent = "❌ Invalid";
+
+    return;
+
+}
     statusCell.textContent = "💾 Saving...";
 
     const assignment = assignments.find(a =>
@@ -996,6 +1003,8 @@ async function autoSaveMark(e) {
 
     };
 
+  try {
+
     const { error } = await supabase
 
         .from("marks")
@@ -1006,17 +1015,7 @@ async function autoSaveMark(e) {
 
         });
 
-    if (error) {
-
-        console.error(error);
-
-        row.classList.add("row-error");
-
-        statusCell.textContent = "❌ Error";
-
-        return;
-
-    }
+    if (error) throw error;
 
     row.classList.remove("row-error");
 
@@ -1028,6 +1027,15 @@ async function autoSaveMark(e) {
 
     updateProgress();
 
+} catch (err) {
+
+    console.error(err);
+
+    row.classList.add("row-error");
+
+    statusCell.textContent = "❌ Error";
+
+}
 }
 /* ==========================================================
    SAVE DRAFT
@@ -1043,7 +1051,7 @@ async function saveDraft() {
 
     }
 
-    alert("All entered marks are automatically saved as Draft.");
+   
 
 }
 
@@ -1061,9 +1069,7 @@ async function submitMarksEntry() {
 
     }
 
-    const pending = document.querySelectorAll(
-        ".save-status:not(.submitted)"
-    );
+    
 
     const emptyMarks = [...document.querySelectorAll(".mark-input")]
 
