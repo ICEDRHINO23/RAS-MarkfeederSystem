@@ -1,30 +1,57 @@
 /* ==========================================================
    RAS MARKFEEDER ERP
-   TABLES.CSS
-   Enterprise Data Table
+   TABLES
 ========================================================== */
-
-/* ===============================
-   TABLE CONTAINER
-=============================== */
 
 .table-container{
 
-    background:var(--card);
+    background:#fff;
 
-    border:1px solid var(--border);
-
-    border-radius:20px;
+    border-radius:16px;
 
     overflow:hidden;
 
     box-shadow:var(--shadow-sm);
 
+    border:1px solid var(--border);
+
+    margin-top:25px;
+
 }
 
-/* ===============================
-   RESPONSIVE
-=============================== */
+.table-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px 25px;
+
+    border-bottom:1px solid var(--border);
+
+    background:#f8fafc;
+
+}
+
+.table-header h2{
+
+    font-size:22px;
+
+    color:var(--text);
+
+    font-weight:700;
+
+}
+
+.table-header p{
+
+    color:var(--text-light);
+
+    font-size:14px;
+
+}
 
 .table-responsive{
 
@@ -34,227 +61,91 @@
 
 }
 
-/* ===============================
-   TABLE
-=============================== */
-
-.table{
+table{
 
     width:100%;
 
     border-collapse:collapse;
 
-    min-width:1000px;
+    background:#fff;
 
 }
 
-/* ===============================
-   HEADER
-=============================== */
+thead{
 
-.table thead{
-
-    background:var(--table-header);
-
-    position:sticky;
-
-    top:0;
-
-    z-index:2;
+    background:#eff6ff;
 
 }
 
-.table thead th{
+thead th{
 
-    padding:18px 20px;
+    padding:16px;
+
+    text-align:left;
 
     font-size:14px;
 
-    font-weight:600;
+    font-weight:700;
 
     color:var(--text);
 
-    white-space:nowrap;
-
     border-bottom:1px solid var(--border);
 
-    text-transform:uppercase;
-
-    letter-spacing:.4px;
+    white-space:nowrap;
 
 }
 
-/* ===============================
-   BODY
-=============================== */
+tbody td{
 
-.table tbody td{
+    padding:15px 16px;
 
-    padding:16px 20px;
+    font-size:14px;
 
-    color:var(--text-light);
+    color:var(--text);
 
-    border-bottom:1px solid var(--border-light);
+    border-bottom:1px solid #f1f5f9;
 
     vertical-align:middle;
 
 }
 
-/* ===============================
-   ROW HOVER
-=============================== */
+tbody tr{
 
-.table tbody tr{
-
-    transition:var(--transition);
+    transition:.25s;
 
 }
 
-.table tbody tr:hover{
+tbody tr:hover{
 
-    background:var(--table-hover);
-
-}
-
-/* ===============================
-   ZEBRA ROWS
-=============================== */
-
-.table tbody tr:nth-child(even){
-
-    background:#fcfcfd;
+    background:#f8fafc;
 
 }
 
-/* ===============================
-   LAST ROW
-=============================== */
-
-.table tbody tr:last-child td{
+tbody tr:last-child td{
 
     border-bottom:none;
 
 }
 
-/* ===============================
-   STUDENT PHOTO
-=============================== */
-
-.table-avatar{
-
-    width:46px;
-
-    height:46px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:2px solid var(--border);
-
-}
-
-.table-avatar-placeholder{
-
-    width:46px;
-
-    height:46px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:var(--primary);
-
-    color:white;
-
-    font-weight:700;
-
-}
-
-/* ===============================
-   STATUS
-=============================== */
-
-.status{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    padding:7px 14px;
-
-    border-radius:100px;
-
-    font-size:13px;
-
-    font-weight:600;
-
-}
-
-.status::before{
-
-    content:"";
-
-    width:8px;
-
-    height:8px;
-
-    border-radius:50%;
-
-}
-
-.status-active{
-
-    background:#dcfce7;
-
-    color:#15803d;
-
-}
-
-.status-active::before{
-
-    background:#16a34a;
-
-}
-
-.status-inactive{
-
-    background:#fee2e2;
-
-    color:#dc2626;
-
-}
-
-.status-inactive::before{
-
-    background:#ef4444;
-
-}
-
-/* ===============================
+/* ==========================================
    ACTION BUTTONS
-=============================== */
+========================================== */
 
-.action-group{
+.table-actions{
 
     display:flex;
 
     gap:8px;
+
+    align-items:center;
 
 }
 
 .action-btn{
 
-    width:38px;
+    width:36px;
 
-    height:38px;
+    height:36px;
 
     border:none;
 
@@ -262,75 +153,111 @@
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
+
+    align-items:center;
 
     cursor:pointer;
 
     transition:.25s;
 
-}
-
-.action-btn i{
-
-    font-size:15px;
+    color:#fff;
 
 }
 
-.action-view{
+.action-btn.edit{
 
-    background:#e0f2fe;
-
-    color:#0284c7;
+    background:var(--primary);
 
 }
 
-.action-edit{
+.action-btn.edit:hover{
 
-    background:#dbeafe;
-
-    color:#2563eb;
+    background:var(--primary-dark);
 
 }
 
-.action-delete{
+.action-btn.delete{
+
+    background:var(--danger);
+
+}
+
+.action-btn.delete:hover{
+
+    filter:brightness(.9);
+
+}
+
+.action-btn.view{
+
+    background:var(--info);
+
+}
+
+.action-btn.view:hover{
+
+    filter:brightness(.9);
+
+}
+
+/* ==========================================
+   STATUS BADGES
+========================================== */
+
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.status.active{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+.status.inactive{
 
     background:#fee2e2;
 
-    color:#dc2626;
+    color:#991b1b;
 
 }
 
-.action-btn:hover{
+.status.pending{
 
-    transform:translateY(-2px);
+    background:#fef3c7;
 
-    box-shadow:var(--shadow-sm);
-
-}
-
-/* ===============================
-   SORTABLE HEADERS
-=============================== */
-
-.sortable{
-
-    cursor:pointer;
-
-    user-select:none;
+    color:#92400e;
 
 }
 
-.sortable:hover{
+.status.locked{
 
-    color:var(--primary);
+    background:#dbeafe;
+
+    color:#1d4ed8;
 
 }
 
-/* ===============================
+/* ==========================================
    TABLE FOOTER
-=============================== */
+========================================== */
 
 .table-footer{
 
@@ -340,17 +267,13 @@
 
     align-items:center;
 
-    padding:18px 20px;
-
-    background:white;
+    padding:18px 25px;
 
     border-top:1px solid var(--border);
 
-}
+    background:#fafafa;
 
-/* ===============================
-   PAGINATION
-=============================== */
+}
 
 .pagination{
 
@@ -362,15 +285,15 @@
 
 .pagination button{
 
-    width:38px;
+    width:36px;
 
-    height:38px;
+    height:36px;
 
     border:1px solid var(--border);
 
-    background:white;
+    background:#fff;
 
-    border-radius:10px;
+    border-radius:8px;
 
     cursor:pointer;
 
@@ -382,98 +305,48 @@
 
     background:var(--primary);
 
-    color:white;
+    color:#fff;
+
+    border-color:var(--primary);
 
 }
 
-.pagination .active{
-
-    background:var(--primary);
-
-    color:white;
-
-}
-
-/* ===============================
+/* ==========================================
    EMPTY STATE
-=============================== */
+========================================== */
 
-.empty-state{
-
-    text-align:center;
-
-    padding:60px 20px;
-
-}
-
-.empty-state i{
-
-    font-size:60px;
-
-    color:#cbd5e1;
-
-    margin-bottom:15px;
-
-}
-
-.empty-state h3{
-
-    color:var(--text);
-
-    margin-bottom:10px;
-
-}
-
-.empty-state p{
-
-    color:var(--text-muted);
-
-}
-
-/* ===============================
-   LOADING
-=============================== */
-
-.table-loading{
-
-    padding:60px;
+.empty-table{
 
     text-align:center;
 
+    padding:50px 20px;
+
+    color:var(--text-light);
+
+    font-size:15px;
+
 }
 
-/* ===============================
-   MOBILE
-=============================== */
+/* ==========================================
+   RESPONSIVE
+========================================== */
 
 @media(max-width:768px){
 
-.table{
+    .table-header{
 
-    min-width:850px;
+        flex-direction:column;
 
-}
+        align-items:flex-start;
 
-.table thead th{
+        gap:15px;
 
-    padding:14px;
+    }
 
-    font-size:13px;
+    table{
 
-}
+        min-width:900px;
 
-.table tbody td{
-
-    padding:14px;
-
-}
-
-.table-footer{
-
-    flex-direction:column;
-
-    gap:15px;
-
-}
+    }
 
 }
