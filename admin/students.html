@@ -1,109 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Students | RAS Markfeeder ERP</title>
-<link rel="stylesheet" href="../css/app.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Students | RAS Markfeeder ERP</title>
+
+    <link rel="stylesheet" href="../css/app.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 </head>
+
 <body>
+
 <div class="app">
-<aside class="sidebar">
-<div class="logo-area">
-<img src="../assets/logos/logo.png" alt="Logo">
-<div class="logo-title"><h2>RAS ERP</h2><span>School Examination ERP</span></div>
-</div>
-<nav class="sidebar-menu">
-<ul>
-<li><a href="dashboard.html"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
-<li><a class="active" href="students.html"><i class="fa-solid fa-user-graduate"></i><span>Students</span></a></li>
-<li><a href="teachers.html"><i class="fa-solid fa-chalkboard-user"></i><span>Teachers</span></a></li>
-<li><a href="classes.html"><i class="fa-solid fa-school"></i><span>Classes</span></a></li>
-<li><a href="subjects.html"><i class="fa-solid fa-book"></i><span>Subjects</span></a></li>
-<li><a href="exams.html"><i class="fa-solid fa-file-pen"></i><span>Exams</span></a></li>
-<li><a href="marks.html"><i class="fa-solid fa-marker"></i><span>Marks Entry</span></a></li>
-<li><a href="reports.html"><i class="fa-solid fa-chart-column"></i><span>Reports</span></a></li>
-<li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
-</ul>
-</nav>
-<div class="sidebar-footer"><a href="../login.html"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a></div>
-</aside>
 
-<main class="main">
-<header class="topbar">
-<div class="page-title"><h1>Student Management</h1><p>Manage students and academic records</p></div>
-<div class="topbar-right">
-<div class="global-search"><i class="fa-solid fa-search"></i><input id="searchStudent" type="text" placeholder="Search students..."></div>
-<button class="btn btn-primary" id="addStudentBtn"><i class="fa-solid fa-plus"></i> Add Student</button>
-</div>
-</header>
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
 
-<section class="page-content">
+    <aside class="sidebar">
 
-<div class="stats-grid">
-<div class="card"><div class="card-title">Students</div><div class="card-value" id="totalStudents">0</div><div class="card-footer">Total Registered</div></div>
-<div class="card"><div class="card-title">Boys</div><div class="card-value" id="boysCount">0</div><div class="card-footer">Male Students</div></div>
-<div class="card"><div class="card-title">Girls</div><div class="card-value" id="girlsCount">0</div><div class="card-footer">Female Students</div></div>
-<div class="card"><div class="card-title">Active</div><div class="card-value" id="activeCount">0</div><div class="card-footer">Active Students</div></div>
+        <div class="logo-area">
+
+            <img src="../assets/logos/logo.png" alt="Logo">
+
+            <div class="logo-title">
+
+                <h2>RAS ERP</h2>
+
+                <span>School Examination ERP</span>
+
+            </div>
+
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <ul>
+
+                <li><a href="dashboard.html"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
+
+                <li><a class="active" href="students.html"><i class="fa-solid fa-user-graduate"></i><span>Students</span></a></li>
+
+                <li><a href="teachers.html"><i class="fa-solid fa-chalkboard-user"></i><span>Teachers</span></a></li>
+
+                <li><a href="classes.html"><i class="fa-solid fa-school"></i><span>Classes</span></a></li>
+
+                <li><a href="subjects.html"><i class="fa-solid fa-book"></i><span>Subjects</span></a></li>
+
+                <li><a href="exams.html"><i class="fa-solid fa-file-pen"></i><span>Exams</span></a></li>
+
+                <li><a href="marks.html"><i class="fa-solid fa-marker"></i><span>Marks Entry</span></a></li>
+
+                <li><a href="reports.html"><i class="fa-solid fa-chart-column"></i><span>Reports</span></a></li>
+
+                <li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+
+            </ul>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <a href="../login.html">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div class="page-title">
+
+                <h1>Student Management</h1>
+
+                <p>Manage students and academic records</p>
+
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="global-search">
+
+                    <i class="fa-solid fa-search"></i>
+
+                    <input
+                        id="searchStudent"
+                        type="text"
+                        placeholder="Search students...">
+
+                </div>
+
+                <button
+                    class="btn btn-primary"
+                    id="addStudentBtn">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Student
+
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- =========================
+             PAGE
+        ========================== -->
+
+        <section class="page-content">
+
+            <!-- Statistics -->
+
+            <div class="stats-grid">
+
+                <div class="card">
+                    <div class="card-title">Students</div>
+                    <div class="card-value" id="totalStudents">0</div>
+                    <div class="card-footer">Total Registered</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Boys</div>
+                    <div class="card-value" id="boysCount">0</div>
+                    <div class="card-footer">Male Students</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Girls</div>
+                    <div class="card-value" id="girlsCount">0</div>
+                    <div class="card-footer">Female Students</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Active</div>
+                    <div class="card-value" id="activeCount">0</div>
+                    <div class="card-footer">Active Students</div>
+                </div>
+
+            </div>
+
+            <!-- Toolbar -->
+
+            <div class="section">
+
+                <div class="toolbar">
+
+                    <div class="toolbar-left">
+
+                        <select id="filterClass">
+
+                            <option value="">All Classes</option>
+
+                        </select>
+
+                        <select id="filterYear">
+
+                            <option value="">Academic Year</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="toolbar-right">
+
+                        <button
+                            id="downloadTemplateBtn"
+                            class="btn btn-secondary">
+
+                            <i class="fa-solid fa-download"></i>
+
+                            Template
+
+                        </button>
+
+                        <button
+                            id="importExcelBtn"
+                            class="btn btn-success">
+
+                            <i class="fa-solid fa-file-import"></i>
+
+                            Import
+
+                        </button>
+
+                        <button
+                            id="exportExcel"
+                            class="btn btn-primary">
+
+                            <i class="fa-solid fa-file-excel"></i>
+
+                            Export
+
+                        </button>
+
+                        <input
+                            type="file"
+                            id="excelFile"
+                            accept=".xlsx,.xls"
+                            hidden>
+
+                    </div>
+
+                </div>
+
+                <!-- Table -->
+
+                <div class="table-container">
+
+                    <div class="table-responsive">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Photo</th>
+
+                                    <th>Admission</th>
+
+                                    <th>Roll</th>
+
+                                    <th>Name</th>
+
+                                    <th>Gender</th>
+
+                                    <th>Class</th>
+
+                                    <th>Academic Year</th>
+
+                                    <th>Mobile</th>
+
+                                    <th>Status</th>
+
+                                    <th>Action</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="studentTable">
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
 </div>
 
-<div class="section">
-<div class="toolbar">
-<select id="filterClass"><option value="">All Classes</option></select>
-<select id="filterYear"><option value="">Academic Year</option></select>
-<button id="exportExcel" class="btn"><i class="fa-solid fa-file-excel"></i> Export Excel</button>
-</div>
-
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Photo</th><th>Admission</th><th>Roll</th><th>Name</th><th>Gender</th><th>Class</th><th>Year</th><th>Mobile</th><th>Status</th><th>Action</th>
-</tr>
-</thead>
-<tbody id="studentTable"></tbody>
-</table>
-</div>
-</div>
-
-</section>
-</main>
-</div>
+<!-- =========================
+     STUDENT MODAL
+========================== -->
 
 <div class="modal" id="studentModal">
-<div class="modal-content">
-<div class="modal-header"><h2>Add Student</h2><span id="closeModal">&times;</span></div>
 
-<form id="studentForm">
-<div class="form-grid">
-<input id="admission_no" placeholder="Admission Number" required>
-<input id="roll_no" type="number" placeholder="Roll Number" required>
-<input id="student_name" placeholder="Student Name" required>
-<select id="gender" required><option value="">Select Gender</option><option>Male</option><option>Female</option></select>
-<input id="dob" type="date">
+    <div class="modal-content">
 
-<input
-    type="file"
-    id="photo"
-    accept="image/*">
+        <div class="modal-header">
 
-<input id="mobile" placeholder="Mobile Number">
-<input id="father_name" placeholder="Father Name">
-<input id="mother_name" placeholder="Mother Name">
-<select id="class_id" required><option value="">Select Class</option></select>
-<select id="academic_year_id" required><option value="">Academic Year</option></select>
-<textarea id="address" placeholder="Address"></textarea>
+            <h2>Add Student</h2>
+
+            <span id="closeModal">&times;</span>
+
+        </div>
+
+        <form id="studentForm">
+
+            <div class="form-grid">
+
+                <input id="admission_no"
+                       placeholder="Admission Number"
+                       required>
+
+                <input id="roll_no"
+                       type="number"
+                       placeholder="Roll Number"
+                       required>
+
+                <input id="student_name"
+                       placeholder="Student Name"
+                       required>
+
+                <select id="gender" required>
+
+                    <option value="">Select Gender</option>
+
+                    <option>Male</option>
+
+                    <option>Female</option>
+
+                </select>
+
+                <input id="dob" type="date">
+
+                <input
+                    id="photo"
+                    type="file"
+                    accept="image/*">
+
+                <input id="mobile"
+                       placeholder="Mobile Number">
+
+                <input id="father_name"
+                       placeholder="Father Name">
+
+                <input id="mother_name"
+                       placeholder="Mother Name">
+
+                <select id="class_id" required>
+
+                    <option value="">Select Class</option>
+
+                </select>
+
+                <select id="academic_year_id" required>
+
+                    <option value="">Academic Year</option>
+
+                </select>
+
+                <textarea
+                    id="address"
+                    placeholder="Address"></textarea>
+
+            </div>
+
+            <label>
+
+                <input
+                    id="active"
+                    type="checkbox"
+                    checked>
+
+                Active Student
+
+            </label>
+
+            <div class="modal-buttons">
+
+                <button
+                    type="button"
+                    id="cancelStudent">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit">
+
+                    Save Student
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
 </div>
-<label><input type="checkbox" id="active" checked> Active Student</label>
-<div class="modal-buttons">
-<button type="button" id="cancelStudent">Cancel</button>
-<button type="submit">Save Student</button>
-</div>
-</form>
-</div>
-</div>
+
+<!-- SheetJS (Load only ONE copy) -->
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+<!-- Students JS -->
 <script type="module" src="../js/students.js"></script>
+
 </body>
 </html>
