@@ -110,15 +110,11 @@ tbody td{
 }
 
 tbody tr{
-
     transition:.25s;
-
 }
 
 tbody tr:hover{
-
     background:#f8fafc;
-
 }
 
 tbody tr:last-child td{
@@ -126,7 +122,9 @@ tbody tr:last-child td{
     border-bottom:none;
 
 }
-
+tbody td{
+    vertical-align:middle;
+}
 /* ==========================================
    ACTION BUTTONS
 ========================================== */
@@ -361,15 +359,22 @@ tbody tr:last-child td{
 }
 
 .edit-btn{
-    background:#2563eb;
+    background:#2563eb !important;
     color:#fff;
 }
 
 .delete-btn{
-    background:#dc2626;
+    background:#dc2626 !important;
     color:#fff;
 }
 
+.edit-btn:hover{
+    background:#1d4ed8 !important;
+}
+
+.delete-btn:hover{
+    background:#b91c1c !important;
+}
 .action-btn i{
     color:#fff;
 }
