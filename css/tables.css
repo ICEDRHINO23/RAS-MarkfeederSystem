@@ -375,3 +375,12 @@ tbody tr:last-child td{
 }
 
 }
+.student-photo{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #e5e7eb;
+    display:block;
+    margin:auto;
+}
