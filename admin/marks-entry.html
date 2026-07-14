@@ -177,87 +177,86 @@ Pending Entry
 
 </div>
 
-<!-- ================= FILTERS ================= -->
+<!-- ================= FILTER BAR ================= -->
 
 <div class="section">
 
-<div class="toolbar">
+    <div class="toolbar">
 
-<select id="academicYear">
+        <select id="academicYear" required>
 
-<option value="">Academic Year</option>
+            <option value="">Academic Year</option>
 
-</select>
+        </select>
 
-<select id="exam">
+        <select id="exam" required>
 
-<option value="">Exam</option>
+            <option value="">Select Exam</option>
 
-</select>
+        </select>
 
-<select id="class">
+        <select id="assignment" required>
 
-<option value="">Class</option>
+            <option value="">Select Assignment</option>
 
-</select>
+        </select>
 
-<select id="subject">
+        <button
+            class="btn btn-primary"
+            id="loadStudents">
 
-<option value="">Subject</option>
+            <i class="fa-solid fa-download"></i>
 
-</select>
+            Load Students
 
-<button
-class="btn btn-primary"
-id="loadStudents">
+        </button>
 
-<i class="fa-solid fa-download"></i>
-
-Load Students
-
-</button>
+    </div>
 
 </div>
-
 <!-- ================= TOTAL MARKS ================= -->
 
 <div class="table-header">
 
-<div>
+    <div>
 
-<h2>Total Marks</h2>
+        <h2>Marks Settings</h2>
 
-<p>Applied to all students</p>
+        <p>Set total marks once for this assignment</p>
 
-</div>
+    </div>
 
-<div style="display:flex;gap:15px;align-items:center;">
+    <div style="display:flex;align-items:center;gap:15px;flex-wrap:wrap;">
 
-<input
-type="number"
-id="totalMarks"
-placeholder="20">
+        <label>Total Marks</label>
 
-<label>
+        <input
+            type="number"
+            id="totalMarks"
+            min="1"
+            style="width:90px;">
 
-<input
-type="checkbox"
-id="rememberMarks">
+        <label>
 
-Remember
+            <input
+                type="checkbox"
+                id="rememberMarks">
 
-</label>
+            Remember
 
-<button
-class="btn"
+        </label>
 
-id="applyAll">
+        <button
+            class="btn"
+            id="applyAll">
 
-Apply to All
+            <i class="fa-solid fa-copy"></i>
 
-</button>
+            Apply to All
 
-</div>
+        </button>
+
+    </div>
 
 </div>
 <!-- ================= MARKS ENTRY TABLE ================= -->
@@ -312,32 +311,45 @@ Apply to All
 
                 </tr>
 
-            </thead>
+           <thead>
 
-            <tbody id="marksTableBody">
+<tr>
 
-                <tr>
+<th width="60">Roll</th>
 
-                    <td colspan="8" style="text-align:center;padding:60px;">
+<th width="110">Admission</th>
 
-                        <i class="fa-solid fa-users"
-                           style="font-size:45px;color:#d1d5db;"></i>
+<th>Student Name</th>
 
-                        <br><br>
+<th width="120">Attendance</th>
 
-                        Select Academic Year, Exam, Class and Subject
+<th width="90">Total</th>
 
-                        <br>
+<th width="90">Obtained</th>
 
-                        then click
+<th width="80">%</th>
 
-                        <b>Load Students</b>
+<th width="80">Grade</th>
 
-                    </td>
+<th>Remarks</th>
 
-                </tr>
+</tr>
 
-            </tbody>
+</thead>
+
+<tbody id="marksTableBody">
+
+<tr>
+
+<td colspan="9" style="text-align:center;padding:60px;">
+
+Select an Assignment and click <b>Load Students</b>
+
+</td>
+
+</tr>
+
+</tbody>
 
         </table>
 
