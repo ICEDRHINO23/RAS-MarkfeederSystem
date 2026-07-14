@@ -372,8 +372,23 @@ if (form) {
         const photoFile =
     document.getElementById("photo").files[0];
 
+const photoFile =
+    document.getElementById("photo").files[0];
+
 let photoUrl = "";
 
+// Keep existing photo when editing
+if (editingStudentId) {
+
+    const existing = students.find(
+        s => s.id === editingStudentId
+    );
+
+    photoUrl = existing?.photo_url || "";
+
+}
+
+// Upload new photo only if selected
 if (photoFile) {
 
     const extension =
@@ -384,11 +399,12 @@ if (photoFile) {
         "." +
         extension;
 
-const { error: uploadError } = await supabase.storage
-    .from("student-photos")
-    .upload(fileName, photoFile, {
-        upsert: true
-    });
+    const { error: uploadError } =
+        await supabase.storage
+            .from("student-photos")
+            .upload(fileName, photoFile, {
+                upsert: true
+            });
 
     if (uploadError) {
 
@@ -398,6 +414,14 @@ const { error: uploadError } = await supabase.storage
 
     }
 
+    const { data } =
+        supabase.storage
+            .from("student-photos")
+            .getPublicUrl(fileName);
+
+    photoUrl = data.publicUrl;
+
+}
   const { data } =
     supabase.storage
         .from("student-photos")
