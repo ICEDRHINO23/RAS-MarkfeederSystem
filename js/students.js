@@ -134,7 +134,7 @@ function renderTable(data = students) {
             <td>${student.roll_no}</td>
             <td>${student.student_name}</td>
             <td>${student.gender}</td>
-            <td>${student.class_grade} - ${student.section}</td>
+            <td>Grade ${student.grade} - ${student.section}</td>
             <td>${student.academic_year}</td>
             <td>${student.mobile ?? ""}</td>
 
