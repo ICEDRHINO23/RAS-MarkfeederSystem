@@ -25,8 +25,8 @@ let selectedAssignment = null;
 
 const academicYear = document.getElementById("academicYear");
 const exam = document.getElementById("exam");
-const classSelect = document.getElementById("class");
-const subject = document.getElementById("subject");
+const assignmentSelect =
+    document.getElementById("assignment");
 
 const totalMarks = document.getElementById("totalMarks");
 const rememberMarks = document.getElementById("rememberMarks");
