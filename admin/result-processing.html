@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Result Processing | RAS Markfeeder ERP</title>
+
+<link rel="stylesheet" href="../css/app.css">
+<link rel="stylesheet" href="../css/tables.css">
+<link rel="stylesheet" href="../css/forms.css">
+<link rel="stylesheet" href="../css/modal.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+<div class="logo-area">
+
+<img src="../assets/logos/logo.png" alt="RAS Logo">
+
+<div class="logo-title">
+
+<h2>RAS ERP</h2>
+
+<span>School Examination ERP</span>
+
+</div>
+
+</div>
+
+<nav class="sidebar-menu">
+
+<ul>
+
+<li>
+<a href="dashboard.html">
+<i class="fa-solid fa-house"></i>
+<span>Dashboard</span>
+</a>
+</li>
+
+<li>
+<a href="students.html">
+<i class="fa-solid fa-user-graduate"></i>
+<span>Students</span>
+</a>
+</li>
+
+<li>
+<a href="teachers.html">
+<i class="fa-solid fa-chalkboard-user"></i>
+<span>Teachers</span>
+</a>
+</li>
+
+<li>
+<a href="teacher-assignment.html">
+<i class="fa-solid fa-users-gear"></i>
+<span>Teacher Assignment</span>
+</a>
+</li>
+
+<li>
+<a href="subjects.html">
+<i class="fa-solid fa-book"></i>
+<span>Subjects</span>
+</a>
+</li>
+
+<li>
+<a href="exams.html">
+<i class="fa-solid fa-file-pen"></i>
+<span>Exams</span>
+</a>
+</li>
+
+<li>
+<a href="marks-entry.html">
+<i class="fa-solid fa-marker"></i>
+<span>Marks Entry</span>
+</a>
+</li>
+
+<li>
+<a class="active" href="result-processing.html">
+<i class="fa-solid fa-calculator"></i>
+<span>Result Processing</span>
+</a>
+</li>
+
+<li>
+<a href="reports.html">
+<i class="fa-solid fa-chart-column"></i>
+<span>Reports</span>
+</a>
+</li>
+
+<li>
+<a href="settings.html">
+<i class="fa-solid fa-gear"></i>
+<span>Settings</span>
+</a>
+</li>
+
+</ul>
+
+</nav>
+
+<div class="sidebar-footer">
+
+<a href="../login.html">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+<span>Logout</span>
+
+</a>
+
+</div>
+
+</aside>
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+<header class="topbar">
+
+<div class="page-title">
+
+<h1>Result Processing</h1>
+
+<p>Generate, verify and publish examination results</p>
+
+</div>
+
+</header>
+
+<section class="page-content">
+
+<!-- ================= DASHBOARD ================= -->
+
+<div class="stats-grid">
+
+<div class="card">
+
+<div class="card-title">
+
+Students
+
+</div>
+
+<div class="card-value"
+
+id="totalStudents">
+
+0
+
+</div>
+
+<div class="card-footer">
+
+Eligible Students
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">
+
+Processed
+
+</div>
+
+<div class="card-value"
+
+id="processedStudents">
+
+0
+
+</div>
+
+<div class="card-footer">
+
+Results Generated
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">
+
+Pending
+
+</div>
+
+<div class="card-value"
+
+id="pendingStudents">
+
+0
+
+</div>
+
+<div class="card-footer">
+
+Awaiting Processing
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">
+
+Published
+
+</div>
+
+<div class="card-value"
+
+id="publishedStudents">
+
+0
+
+</div>
+
+<div class="card-footer">
+
+Published Results
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= FILTERS ================= -->
+
+<div class="section">
+
+<div class="toolbar">
+
+<select id="academicYear">
+
+<option value="">
+
+Academic Year
+
+</option>
+
+</select>
+
+<select id="exam">
+
+<option value="">
+
+Select Exam
+
+</option>
+
+</select>
+
+<select id="class">
+
+<option value="">
+
+Select Class
+
+</option>
+
+</select>
+
+<button
+
+class="btn btn-primary"
+
+id="previewResults">
+
+<i class="fa-solid fa-eye"></i>
+
+Preview
+
+</button>
+
+<button
+
+class="btn"
+
+id="processResults">
+
+<i class="fa-solid fa-gears"></i>
+
+Process Results
+
+</button>
+
+<button
+
+class="btn"
+
+id="recalculateResults">
+
+<i class="fa-solid fa-rotate-right"></i>
+
+Recalculate
+
+</button>
+
+<button
+
+class="btn"
+
+id="publishResults">
+
+<i class="fa-solid fa-upload"></i>
+
+Publish
+
+</button>
+
+</div>
+
+</div>
+<!-- ================= RESULT PREVIEW ================= -->
+
+<div class="table-container">
+
+    <div class="table-header">
+
+        <div>
+
+            <h2>Result Preview</h2>
+
+            <p>Verify calculated results before processing</p>
+
+        </div>
+
+        <div>
+
+            <span class="status pending" id="processStatus">
+
+                Waiting
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table id="resultTable">
+
+            <thead>
+
+                <tr>
+
+                    <th>Roll</th>
+
+                    <th>Admission</th>
+
+                    <th>Student Name</th>
+
+                    <th>Total</th>
+
+                    <th>Maximum</th>
+
+                    <th>%</th>
+
+                    <th>Grade</th>
+
+                    <th>Result</th>
+
+                    <th>Class Rank</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="resultTableBody">
+
+                <tr>
+
+                    <td colspan="10"
+                        style="text-align:center;padding:60px;">
+
+                        <i class="fa-solid fa-calculator"
+                           style="font-size:45px;color:#cbd5e1;"></i>
+
+                        <br><br>
+
+                        Select Academic Year,
+
+                        Exam and Class
+
+                        <br>
+
+                        then click
+
+                        <strong>Preview</strong>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- ================= PROCESS SUMMARY ================= -->
+
+<div class="stats-grid" style="margin-top:25px;">
+
+    <div class="card">
+
+        <div class="card-title">
+
+            Highest %
+
+        </div>
+
+        <div class="card-value"
+
+             id="highestPercentage">
+
+            0%
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-title">
+
+            Lowest %
+
+        </div>
+
+        <div class="card-value"
+
+             id="lowestPercentage">
+
+            0%
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-title">
+
+            Average %
+
+        </div>
+
+        <div class="card-value"
+
+             id="averagePercentage">
+
+            0%
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-title">
+
+            Pass %
+
+        </div>
+
+        <div class="card-value"
+
+             id="passPercentage">
+
+            0%
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= PROCESS PROGRESS ================= -->
+
+<div class="table-container"
+     style="margin-top:25px;">
+
+    <div class="table-header">
+
+        <h2>Processing Progress</h2>
+
+    </div>
+
+    <div style="padding:25px;">
+
+        <div class="progress">
+
+            <div id="progressBar"
+
+                 class="progress-bar"
+
+                 style="width:0%;">
+
+                0%
+
+            </div>
+
+        </div>
+
+        <p
+        id="progressText"
+
+        style="margin-top:15px;color:#64748b;">
+
+            Waiting to start result processing...
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ================= ACTION FOOTER ================= -->
+
+<div class="table-footer">
+
+    <div>
+
+        <button
+
+            class="btn"
+
+            id="exportPreview">
+
+            <i class="fa-solid fa-file-excel"></i>
+
+            Export Preview
+
+        </button>
+
+    </div>
+
+    <div style="display:flex;gap:15px;">
+
+        <button
+
+            class="btn"
+
+            id="clearResults">
+
+            <i class="fa-solid fa-trash"></i>
+
+            Clear Preview
+
+        </button>
+
+        <button
+
+            class="btn btn-primary"
+
+            id="generateResults">
+
+            <i class="fa-solid fa-award"></i>
+
+            Generate Final Results
+
+        </button>
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
