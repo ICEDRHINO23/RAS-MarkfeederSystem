@@ -349,4 +349,29 @@ tbody tr:last-child td{
 
     }
 
+   .action-btn{
+    width:36px;
+    height:36px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.edit-btn{
+    background:#2563eb;
+    color:#fff;
+}
+
+.delete-btn{
+    background:#dc2626;
+    color:#fff;
+}
+
+.action-btn i{
+    color:#fff;
+}
+
 }
