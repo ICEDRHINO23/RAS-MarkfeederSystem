@@ -1,5 +1,6 @@
 import { supabase } from "../database/supabase.js";
 import { exportExcel } from "../utils/excel.js";
+import "./excel-import.js";
 // =============================
 // DOM ELEMENTS
 // =============================
