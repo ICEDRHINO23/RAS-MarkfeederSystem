@@ -122,13 +122,12 @@ function renderTable(data = students) {
         tableBody.innerHTML += `
         <tr>
 
-            <td>
-           <img
-    src="${student.photo_url || '../assets/images/default-user.png'}"
-    class="student-photo"
-    alt="Student"
-    onerror="this.src='../assets/images/default-user.png'">
-            </td>
+        <td>
+    <img
+        src="${student.photo_url || '../assets/default-avatar.png'}"
+        class="student-photo"
+        alt="${student.student_name}">
+</td>
 
             <td>${student.admission_no}</td>
             <td>${student.roll_no}</td>
