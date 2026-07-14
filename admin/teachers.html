@@ -9,12 +9,14 @@
           content="width=device-width, initial-scale=1.0">
 
     <title>Teachers | RAS Markfeeder ERP</title>
+<link rel="stylesheet" href="../css/app.css">
+<link rel="stylesheet" href="../css/tables.css">
+<link rel="stylesheet" href="../css/forms.css">
+<link rel="stylesheet" href="../css/modal.css">
 
-    <link rel="stylesheet" href="../css/app.css">
-    <link rel="stylesheet" href="../css/teachers.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
@@ -216,9 +218,9 @@
                 <i class="fa-solid fa-search"></i>
 
                 <input
-                    type="text"
-                    id="searchTeacher"
-                    placeholder="Search Teacher...">
+    type="text"
+    id="searchTeacher"
+    placeholder="Search by Employee ID, Name or Mobile...">
 
             </div>
 
@@ -435,16 +437,11 @@
 
                 <th>Teacher Name</th>
 
-                <th>Gender</th>
-
-                <th>Department</th>
-
                 <th>Designation</th>
-
+                <th>Department</th>
+                <th>Qualification</th>
                 <th>Mobile</th>
-
-                <th>Joining Date</th>
-
+                <th>Email</th>
                 <th>Status</th>
 
                 <th width="120">Action</th>
@@ -556,7 +553,15 @@
                     </select>
 
                 </div>
+                <div class="form-group">
 
+    <label>Date of Birth</label>
+
+    <input
+        type="date"
+        id="dob">
+
+</div>
                 <!-- Mobile -->
 
                 <div class="form-group">
@@ -587,67 +592,60 @@
 
                     <label>Department</label>
 
-                    <select id="department">
+                <select id="department">
 
-                        <option value="">Select Department</option>
+    <option value="">Select Department</option>
 
-                        <option>Mathematics</option>
+    <option>Administration</option>
+    <option>Pre Primary</option>
+    <option>Primary</option>
+    <option>English</option>
+    <option>Hindi</option>
+    <option>Marathi</option>
+    <option>Mathematics</option>
+    <option>Science</option>
+    <option>Social Science</option>
+    <option>ICT</option>
+    <option>Robotics</option>
+    <option>Physical Education</option>
+    <option>Arts</option>
+    <option>Music</option>
 
-                        <option>Science</option>
-
-                        <option>English</option>
-
-                        <option>Hindi</option>
-
-                        <option>Marathi</option>
-
-                        <option>Social Science</option>
-
-                        <option>ICT</option>
-
-                         <option>Robotics</option>
-
-                        <option>Physical Education</option>
-
-                        <option>Arts</option>
-
-                        <option>Music</option>
-
-                        <option>Primary</option>
-
-                        <option>Administration</option>
-
-                    </select>
-
-                </div>
-
+</select>
+                    </div>
                 <!-- Designation -->
 
                 <div class="form-group">
 
                     <label>Designation</label>
 
-                    <select id="designation">
+                  <select id="designation">
 
-                        <option value="">Select Designation</option>
+    <option value="">Select Designation</option>
 
-                        <option>Principal</option>
+    <option>Principal</option>
 
-                        <option>Vice Principal</option>
+    <option>Vice Principal</option>
 
-                        <option>HOD</option>
+    <option>Academic Coordinator</option>
 
-                        <option>PGT</option>
+    <option>Exam Head</option>
 
-                        <option>TGT</option>
+    <option>Coordinator</option>
 
-                        <option>PRT</option>
+    <option>HOD</option>
 
-                        <option>Lab Assistant</option>
+    <option>PGT</option>
 
-                        <option>Office Staff</option>
+    <option>TGT</option>
 
-                    </select>
+    <option>PRT</option>
+
+    <option>Lab Assistant</option>
+
+    <option>Office Staff</option>
+
+</select>
 
                 </div>
 
@@ -674,7 +672,18 @@
                         id="joining_date">
 
                 </div>
+                <div class="form-group full-width">
 
+    <label>Address</label>
+
+    <textarea
+        id="address"
+        rows="3"
+        placeholder="Teacher Address">
+    </textarea>
+
+</div>
+                
                 <!-- Photo -->
 
                 <div class="form-group">
