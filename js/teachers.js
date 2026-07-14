@@ -131,7 +131,24 @@ function initializeEvents() {
 // Search
 if (searchTeacher) {
 
-    searchTeacher.addEventListener("input", searchTeachers);
+   searchTeacher.addEventListener("input", filterTeachers);
+
+}
+   if (filterDepartment) {
+
+    filterDepartment.addEventListener("change", filterTeachers);
+
+}
+
+if (filterDesignation) {
+
+    filterDesignation.addEventListener("change", filterTeachers);
+
+}
+
+if (filterStatus) {
+
+    filterStatus.addEventListener("change", filterTeachers);
 
 }
     // Form Submit
@@ -202,12 +219,12 @@ async function loadTeachers() {
     }
 
     teachers = data || [];
+updateDashboard();
 
-    updateDashboard();
+loadFilters();
 
-    renderTeachers(teachers);
+filterTeachers();
 
-    loadFilters();
 
 }
 
@@ -244,8 +261,8 @@ function renderTeachers(data) {
                 </td>
             </tr>
         `;
-
         return;
+
     }
 
     teacherTable.innerHTML = "";
@@ -257,31 +274,29 @@ function renderTeachers(data) {
         <tr>
 
             <td>
-
                 <img
-                    src="${teacher.photo_url || '../assets/images/default-user.png'}"
+                    src="${teacher.photo_url || "../assets/images/default-user.png"}"
                     class="teacher-photo"
                     alt="Teacher">
-
             </td>
 
-            <td>${teacher.employee_id}</td>
+            <td>${teacher.employee_id || "-"}</td>
 
-            <td>${teacher.teacher_name}</td>
+            <td>${teacher.teacher_name || "-"}</td>
 
-            <td>${teacher.gender}</td>
+            <td>${teacher.designation || "-"}</td>
 
             <td>${teacher.department || "-"}</td>
 
-            <td>${teacher.designation}</td>
+            <td>${teacher.qualification || "-"}</td>
 
-            <td>${teacher.mobile}</td>
+            <td>${teacher.mobile || "-"}</td>
 
-            <td>${teacher.joining_date}</td>
+            <td>${teacher.email || "-"}</td>
 
             <td>
 
-                <span class="${teacher.active ? 'badge-success' : 'badge-danger'}">
+                <span class="${teacher.active ? "badge-success" : "badge-danger"}">
 
                     ${teacher.active ? "Active" : "Inactive"}
 
@@ -315,8 +330,7 @@ function renderTeachers(data) {
 
     });
 
-}
-/* ==========================================================
+}/* ==========================================================
    LOAD FILTERS
 ========================================================== */
 
@@ -350,40 +364,77 @@ function loadFilters() {
 
 }
 /* ==========================================================
-   SEARCH TEACHERS
+   SEARCH + FILTER TEACHERS
 ========================================================== */
 
-function searchTeachers() {
+function filterTeachers() {
 
-    console.log("Searching:", searchTeacher.value);
+    const keyword =
+        searchTeacher.value.toLowerCase().trim();
 
-    const keyword = searchTeacher.value
-        .toLowerCase()
-        .trim();
+    const department =
+        filterDepartment.value;
 
-    const filtered = teachers.filter(t => {
+    const designation =
+        filterDesignation.value;
+
+    const status =
+        filterStatus.value;
+
+    const filtered = teachers.filter(teacher => {
+
+        // Search
+        const matchSearch =
+
+            (teacher.teacher_name || "")
+                .toLowerCase()
+                .includes(keyword)
+
+            ||
+
+            (teacher.employee_id || "")
+                .toLowerCase()
+                .includes(keyword)
+
+            ||
+
+            (teacher.mobile || "")
+                .toLowerCase()
+                .includes(keyword)
+
+            ||
+
+            (teacher.email || "")
+                .toLowerCase()
+                .includes(keyword);
+
+        // Department
+        const matchDepartment =
+            !department ||
+            teacher.department === department;
+
+        // Designation
+        const matchDesignation =
+            !designation ||
+            teacher.designation === designation;
+
+        // Status
+        const matchStatus =
+            status === "" ||
+            String(teacher.active) === status;
 
         return (
-
-            (t.teacher_name || "").toLowerCase().includes(keyword) ||
-
-            (t.employee_id || "").toLowerCase().includes(keyword) ||
-
-            (t.mobile || "").toLowerCase().includes(keyword) ||
-
-            (t.department || "").toLowerCase().includes(keyword) ||
-
-            (t.designation || "").toLowerCase().includes(keyword)
-
+            matchSearch &&
+            matchDepartment &&
+            matchDesignation &&
+            matchStatus
         );
 
     });
 
     renderTeachers(filtered);
 
-}
-
-/* ==========================================================
+}/* ==========================================================
    EDIT TEACHER
 ========================================================== */
 
@@ -430,6 +481,11 @@ async function editTeacher(id) {
 
     teacherModal.classList.add("show");
 
+   document.getElementById("dob").value =
+    teacher.dob || "";
+
+   document.getElementById("address").value =
+    teacher.address || "";
 }
    
 /* ==========================================================
@@ -522,7 +578,11 @@ console.log("Uploaded Image:", photoUrl);
 
         gender:
             document.getElementById("gender").value,
+      dob:
+            document.getElementById("dob").value,
 
+      address:
+            document.getElementById("address").value.trim(),
         mobile:
             document.getElementById("mobile").value.trim(),
 
