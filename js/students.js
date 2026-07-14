@@ -405,8 +405,7 @@ if (form) {
         const photoFile =
     document.getElementById("photo").files[0];
 
-const photoFile =
-    document.getElementById("photo").files[0];
+
 
 let photoUrl = "";
 
