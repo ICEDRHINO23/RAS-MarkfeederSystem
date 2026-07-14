@@ -3,470 +3,478 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    <title>Marks Entry | RAS Markfeeder ERP</title>
+<title>Marks Entry | RAS Markfeeder ERP</title>
 
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/sidebar.css">
-    <link rel="stylesheet" href="../css/marks-entry.css">
+<link rel="stylesheet" href="../css/app.css">
+<link rel="stylesheet" href="../css/tables.css">
+<link rel="stylesheet" href="../css/forms.css">
+<link rel="stylesheet" href="../css/modal.css">
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
 <body>
 
-<div class="dashboard">
+<div class="app">
 
-    <!-- Sidebar -->
-    <aside id="sidebar"></aside>
+<!-- ================= SIDEBAR ================= -->
 
-    <main class="main-content">
+<aside class="sidebar">
 
-        <!-- =========================================
-             PAGE HEADER
-        ========================================== -->
+<div class="logo-area">
 
-        <div class="page-header">
+<img src="../assets/logos/logo.png">
 
-            <div>
+<div class="logo-title">
 
-                <h1>
-                    Marks Entry
-                </h1>
+<h2>RAS ERP</h2>
 
-                <p>
-                    Teacher Examination Portal
-                </p>
-
-            </div>
-
-            <div class="connection-status">
-
-                <span class="online-dot"></span>
-
-                Auto Save Ready
-
-            </div>
-
-        </div>
-
-        <!-- =========================================
-             DASHBOARD
-        ========================================== -->
-
-        <div class="dashboard-grid">
-
-            <div class="card">
-
-                <h3>Assigned Classes</h3>
-
-                <h1 id="assignedClasses">0</h1>
-
-                <span>Available Classes</span>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Assigned Subjects</h3>
-
-                <h1 id="assignedSubjects">0</h1>
-
-                <span>Available Subjects</span>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Total Students</h3>
-
-                <h1 id="studentCount">0</h1>
-
-                <span>Loaded Students</span>
-
-            </div>
-
-            <div class="card">
-
-                <h3>Completion</h3>
-
-                <h1 id="completionPercent">0%</h1>
-
-                <span>Marks Entered</span>
-
-            </div>
-
-        </div>
-
-        <!-- =========================================
-             EXAM SELECTION PANEL
-        ========================================== -->
-
-        <div class="selection-card">
-
-            <h2>
-
-                Examination Details
-
-            </h2>
-
-            <div class="selection-grid">
-
-                <div class="form-group">
-
-                    <label>
-
-                        Academic Year
-
-                    </label>
-
-                    <select id="academicYear">
-
-                        <option value="">
-                            Select Academic Year
-                        </option>
-
-                    </select>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-
-                        Examination
-
-                    </label>
-
-                    <select id="examSelect">
-
-                        <option value="">
-                            Select Examination
-                        </option>
-
-                    </select>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-
-                        Class
-
-                    </label>
-
-                    <select id="classSelect">
-
-                        <option value="">
-                            Select Class
-                        </option>
-
-                    </select>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>
-
-                        Subject
-
-                    </label>
-
-                    <select id="subjectSelect">
-
-                        <option value="">
-                            Select Subject
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-            <div class="teacher-panel">
-
-                <div>
-
-                    <strong>Teacher</strong>
-
-                    <span id="teacherName">
-
-                        Loading...
-
-                    </span>
-
-                </div>
-
-                <button
-                    id="loadStudentsBtn"
-                    class="btn-primary">
-
-                    <i class="fa-solid fa-users"></i>
-
-                    Load Students
-
-                </button>
-
-            </div>
-
-        </div>
-                <!-- =========================================
-             EXAM INFORMATION
-        ========================================== -->
-
-        <div class="exam-info-card">
-
-            <div class="info-box">
-
-                <h4>Maximum Marks</h4>
-
-                <h2 id="maxMarks">
-
-                    --
-
-                </h2>
-
-            </div>
-
-            <div class="info-box">
-
-                <h4>Pass Marks</h4>
-
-                <h2 id="passMarks">
-
-                    --
-
-                </h2>
-
-            </div>
-
-            <div class="info-box">
-
-                <h4>Entry Type</h4>
-
-                <h2 id="entryType">
-
-                    --
-
-                </h2>
-
-            </div>
-
-            <div class="info-box">
-
-                <h4>Exam Status</h4>
-
-                <h2 id="examStatus">
-
-                    OPEN
-
-                </h2>
-
-            </div>
-
-        </div>
-
-        <!-- =========================================
-             PROGRESS
-        ========================================== -->
-
-        <div class="progress-card">
-
-            <div class="progress-header">
-
-                <h3>
-
-                    Marks Entry Progress
-
-                </h3>
-
-                <span id="progressText">
-
-                    0 / 0 Students
-
-                </span>
-
-            </div>
-
-            <div class="progress-bar">
-
-                <div
-                    id="progressFill"
-                    class="progress-fill">
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- =========================================
-             QUICK FILTERS
-        ========================================== -->
-
-        <div class="quick-actions">
-
-            <button class="filter-btn active">
-
-                All Students
-
-            </button>
-
-            <button class="filter-btn">
-
-                Pending
-
-            </button>
-
-            <button class="filter-btn">
-
-                Saved
-
-            </button>
-
-            <button class="filter-btn">
-
-                Errors
-
-            </button>
-
-            <button class="filter-btn">
-
-                Absent
-
-            </button>
-
-        </div>
-
-        <!-- =========================================
-             MARKS TABLE
-        ========================================== -->
-
-        <div class="table-card">
-
-            <table class="marks-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th width="70">
-
-                            Roll
-
-                        </th>
-
-                        <th width="110">
-
-                            Adm No
-
-                        </th>
-
-                        <th>
-
-                            Student Name
-
-                        </th>
-
-                        <th width="90">
-
-                            Max
-
-                        </th>
-
-                        <th width="120">
-
-                            Marks
-
-                        </th>
-
-                        <th width="90">
-
-                            Grade
-
-                        </th>
-
-                        <th width="220">
-
-                            Remarks
-
-                        </th>
-
-                        <th width="120">
-
-                            Saved
-
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="marksTable">
-
-                    <tr>
-
-                        <td colspan="8"
-                            class="empty-state">
-
-                            Select an Exam, Class and Subject,
-                            then click <strong>Load Students</strong>.
-
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-        <!-- =========================================
-             FOOTER ACTIONS
-        ========================================== -->
-
-        <div class="footer-actions">
-
-            <button
-                id="saveDraftBtn"
-                class="btn-secondary">
-
-                <i class="fa-solid fa-floppy-disk"></i>
-
-                Save Draft
-
-            </button>
-
-            <button
-                id="submitMarksBtn"
-                class="btn-primary">
-
-                <i class="fa-solid fa-paper-plane"></i>
-
-                Final Submit
-
-            </button>
-
-        </div>
-
-    </main>
+<span>School Examination ERP</span>
 
 </div>
 
-<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+</div>
 
-<script type="module"
-        src="../js/marks-entry.js"></script>
+<nav class="sidebar-menu">
 
-</body>
+<ul>
 
-</html>
+<li><a href="dashboard.html"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
+
+<li><a href="students.html"><i class="fa-solid fa-user-graduate"></i><span>Students</span></a></li>
+
+<li><a href="teachers.html"><i class="fa-solid fa-chalkboard-user"></i><span>Teachers</span></a></li>
+
+<li><a href="teacher-assignment.html"><i class="fa-solid fa-users-gear"></i><span>Teacher Assignment</span></a></li>
+
+<li><a href="subjects.html"><i class="fa-solid fa-book"></i><span>Subjects</span></a></li>
+
+<li><a href="exams.html"><i class="fa-solid fa-file-pen"></i><span>Exams</span></a></li>
+
+<li>
+
+<a class="active"
+href="marks-entry.html">
+
+<i class="fa-solid fa-marker"></i>
+
+<span>Marks Entry</span>
+
+</a>
+
+</li>
+
+<li><a href="reports.html"><i class="fa-solid fa-chart-column"></i><span>Reports</span></a></li>
+
+<li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+
+</ul>
+
+</nav>
+
+<div class="sidebar-footer">
+
+<a href="../login.html">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+<span>Logout</span>
+
+</a>
+
+</div>
+
+</aside>
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+<header class="topbar">
+
+<div class="page-title">
+
+<h1>Marks Entry</h1>
+
+<p>Enter Student Examination Marks</p>
+
+</div>
+
+</header>
+
+<section class="page-content">
+
+<!-- ================= DASHBOARD ================= -->
+
+<div class="stats-grid">
+
+<div class="card">
+
+<div class="card-title">Students</div>
+
+<div class="card-value"
+id="studentCount">0</div>
+
+<div class="card-footer">
+
+Loaded Students
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">Saved</div>
+
+<div class="card-value"
+id="savedCount">0</div>
+
+<div class="card-footer">
+
+Saved Marks
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">Absent</div>
+
+<div class="card-value"
+id="absentCount">0</div>
+
+<div class="card-footer">
+
+Attendance
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-title">Pending</div>
+
+<div class="card-value"
+id="pendingCount">0</div>
+
+<div class="card-footer">
+
+Pending Entry
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ================= FILTERS ================= -->
+
+<div class="section">
+
+<div class="toolbar">
+
+<select id="academicYear">
+
+<option value="">Academic Year</option>
+
+</select>
+
+<select id="exam">
+
+<option value="">Exam</option>
+
+</select>
+
+<select id="class">
+
+<option value="">Class</option>
+
+</select>
+
+<select id="subject">
+
+<option value="">Subject</option>
+
+</select>
+
+<button
+class="btn btn-primary"
+id="loadStudents">
+
+<i class="fa-solid fa-download"></i>
+
+Load Students
+
+</button>
+
+</div>
+
+<!-- ================= TOTAL MARKS ================= -->
+
+<div class="table-header">
+
+<div>
+
+<h2>Total Marks</h2>
+
+<p>Applied to all students</p>
+
+</div>
+
+<div style="display:flex;gap:15px;align-items:center;">
+
+<input
+type="number"
+id="totalMarks"
+placeholder="20">
+
+<label>
+
+<input
+type="checkbox"
+id="rememberMarks">
+
+Remember
+
+</label>
+
+<button
+class="btn"
+
+id="applyAll">
+
+Apply to All
+
+</button>
+
+</div>
+
+</div>
+<!-- ================= MARKS ENTRY TABLE ================= -->
+
+<div class="table-container">
+
+    <div class="table-header">
+
+        <div>
+
+            <h2>Student Marks Entry</h2>
+
+            <p>Enter marks for all students</p>
+
+        </div>
+
+        <div>
+
+            <span id="saveStatus" class="status pending">
+
+                Draft
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table id="marksTable">
+
+            <thead>
+
+                <tr>
+
+                    <th width="60">Roll</th>
+
+                    <th width="110">Admission</th>
+
+                    <th>Student Name</th>
+
+                    <th width="130">Attendance</th>
+
+                    <th width="120">Total</th>
+
+                    <th width="120">Obtained</th>
+
+                    <th width="100">Grade</th>
+
+                    <th>Remarks</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="marksTableBody">
+
+                <tr>
+
+                    <td colspan="8" style="text-align:center;padding:60px;">
+
+                        <i class="fa-solid fa-users"
+                           style="font-size:45px;color:#d1d5db;"></i>
+
+                        <br><br>
+
+                        Select Academic Year, Exam, Class and Subject
+
+                        <br>
+
+                        then click
+
+                        <b>Load Students</b>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- ================= LIVE ANALYTICS ================= -->
+
+<div class="stats-grid" style="margin-top:25px;">
+
+    <div class="card">
+
+        <div class="card-title">
+
+            Highest
+
+        </div>
+
+        <div class="card-value"
+
+             id="highestMarks">
+
+            0
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-title">
+
+            Lowest
+
+        </div>
+
+        <div class="card-value"
+
+             id="lowestMarks">
+
+            0
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-title">
+
+            Average
+
+        </div>
+
+        <div class="card-value"
+
+             id="averageMarks">
+
+            0
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-title">
+
+            Pass %
+
+        </div>
+
+        <div class="card-value"
+
+             id="passPercentage">
+
+            0%
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= ACTION BUTTONS ================= -->
+
+<div class="table-footer">
+
+    <div>
+
+        <button
+
+            class="btn"
+
+            id="saveDraft">
+
+            <i class="fa-solid fa-floppy-disk"></i>
+
+            Save Draft
+
+        </button>
+
+    </div>
+
+    <div style="display:flex;gap:15px;">
+
+        <button
+
+            class="btn"
+
+            id="clearMarks">
+
+            <i class="fa-solid fa-eraser"></i>
+
+            Clear
+
+        </button>
+
+        <button
+
+            class="btn btn-primary"
+
+            id="submitMarks">
+
+            <i class="fa-solid fa-paper-plane"></i>
+
+            Submit Marks
+
+        </button>
+
+    </div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
