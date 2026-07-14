@@ -1,45 +1,19 @@
 /* ==========================================================
    RAS MARKFEEDER ERP
-   TEACHER ASSIGNMENTS
+   TEACHER ASSIGNMENT
 ========================================================== */
 
 import { supabase } from "../database/supabase.js";
-
-import {
-    loadData,
-    insertData,
-    updateData,
-    deleteData
-} from "../utils/crud.js";
-
-import {
-    openModal,
-    closeModal,
-    initializeModal
-} from "../utils/modal.js";
-
-import {
-    success,
-    error
-} from "../utils/alerts.js";
-
-import { exportExcel } from "../utils/excel.js";
-
-import { search } from "../utils/search.js";
-
-import { filterData } from "../utils/filters.js";
-
-import {
-    showLoader,
-    showEmpty,
-    showError
-} from "../utils/loader.js";
 
 /* ==========================================================
    GLOBAL VARIABLES
 ========================================================== */
 
 let assignments = [];
+let teachers = [];
+let classes = [];
+let subjects = [];
+let academicYears = [];
 
 let editingAssignment = null;
 
@@ -48,59 +22,95 @@ let editingAssignment = null;
 ========================================================== */
 
 const assignmentTable =
-    document.getElementById("assignmentTable");
+document.getElementById("assignmentTable");
 
 const assignmentForm =
-    document.getElementById("assignmentForm");
+document.getElementById("assignmentForm");
 
 const assignmentModal =
-    document.getElementById("assignmentModal");
+document.getElementById("assignmentModal");
 
 const addAssignmentBtn =
-    document.getElementById("addAssignmentBtn");
+document.getElementById("addAssignmentBtn");
 
-const closeModalBtn =
-    document.getElementById("closeModal");
+const closeModal =
+document.getElementById("closeModal");
 
 const cancelAssignment =
-    document.getElementById("cancelAssignment");
+document.getElementById("cancelAssignment");
 
-const searchInput =
-    document.getElementById("searchInput");
+const searchAssignment =
+document.getElementById("searchAssignment");
 
-const teacherFilter =
-    document.getElementById("teacherFilter");
+const teacherSelect =
+document.getElementById("teacher_id");
 
-const classFilter =
-    document.getElementById("classFilter");
+const classSelect =
+document.getElementById("class_id");
 
-const subjectFilter =
-    document.getElementById("subjectFilter");
+const subjectSelect =
+document.getElementById("subject_id");
 
-const exportBtn =
-    document.getElementById("exportBtn");
+const yearSelect =
+document.getElementById("academic_year_id");
+
+const classTeacher =
+document.getElementById("is_class_teacher");
+
+const active =
+document.getElementById("active");
+
+/* Filters */
+
+const filterGrade =
+document.getElementById("filterGrade");
+
+const filterSection =
+document.getElementById("filterSection");
+
+const filterSubject =
+document.getElementById("filterSubject");
+
+const filterYear =
+document.getElementById("filterYear");
+
+/* Dashboard */
+
+const totalAssignments =
+document.getElementById("totalAssignments");
+
+const classTeacherCount =
+document.getElementById("classTeacherCount");
+
+const subjectTeacherCount =
+document.getElementById("subjectTeacherCount");
+
+const activeAssignments =
+document.getElementById("activeAssignments");
 
 /* ==========================================================
    INITIALIZE
 ========================================================== */
 
-document.addEventListener(
+document.addEventListener("DOMContentLoaded", async () => {
 
-    "DOMContentLoaded",
+    initializeEvents();
 
-    async () => {
+    await Promise.all([
 
-        initializeModal(assignmentModal);
+        loadTeachers(),
 
-        initializeEvents();
+        loadClasses(),
 
-        await loadDropdowns();
+        loadSubjects(),
 
-        await loadAssignments();
+        loadAcademicYears()
 
-    }
+    ]);
 
-);
+    await loadAssignments();
+
+});
 
 /* ==========================================================
    EVENTS
@@ -108,128 +118,73 @@ document.addEventListener(
 
 function initializeEvents(){
 
-    addAssignmentBtn.addEventListener(
+    if(addAssignmentBtn){
 
-        "click",
+        addAssignmentBtn.addEventListener("click",()=>{
 
-        ()=>{
-
-            editingAssignment = null;
+            editingAssignment=null;
 
             assignmentForm.reset();
 
-            document.getElementById("active").checked = true;
+            document.getElementById("modalTitle").textContent="Assign Teacher";
 
-            document.getElementById("modalTitle").textContent =
-                "Add Teacher Assignment";
+            assignmentModal.classList.add("show");
 
-            openModal(assignmentModal);
+        });
+
+    }
+
+    if(closeModal){
+
+        closeModal.addEventListener("click",closeAssignmentModal);
+
+    }
+
+    if(cancelAssignment){
+
+        cancelAssignment.addEventListener("click",closeAssignmentModal);
+
+    }
+
+    window.addEventListener("click",(e)=>{
+
+        if(e.target===assignmentModal){
+
+            closeAssignmentModal();
 
         }
 
-    );
+    });
 
-    closeModalBtn.addEventListener(
-
-        "click",
-
-        ()=>closeModal(assignmentModal)
-
-    );
-
-    cancelAssignment.addEventListener(
-
-        "click",
-
-        ()=>closeModal(assignmentModal)
-
-    );
-
-    assignmentForm.addEventListener(
-
-        "submit",
-
-        saveAssignment
-
-    );
-
-    searchInput.addEventListener(
-
-        "input",
-
-        searchAssignments
-
-    );
-
-    teacherFilter.addEventListener(
-
-        "change",
-
-        applyFilters
-
-    );
-
-    classFilter.addEventListener(
-
-        "change",
-
-        applyFilters
-
-    );
-
-    subjectFilter.addEventListener(
-
-        "change",
-
-        applyFilters
-
-    );
-
-    exportBtn.addEventListener(
-
-        "click",
-
-        exportAssignments
-
-    );
+    assignmentForm.addEventListener("submit",saveAssignment);
 
 }
 
 /* ==========================================================
-   LOAD DROPDOWNS
+   CLOSE MODAL
 ========================================================== */
 
-async function loadDropdowns(){
+function closeAssignmentModal(){
 
-    await loadTeachers();
-
-    await loadClasses();
-
-    await loadSubjects();
+    assignmentModal.classList.remove("show");
 
 }
+
 /* ==========================================================
    LOAD TEACHERS
 ========================================================== */
 
-async function loadTeachers() {
+async function loadTeachers(){
 
-    const teacherSelect =
-        document.getElementById("teacher_id");
+    const {data,error}=await supabase
 
-    teacherSelect.innerHTML =
-        `<option value="">Select Teacher</option>`;
+    .from("teachers")
 
-    teacherFilter.innerHTML =
-        `<option value="">All Teachers</option>`;
+    .select("id,teacher_name")
 
-    const { data, error } = await supabase
-        .from("teachers")
-        .select("id, teacher_name")
-        .eq("active", true)
-        .order("teacher_name");
+    .order("teacher_name");
 
-    if (error) {
+    if(error){
 
         console.error(error);
 
@@ -237,27 +192,22 @@ async function loadTeachers() {
 
     }
 
-    data.forEach(teacher => {
+    teachers=data||[];
 
-        teacherSelect.innerHTML += `
+    teacherSelect.innerHTML=
+    `<option value="">Select Teacher</option>`;
 
-<option value="${teacher.id}">
+    teachers.forEach(t=>{
 
-${teacher.teacher_name}
+        teacherSelect.innerHTML+=`
 
-</option>
+        <option value="${t.id}">
 
-`;
+            ${t.teacher_name}
 
-        teacherFilter.innerHTML += `
+        </option>
 
-<option value="${teacher.teacher_name}">
-
-${teacher.teacher_name}
-
-</option>
-
-`;
+        `;
 
     });
 
@@ -267,24 +217,17 @@ ${teacher.teacher_name}
    LOAD CLASSES
 ========================================================== */
 
-async function loadClasses() {
+async function loadClasses(){
 
-    const classSelect =
-        document.getElementById("class_id");
+    const {data,error}=await supabase
 
-    classSelect.innerHTML =
-        `<option value="">Select Class</option>`;
+    .from("classes")
 
-    classFilter.innerHTML =
-        `<option value="">All Classes</option>`;
+    .select("*")
 
-    const { data, error } = await supabase
-        .from("classes")
-        .select("id,class_name,section")
-        .eq("active", true)
-        .order("class_name");
+    .order("grade");
 
-    if (error) {
+    if(error){
 
         console.error(error);
 
@@ -292,51 +235,38 @@ async function loadClasses() {
 
     }
 
-    data.forEach(cls => {
+    classes=data||[];
 
-        classSelect.innerHTML += `
+    classSelect.innerHTML=
+    `<option value="">Select Class</option>`;
 
-<option value="${cls.id}">
+    classes.forEach(c=>{
 
-${cls.class_name} ${cls.section}
+        classSelect.innerHTML+=`
 
-</option>
+        <option value="${c.id}">
 
-`;
+            Grade ${c.grade} - ${c.section}
 
-        classFilter.innerHTML += `
+        </option>
 
-<option value="${cls.class_name}">
-
-${cls.class_name}
-
-</option>
-
-`;
+        `;
 
     });
 
 }
-
 /* ==========================================================
    LOAD SUBJECTS
 ========================================================== */
 
 async function loadSubjects() {
 
-    const subjectSelect =
-        document.getElementById("subject_id");
-
-    subjectSelect.innerHTML =
-        `<option value="">Select Subject</option>`;
-
-    subjectFilter.innerHTML =
-        `<option value="">All Subjects</option>`;
-
     const { data, error } = await supabase
+
         .from("subjects")
+
         .select("id,subject_name")
-        .eq("active", true)
+
         .order("subject_name");
 
     if (error) {
@@ -347,27 +277,83 @@ async function loadSubjects() {
 
     }
 
-    data.forEach(subject => {
+    subjects = data || [];
+
+    subjectSelect.innerHTML =
+        `<option value="">Select Subject</option>`;
+
+    filterSubject.innerHTML =
+        `<option value="">All Subjects</option>`;
+
+    subjects.forEach(subject => {
 
         subjectSelect.innerHTML += `
 
-<option value="${subject.id}">
+            <option value="${subject.id}">
+                ${subject.subject_name}
+            </option>
 
-${subject.subject_name}
+        `;
 
-</option>
+        filterSubject.innerHTML += `
 
-`;
+            <option value="${subject.id}">
+                ${subject.subject_name}
+            </option>
 
-        subjectFilter.innerHTML += `
+        `;
 
-<option value="${subject.subject_name}">
+    });
 
-${subject.subject_name}
+}
 
-</option>
+/* ==========================================================
+   LOAD ACADEMIC YEARS
+========================================================== */
 
-`;
+async function loadAcademicYears() {
+
+    const { data, error } = await supabase
+
+        .from("academic_years")
+
+        .select("*")
+
+        .order("id");
+
+    if (error) {
+
+        console.error(error);
+
+        return;
+
+    }
+
+    academicYears = data || [];
+
+    yearSelect.innerHTML =
+        `<option value="">Academic Year</option>`;
+
+    filterYear.innerHTML =
+        `<option value="">All Years</option>`;
+
+    academicYears.forEach(year => {
+
+        yearSelect.innerHTML += `
+
+            <option value="${year.id}">
+                ${year.academic_year}
+            </option>
+
+        `;
+
+        filterYear.innerHTML += `
+
+            <option value="${year.id}">
+                ${year.academic_year}
+            </option>
+
+        `;
 
     });
 
@@ -379,37 +365,55 @@ ${subject.subject_name}
 
 async function loadAssignments() {
 
-    showLoader(assignmentTable, 8);
+    assignmentTable.innerHTML = `
 
-    try {
+        <tr>
 
-        assignments = await loadData(
+            <td colspan="8">
 
-            "vw_teacher_assignments"
+                Loading Assignments...
 
-        );
+            </td>
 
-        updateDashboard();
+        </tr>
 
-        renderAssignments(assignments);
+    `;
+
+    const { data, error } = await supabase
+
+        .from("vw_teacher_assignments")
+
+        .select("*")
+
+        .order("teacher_name");
+
+    if (error) {
+
+        console.error(error);
+
+        assignmentTable.innerHTML = `
+
+            <tr>
+
+                <td colspan="8">
+
+                    Failed to Load Assignments
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
 
     }
 
-    catch (err) {
+    assignments = data || [];
 
-        console.error(err);
+    updateDashboard();
 
-        showError(
-
-            assignmentTable,
-
-            err.message,
-
-            8
-
-        );
-
-    }
+    renderAssignments(assignments);
 
 }
 
@@ -419,23 +423,17 @@ async function loadAssignments() {
 
 function updateDashboard() {
 
-    document.getElementById("totalAssignments").textContent =
+    totalAssignments.textContent =
         assignments.length;
 
-    document.getElementById("teacherCount").textContent =
-        new Set(
-            assignments.map(a => a.teacher_name)
-        ).size;
+    classTeacherCount.textContent =
+        assignments.filter(a => a.is_class_teacher).length;
 
-    document.getElementById("classCount").textContent =
-        new Set(
-            assignments.map(a => a.class_name)
-        ).size;
+    subjectTeacherCount.textContent =
+        assignments.filter(a => !a.is_class_teacher).length;
 
-    document.getElementById("classTeacherCount").textContent =
-        assignments.filter(
-            a => a.is_class_teacher
-        ).length;
+    activeAssignments.textContent =
+        assignments.filter(a => a.active).length;
 
 }
 
@@ -445,9 +443,22 @@ function updateDashboard() {
 
 function renderAssignments(data) {
 
-    if (!data.length) {
+    if (data.length === 0) {
 
-        showEmpty(assignmentTable, 8);
+        assignmentTable.innerHTML = `
+
+            <tr>
+
+                <td colspan="8"
+                    style="text-align:center;padding:30px;">
+
+                    No Assignments Found
+
+                </td>
+
+            </tr>
+
+        `;
 
         return;
 
@@ -455,73 +466,85 @@ function renderAssignments(data) {
 
     assignmentTable.innerHTML = "";
 
-    data.forEach(item => {
+    data.forEach(a => {
 
         assignmentTable.innerHTML += `
 
-<tr>
+        <tr>
 
-<td>${item.teacher_name}</td>
+            <td>${a.teacher_name}</td>
 
-<td>${item.class_name}</td>
+            <td>${a.grade}</td>
 
-<td>${item.section}</td>
+            <td>${a.section}</td>
 
-<td>${item.subject_name}</td>
+            <td>${a.subject_name}</td>
 
-<td>${item.academic_year}</td>
+            <td>${a.academic_year}</td>
 
-<td>
+            <td>
 
-${item.is_class_teacher
-? "✔"
-: "-"}
+                <span class="${
+                    a.is_class_teacher
+                        ? "status active"
+                        : "status pending"
+                }">
 
-</td>
+                    ${
+                        a.is_class_teacher
+                            ? "Yes"
+                            : "No"
+                    }
 
-<td>
+                </span>
 
-<span class="${
-item.active
-? "badge-success"
-: "badge-danger"
-}">
+            </td>
 
-${item.active
-? "Active"
-: "Inactive"}
+            <td>
 
-</span>
+                <span class="${
+                    a.active
+                        ? "status active"
+                        : "status inactive"
+                }">
 
-</td>
+                    ${
+                        a.active
+                            ? "Active"
+                            : "Inactive"
+                    }
 
-<td>
+                </span>
 
-<div class="action-buttons">
+            </td>
 
-<button
-class="edit-btn"
-onclick="editAssignment('${item.id}')">
+            <td>
 
-<i class="fa-solid fa-pen"></i>
+                <div class="table-actions">
 
-</button>
+                    <button
+                        class="action-btn edit"
+                        onclick="editAssignment('${a.id}')">
 
-<button
-class="delete-btn"
-onclick="deleteAssignment('${item.id}')">
+                        <i class="fa-solid fa-pen"></i>
 
-<i class="fa-solid fa-trash"></i>
+                    </button>
 
-</button>
+                    <button
+                        class="action-btn delete"
+                        onclick="deleteAssignment('${a.id}')">
 
-</div>
+                        <i class="fa-solid fa-trash"></i>
 
-</td>
+                    </button>
 
-</tr>
+                </div>
 
-`;
+            </td>
+
+        </tr>
+
+        `;
 
     });
 
@@ -530,77 +553,115 @@ onclick="deleteAssignment('${item.id}')">
    SAVE ASSIGNMENT
 ========================================================== */
 
-async function saveAssignment(e) {
+async function saveAssignment(e){
 
     e.preventDefault();
 
-    const assignment = {
+    const assignment={
 
         teacher_id:
-            document.getElementById("teacher_id").value,
+        teacherSelect.value,
 
         class_id:
-            document.getElementById("class_id").value,
+        classSelect.value,
 
         subject_id:
-            document.getElementById("subject_id").value,
+        subjectSelect.value,
 
-        academic_year:
-            document.getElementById("academic_year").value,
+        academic_year_id:
+        yearSelect.value,
 
         is_class_teacher:
-            document.getElementById("is_class_teacher").checked,
+        classTeacher.checked,
 
         active:
-            document.getElementById("active").checked
+        active.checked
 
     };
 
-    try {
+    /* ==========================================
+       DUPLICATE CHECK
+    ========================================== */
 
-        if (editingAssignment) {
+    const duplicate=assignments.find(a=>
 
-            await updateData(
+        a.teacher_id===assignment.teacher_id &&
 
-                "teacher_assignments",
+        a.class_id===assignment.class_id &&
 
-                editingAssignment,
+        a.subject_id===assignment.subject_id &&
 
-                assignment
+        a.id!==editingAssignment
 
-            );
+    );
 
-            success("Assignment Updated Successfully");
+    if(duplicate){
 
-        } else {
+        alert("Teacher already assigned.");
 
-            await insertData(
-
-                "teacher_assignments",
-
-                assignment
-
-            );
-
-            success("Assignment Added Successfully");
-
-        }
-
-        editingAssignment = null;
-
-        assignmentForm.reset();
-
-        closeModal(assignmentModal);
-
-        await loadAssignments();
-
-    } catch (err) {
-
-        console.error(err);
-
-        error(err.message);
+        return;
 
     }
+
+    let error;
+
+    /* ==========================================
+       UPDATE
+    ========================================== */
+
+    if(editingAssignment){
+
+        ({error}=await supabase
+
+            .from("teacher_assignments")
+
+            .update(assignment)
+
+            .eq("id",editingAssignment));
+
+    }
+
+    /* ==========================================
+       INSERT
+    ========================================== */
+
+    else{
+
+        ({error}=await supabase
+
+            .from("teacher_assignments")
+
+            .insert([assignment]));
+
+    }
+
+    if(error){
+
+        console.error(error);
+
+        alert(error.message);
+
+        return;
+
+    }
+
+    alert(
+
+        editingAssignment
+
+        ? "Assignment Updated Successfully"
+
+        : "Assignment Added Successfully"
+
+    );
+
+    editingAssignment=null;
+
+    assignmentForm.reset();
+
+    closeAssignmentModal();
+
+    await loadAssignments();
 
 }
 
@@ -608,36 +669,39 @@ async function saveAssignment(e) {
    EDIT ASSIGNMENT
 ========================================================== */
 
-async function editAssignment(id) {
+async function editAssignment(id){
 
-    const item = assignments.find(a => a.id === id);
+    const assignment=
 
-    if (!item) return;
+    assignments.find(a=>a.id===id);
 
-    editingAssignment = id;
+    if(!assignment) return;
 
-    document.getElementById("modalTitle").textContent =
-        "Edit Teacher Assignment";
+    editingAssignment=id;
 
-    document.getElementById("teacher_id").value =
-        item.teacher_id;
+    document.getElementById("modalTitle").textContent=
 
-    document.getElementById("class_id").value =
-        item.class_id;
+    "Edit Assignment";
 
-    document.getElementById("subject_id").value =
-        item.subject_id;
+    teacherSelect.value=
+    assignment.teacher_id;
 
-    document.getElementById("academic_year").value =
-        item.academic_year;
+    classSelect.value=
+    assignment.class_id;
 
-    document.getElementById("is_class_teacher").checked =
-        item.is_class_teacher;
+    subjectSelect.value=
+    assignment.subject_id;
 
-    document.getElementById("active").checked =
-        item.active;
+    yearSelect.value=
+    assignment.academic_year_id;
 
-    openModal(assignmentModal);
+    classTeacher.checked=
+    assignment.is_class_teacher;
+
+    active.checked=
+    assignment.active;
+
+    assignmentModal.classList.add("show");
 
 }
 
@@ -645,89 +709,105 @@ async function editAssignment(id) {
    DELETE ASSIGNMENT
 ========================================================== */
 
-async function deleteAssignment(id) {
+async function deleteAssignment(id){
 
-    if (!confirm("Delete this assignment?"))
+    if(!confirm("Delete this assignment?")){
+
         return;
-
-    try {
-
-        await deleteData(
-
-            "teacher_assignments",
-
-            id
-
-        );
-
-        success("Assignment Deleted");
-
-        await loadAssignments();
-
-    } catch (err) {
-
-        console.error(err);
-
-        error(err.message);
 
     }
 
-}
+    const {error}=await supabase
 
-/* ==========================================================
-   SEARCH
-========================================================== */
+    .from("teacher_assignments")
 
-function searchAssignments() {
+    .delete()
 
-    const filtered = search(
+    .eq("id",id);
 
-        assignments,
+    if(error){
 
-        searchInput.value,
+        alert(error.message);
 
-        [
+        return;
 
-            "teacher_name",
+    }
 
-            "class_name",
-
-            "section",
-
-            "subject_name",
-
-            "academic_year"
-
-        ]
-
-    );
-
-    renderAssignments(filtered);
+    await loadAssignments();
 
 }
 
 /* ==========================================================
-   FILTERS
+   SEARCH + FILTER
 ========================================================== */
 
-function applyFilters() {
+function filterAssignments(){
 
-    const filtered = assignments.filter(item => {
+    const keyword=
 
-        return (
+    searchAssignment.value.toLowerCase();
 
-            (!teacherFilter.value ||
-                item.teacher_name === teacherFilter.value)
+    const grade=
 
-            &&
+    filterGrade.value;
 
-            (!classFilter.value ||
-                item.class_name === classFilter.value)
+    const section=
 
-            &&
+    filterSection.value;
 
-            (!subjectFilter.value ||
-                item.subject_name === subjectFilter.value)
+    const subject=
+
+    filterSubject.value;
+
+    const year=
+
+    filterYear.value;
+
+    const filtered=assignments.filter(a=>{
+
+        const matchSearch=
+
+        (a.teacher_name||"")
+
+        .toLowerCase()
+
+        .includes(keyword);
+
+        const matchGrade=
+
+        !grade||
+
+        String(a.grade)===grade;
+
+        const matchSection=
+
+        !section||
+
+        a.section===section;
+
+        const matchSubject=
+
+        !subject||
+
+        a.subject_id===subject;
+
+        const matchYear=
+
+        !year||
+
+        String(a.academic_year_id)===year;
+
+        return(
+
+            matchSearch&&
+
+            matchGrade&&
+
+            matchSection&&
+
+            matchSubject&&
+
+            matchYear
 
         );
 
@@ -738,49 +818,236 @@ function applyFilters() {
 }
 
 /* ==========================================================
-   EXPORT
+   EVENTS
 ========================================================== */
 
-function exportAssignments() {
+searchAssignment.addEventListener(
 
-    const rows = assignments.map(item => ({
+    "input",
 
-        Teacher: item.teacher_name,
+    filterAssignments
 
-        Class: item.class_name,
+);
 
-        Section: item.section,
+filterGrade.addEventListener(
 
-        Subject: item.subject_name,
+    "change",
 
-        "Academic Year": item.academic_year,
+    filterAssignments
+
+);
+
+filterSection.addEventListener(
+
+    "change",
+
+    filterAssignments
+
+);
+
+filterSubject.addEventListener(
+
+    "change",
+
+    filterAssignments
+
+);
+
+filterYear.addEventListener(
+
+    "change",
+
+    filterAssignments
+
+);
+
+window.editAssignment=editAssignment;
+
+window.deleteAssignment=deleteAssignment;
+/* ==========================================================
+   LOAD GRADE & SECTION FILTERS
+========================================================== */
+
+function loadGradeFilters() {
+
+    const grades =
+        [...new Set(classes.map(c => c.grade))].sort((a, b) => a - b);
+
+    filterGrade.innerHTML =
+        `<option value="">All Grades</option>`;
+
+    grades.forEach(g => {
+
+        filterGrade.innerHTML +=
+            `<option value="${g}">Grade ${g}</option>`;
+
+    });
+
+}
+
+function loadSectionFilters() {
+
+    const sections =
+        [...new Set(classes.map(c => c.section))].sort();
+
+    filterSection.innerHTML =
+        `<option value="">All Sections</option>`;
+
+    sections.forEach(section => {
+
+        filterSection.innerHTML +=
+            `<option value="${section}">${section}</option>`;
+
+    });
+
+}
+
+/* ==========================================================
+   EXPORT TO EXCEL
+========================================================== */
+
+function exportToExcel() {
+
+    const exportData = assignments.map(a => ({
+
+        Teacher: a.teacher_name,
+
+        Grade: a.grade,
+
+        Section: a.section,
+
+        Subject: a.subject_name,
+
+        "Academic Year": a.academic_year,
 
         "Class Teacher":
-            item.is_class_teacher ? "Yes" : "No",
+            a.is_class_teacher ? "Yes" : "No",
 
         Status:
-            item.active ? "Active" : "Inactive"
+            a.active ? "Active" : "Inactive"
 
     }));
 
-    exportExcel(
+    const worksheet =
+        XLSX.utils.json_to_sheet(exportData);
 
-        rows,
+    const workbook =
+        XLSX.utils.book_new();
 
+    XLSX.utils.book_append_sheet(
+        workbook,
+        worksheet,
         "Teacher Assignments"
+    );
 
+    XLSX.writeFile(
+        workbook,
+        "Teacher_Assignments.xlsx"
     );
 
 }
 
 /* ==========================================================
-   GLOBAL
+   TOAST
 ========================================================== */
 
-window.editAssignment = editAssignment;
+function showToast(message, type = "success") {
 
-window.deleteAssignment = deleteAssignment;
+    if (window.showToast) {
 
-console.log(
-    "Teacher Assignments Module Loaded Successfully"
-);
+        window.showToast(message, type);
+
+    } else {
+
+        alert(message);
+
+    }
+
+}
+
+/* ==========================================================
+   REPLACE ALERTS
+========================================================== */
+
+/*
+Replace:
+
+alert("Assignment Added Successfully");
+
+with
+
+showToast("Assignment Added Successfully");
+
+Replace:
+
+alert("Assignment Updated Successfully");
+
+with
+
+showToast("Assignment Updated Successfully");
+
+Replace:
+
+alert(error.message);
+
+with
+
+showToast(error.message,"error");
+
+*/
+
+/* ==========================================================
+   FINAL INITIALIZATION
+========================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    if (document.getElementById("exportAssignments")) {
+
+        document
+            .getElementById("exportAssignments")
+            .addEventListener("click", exportToExcel);
+
+    }
+
+});
+
+/* ==========================================================
+   LOAD FILTERS AFTER MASTER DATA
+========================================================== */
+
+async function initializeFilters() {
+
+    loadGradeFilters();
+
+    loadSectionFilters();
+
+}
+
+/* ==========================================================
+   MODIFY DOM LOADED
+========================================================== */
+
+/*
+After
+
+await Promise.all([
+    loadTeachers(),
+    loadClasses(),
+    loadSubjects(),
+    loadAcademicYears()
+]);
+
+add
+
+initializeFilters();
+
+before
+
+await loadAssignments();
+
+*/
+
+/* ==========================================================
+   END OF FILE
+========================================================== */
