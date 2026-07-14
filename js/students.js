@@ -430,11 +430,8 @@ if (photoFile) {
 
     const extension =
         photoFile.name.split(".").pop();
-
-    const fileName =
-        document.getElementById("admission_no").value +
-        "." +
-        extension;
+const fileName =
+    `${Date.now()}_${document.getElementById("admission_no").value}.${extension}`;
 
     const { error: uploadError } =
         await supabase.storage
