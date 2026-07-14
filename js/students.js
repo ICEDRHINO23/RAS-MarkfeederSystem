@@ -84,7 +84,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.getElementById("filterYear")
         .addEventListener("change", filterStudents);
-
+    
+    document.getElementById("searchStudent")
+    .addEventListener("input", filterStudents);
 });
 // =============================
 // LOAD STUDENTS
@@ -188,18 +190,49 @@ tableBody.addEventListener("click", async (e) => {
 
 function filterStudents() {
 
-    const classId = document.getElementById("filterClass").value;
-    const yearId = document.getElementById("filterYear").value;
+    const classId =
+        document.getElementById("filterClass").value;
+
+    const yearId =
+        document.getElementById("filterYear").value;
+
+    const keyword =
+        document.getElementById("searchStudent")
+        .value
+        .toLowerCase()
+        .trim();
 
     const filtered = students.filter(student => {
 
         const classMatch =
-            !classId || String(student.class_id) === classId;
+            !classId ||
+            String(student.class_id) === classId;
 
         const yearMatch =
-            !yearId || String(student.academic_year_id) === yearId;
+            !yearId ||
+            String(student.academic_year_id) === yearId;
 
-        return classMatch && yearMatch;
+        const searchMatch =
+
+            !keyword ||
+
+            student.student_name
+                ?.toLowerCase()
+                .includes(keyword) ||
+
+            student.admission_no
+                ?.toLowerCase()
+                .includes(keyword) ||
+
+            String(student.roll_no)
+                .includes(keyword) ||
+
+            (student.mobile || "")
+                .includes(keyword);
+
+        return classMatch &&
+               yearMatch &&
+               searchMatch;
 
     });
 
