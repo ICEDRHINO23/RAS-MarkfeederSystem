@@ -269,38 +269,42 @@ async function loadClasses() {
     const classSelect = document.getElementById("class_id");
     const filterClass = document.getElementById("filterClass");
 
-   const { data, error } = await supabase
-    .from("classes")
-    .select("*")
-    .eq("active", true)
-    .order("grade", { ascending: true })
-    .order("section", { ascending: true });
+    const { data, error } = await supabase
+        .from("classes")
+        .select("*")
+        .eq("active", true)
+        .order("grade")
+        .order("section");
 
     if (error) {
         console.error(error);
         return;
     }
 
-    // Modal Dropdown
-    classSelect.innerHTML = `<option value="">Select Class</option>`;
+    classSelect.innerHTML =
+        `<option value="">Select Class</option>`;
 
-    // Filter Dropdown
-  classSelect.innerHTML = '<option value="">Select Class</option>';
+    filterClass.innerHTML =
+        `<option value="">All Classes</option>`;
 
-data.forEach(cls => {
-    const option = document.createElement("option");
-    option.value = cls.id;
-    option.textContent = `Class ${cls.grade} - ${cls.section}`;
-    classSelect.appendChild(option);
-});
+    data.forEach(cls => {
 
-        classSelect.innerHTML += option;
-        filterClass.innerHTML += option;
+        const text =
+            `Grade ${cls.grade} - ${cls.section}`;
+
+        classSelect.innerHTML +=
+            `<option value="${cls.id}">
+                ${text}
+            </option>`;
+
+        filterClass.innerHTML +=
+            `<option value="${cls.id}">
+                ${text}
+            </option>`;
 
     });
 
 }
-
 
 // ==========================
 // Load Academic Years
@@ -487,9 +491,9 @@ if (photoFile) {
 
             address:
                 document.getElementById("address").value,
-
+            
             class_id:
-                parseInt(document.getElementById("class_id").value),
+                    document.getElementById("class_id").value,
 
             academic_year_id:
                 parseInt(document.getElementById("academic_year_id").value),
