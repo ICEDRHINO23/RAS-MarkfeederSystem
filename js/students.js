@@ -454,13 +454,8 @@ if (photoFile) {
     photoUrl = data.publicUrl;
 
 }
-  const { data } =
-    supabase.storage
-        .from("student-photos")
-        .getPublicUrl(fileName);
 
-photoUrl = data.publicUrl;
-}
+        
         const student = {
 
             admission_no:
